@@ -19,7 +19,7 @@ export function Hero() {
       <div className="hero-decor" aria-hidden />
 
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-40 pt-32 text-center">
-        <h1 className="animate-fade-rise max-w-7xl font-display text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-8xl">
+        <h1 className="hero-title animate-fade-rise max-w-7xl font-display text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-8xl">
           {HERO.headline.map((part, i) =>
             "em" in part && part.em ? (
               <em key={i} className="hero-em not-italic text-muted-foreground">

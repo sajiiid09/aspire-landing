@@ -32,12 +32,12 @@ export function Header() {
           : "over-video absolute inset-x-0 top-0 z-40"
       }
     >
-      <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
+      <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-3">
         <a
           href="#home"
-          className="inline-flex items-center gap-3 font-display text-3xl tracking-tight text-foreground"
+          className="inline-flex items-center gap-3 font-display text-2xl tracking-tight text-foreground"
         >
-          <span className="logo-chip h-9 w-9">
+          <span className="logo-chip h-8 w-8">
             <Image
               src="/asp-logo.png"
               alt=""

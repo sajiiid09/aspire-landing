@@ -73,7 +73,7 @@ export const HERO = {
   videoSrc:
     "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
   poster:
-    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop",
+    "/images/hero-poster.jpg",
 } as const;
 
 // PLACEHOLDER — pending client BRD data
@@ -146,7 +146,7 @@ export const DESTINATIONS: {
     {
       country: "United Kingdom",
       image:
-        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-uk.jpg",
       imageAlt: "Tower Bridge and the London skyline along the Thames",
       statLine: "40+ partner universities",
       universities: [
@@ -161,7 +161,7 @@ export const DESTINATIONS: {
     {
       country: "United States",
       image:
-        "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-usa.jpg",
       imageAlt: "Times Square street view in New York City",
       statLine: "60+ partner universities",
       universities: [
@@ -175,7 +175,7 @@ export const DESTINATIONS: {
     {
       country: "Canada",
       image:
-        "https://images.unsplash.com/photo-1517935706615-2717063c2225?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-canada.jpg",
       imageAlt: "Toronto skyline with the CN Tower at sunset",
       statLine: "35+ partner universities",
       universities: [
@@ -188,7 +188,7 @@ export const DESTINATIONS: {
     {
       country: "Australia",
       image:
-        "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-australia.jpg",
       imageAlt: "Sydney Harbour with the Opera House and city skyline",
       statLine: "30+ partner universities",
       universities: [
@@ -201,7 +201,7 @@ export const DESTINATIONS: {
     {
       country: "Germany",
       image:
-        "https://images.unsplash.com/photo-1560969184-10fe8719e047?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-germany.jpg",
       imageAlt: "Brandenburg Gate in Berlin under a summer sky",
       statLine: "25+ partner universities",
       universities: [
@@ -214,7 +214,7 @@ export const DESTINATIONS: {
     {
       country: "Malaysia",
       image:
-        "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1600&auto=format&fit=crop",
+        "/images/dest-malaysia.jpg",
       imageAlt: "Petronas Towers rising over Kuala Lumpur at dusk",
       statLine: "20+ partner universities",
       universities: [
@@ -265,7 +265,7 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       destination: "United Kingdom",
       university: "University of Manchester",
       image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop",
+        "/images/student-1.jpg",
     },
     {
       quote:
@@ -274,7 +274,7 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       destination: "Canada",
       university: "University of Toronto",
       image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+        "/images/student-2.jpg",
     },
     {
       quote:
@@ -283,7 +283,7 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       destination: "Australia",
       university: "Monash University",
       image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop",
+        "/images/student-3.jpg",
     },
     {
       quote:
@@ -292,7 +292,7 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       destination: "Germany",
       university: "TU Berlin",
       image:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop",
+        "/images/student-4.jpg",
     },
   ],
 };
@@ -301,6 +301,7 @@ export const CONTACT = {
   eyebrow: "Get in touch",
   title: "Start the conversation.",
   body: "Tell us where you want to go. A counselor will reach out within one business day.",
+  backgroundImage: "/images/contact-bg.jpg",
   destinationOptions: [
     "United Kingdom",
     "United States",
@@ -318,5 +319,12 @@ export const FOOTER = {
   legal: [
     { label: "Privacy", href: "#" }, // PLACEHOLDER
     { label: "Terms", href: "#" }, // PLACEHOLDER
+  ],
+  // PLACEHOLDER — social profiles pending client handles
+  socials: [
+    { label: "Facebook", href: "#" },
+    { label: "Instagram", href: "#" },
+    { label: "LinkedIn", href: "#" },
+    { label: "YouTube", href: "#" },
   ],
 } as const;

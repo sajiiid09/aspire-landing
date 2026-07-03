@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/content";
 import { CONTACT_FORM_ENDPOINT, SITE } from "@/lib/config";
@@ -45,8 +46,25 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-secondary/40 py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-16 px-8 md:grid-cols-2">
+    <section id="contact" className="relative overflow-hidden py-24 md:py-32">
+      <Image
+        src={CONTACT.backgroundImage}
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
+        aria-hidden
+      />
+      {/* Overlay keeps form and text legible over the photo in every theme */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(105deg, hsl(var(--background) / 0.96) 35%, hsl(var(--background) / 0.82))",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-7xl gap-16 px-8 md:grid-cols-2">
         <Reveal>
           <div className="text-sm text-muted-foreground">{CONTACT.eyebrow}</div>
           <h2 className="section-title mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">

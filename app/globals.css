@@ -55,6 +55,13 @@
   mask-composite: exclude;
   pointer-events: none;
 }
+/* Header bar: sleek variant — no outline or inset highlight on the nav itself */
+header.liquid-glass {
+  box-shadow: none;
+}
+header.liquid-glass::before {
+  display: none;
+}
 }
 
 /* ---------------------------------- */

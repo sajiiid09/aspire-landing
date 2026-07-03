@@ -106,7 +106,7 @@ Warm parchment editorial register (LimeIQ reference), cursive influence.
 | `--font-display` | `'Orbitron', sans-serif` |
 | `--font-body` | `'Space Grotesk', sans-serif` |
 | `--font-accent` | `'JetBrains Mono', monospace` — stats digits, nav links |
-| Hero treatment | Dark charcoal wash with faint teal `linear-gradient(160deg, rgba(8,20,30,.55), rgba(0,190,210,.1))` + faint scanline layer (repeating-linear-gradient, 4px, opacity .03) + `saturate(1.1) contrast(1.05)` |
+| Hero treatment | Dark charcoal wash with faint teal `linear-gradient(160deg, rgba(8,20,30,.55), rgba(0,190,210,.1))` + faint scanline layer (repeating-linear-gradient, 4px, opacity .03) + `saturate(1.1) contrast(1.05)` + headline RGB-split glitch bursts (`hero-glitch` keyframes on `.hero-title`, ~4s cycle, killed by reduced-motion) |
 | Decorative layer | Glass elements gain soft `box-shadow: 0 0 16px hsl(var(--glow) / .12)` |
 
 ### 4.4 `space` — Sky / Stars
