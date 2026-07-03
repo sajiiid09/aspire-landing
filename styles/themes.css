@@ -125,6 +125,38 @@
 [data-theme="cyberpunk"] .nav-link {
   font-family: var(--font-accent);
 }
+/* Hero headline glitch — brief RGB-split bursts, calm between.
+   Combined with fade-rise so the entrance animation is preserved. */
+[data-theme="cyberpunk"] .hero-title {
+  animation:
+    fade-rise 0.8s ease-out both,
+    hero-glitch 4s steps(1, end) 1.2s infinite;
+}
+@keyframes hero-glitch {
+  0%, 100% { text-shadow: none; transform: none; }
+  2% {
+    text-shadow:
+      -3px 0 hsl(var(--primary) / 0.8),
+      3px 0 hsl(var(--accent) / 0.7);
+    transform: translateX(2px) skewX(-1.5deg);
+  }
+  3% {
+    text-shadow:
+      3px 0 hsl(var(--primary) / 0.8),
+      -3px 0 hsl(var(--accent) / 0.7);
+    transform: translateX(-2px);
+  }
+  4.5% { text-shadow: none; transform: none; }
+  58% { text-shadow: none; transform: none; }
+  59% {
+    text-shadow:
+      -2px 0 hsl(var(--primary) / 0.7),
+      2px 0 hsl(var(--accent) / 0.6);
+    transform: translateX(-1px) skewX(1deg);
+  }
+  60.5% { text-shadow: none; transform: none; }
+}
+
 /* Scanlines over hero video — kept faint */
 [data-theme="cyberpunk"] .hero-decor {
   display: block;
