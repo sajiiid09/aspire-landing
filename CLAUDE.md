@@ -8,9 +8,9 @@ Static landing page for **Aspire Global Education**, a study-abroad consultancy.
 
 Currently docs-only; code scaffolding is the next phase. The three companion docs are binding:
 
-- `design.md` — design system: tokens, 4 theme skins, per-section specs, motion, accessibility bar
-- `architecture.md` — stack, directory layout, theming architecture, content model, constraints
-- `agent.md` — hard rules and file placement conventions (read before any code change)
+- `DESIGN.md` — design system: tokens, 4 theme skins, per-section specs, motion, accessibility bar
+- `ARCHITECTURE.md` — stack, directory layout, theming architecture, content model, constraints
+- `AGENT.md` — hard rules and file placement conventions (read before any code change)
 
 ## Stack
 
@@ -33,4 +33,4 @@ No test framework (v1); verification = clean build + manual QA across all 4 them
 - **Content is data:** all copy, stats, destinations, testimonials live as typed constants in `lib/content.ts` — never as literals in components. Much of it is placeholder pending client data (marked `// PLACEHOLDER`).
 - **Page = 9 self-contained sections** in `components/sections/` (header, hero, stats, services, destinations, course-finder-cta, testimonials, contact, footer), composed in order by `app/page.tsx`. Shared behavior (scroll reveal, count-up) lives in `lib/hooks.ts`.
 - **External links** (portal, course finder, contact form endpoint) come from `lib/config.ts` / `NEXT_PUBLIC_*` env vars.
-- The `.liquid-glass` CSS and `fade-rise` keyframes in `design.md` §6–7 are verbatim approved specs — do not alter without user sign-off.
+- The `.liquid-glass` CSS and `fade-rise` keyframes in `DESIGN.md` §6–7 are verbatim approved specs — do not alter without user sign-off.

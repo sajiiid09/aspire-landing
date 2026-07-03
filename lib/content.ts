@@ -10,7 +10,7 @@ import {
 
 /**
  * ALL page copy and data. Sections import their slice from here —
- * no marketing strings inside components (agent.md rule 4).
+ * no marketing strings inside components (AGENT.md rule 4).
  */
 
 export interface Stat {
@@ -59,7 +59,7 @@ export const HERO = {
   subtext:
     "We guide students from first question to first day abroad — universities, visas, scholarships, and everything between. Calm, expert, end to end.",
   cta: "Begin Your Journey",
-  // PLACEHOLDER — design-phase asset; production video TBD (architecture.md §10)
+  // PLACEHOLDER — design-phase asset; production video TBD (ARCHITECTURE.md §10)
   videoSrc:
     "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
   poster: "/images/hero-poster.svg",

@@ -1,6 +1,6 @@
 # Agent Conventions — aspire-landing
 
-Rules for AI agents (and humans) working in this repo. `design.md` = visual source of truth. `architecture.md` = structural source of truth. When code and docs conflict, flag it — don't silently pick one.
+Rules for AI agents (and humans) working in this repo. `DESIGN.md` = visual source of truth. `ARCHITECTURE.md` = structural source of truth. When code and docs conflict, flag it — don't silently pick one.
 
 ## Project in one paragraph
 
@@ -24,7 +24,7 @@ npx tsc --noEmit     # typecheck
 5. **Sections stay self-contained** in `components/sections/` — one file per landing section, no cross-imports between sections. Shared behavior goes in `lib/hooks.ts` or `components/theme/`.
 6. **shadcn/ui components go in `components/ui/`** via the shadcn CLI; edit them minimally. Don't hand-write components that shadcn already provides.
 7. **Static export constraints:** no server-only features (dynamic routes with runtime data, next/image optimization API, headers/middleware). Anything added must survive `next build` with `output: 'export'`.
-8. **Preserve the verbatim specs** in `design.md` §6–7 (`.liquid-glass`, `fade-rise`) — these came from the approved design prompt; change only with explicit user sign-off.
+8. **Preserve the verbatim specs** in `DESIGN.md` §6–7 (`.liquid-glass`, `fade-rise`) — these came from the approved design prompt; change only with explicit user sign-off.
 9. **Every visual change must be checked in all four themes** and under `prefers-reduced-motion`. A change that looks right only in `default` is not done.
 10. **Accessibility bar is non-negotiable:** WCAG AA contrast per theme, keyboard-operable switcher and menu, single `h1`, semantic landmarks.
 
@@ -33,7 +33,7 @@ npx tsc --noEmit     # typecheck
 | Change | File(s) |
 |---|---|
 | Copy / stats / testimonials | `lib/content.ts` |
-| Theme colors / fonts / hero overlays | `styles/themes.css` (+ token docs in `design.md`) |
+| Theme colors / fonts / hero overlays | `styles/themes.css` (+ token docs in `DESIGN.md`) |
 | New shared animation/behavior | `lib/hooks.ts` |
 | Section layout | that section's file in `components/sections/` |
 | External URLs, site metadata | `lib/config.ts` |

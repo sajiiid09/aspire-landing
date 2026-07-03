@@ -1,6 +1,6 @@
 # Design System — Aspire Global Education Landing Page
 
-Visual source of truth for the Aspire Global Education landing page. Architecture and code conventions live in `architecture.md` and `agent.md`.
+Visual source of truth for the Aspire Global Education landing page. Architecture and code conventions live in `ARCHITECTURE.md` and `AGENT.md`.
 
 ## 1. Brand & Voice
 
@@ -25,7 +25,7 @@ Aspire Global Education is a study-abroad consultancy. The landing page position
 
 ## 3. Token Architecture
 
-Every visual decision routes through CSS variables on `:root`, overridden per theme via `[data-theme="…"]`. Components never hardcode colors or fonts. Tailwind maps utilities to these vars (see `architecture.md`).
+Every visual decision routes through CSS variables on `:root`, overridden per theme via `[data-theme="…"]`. Components never hardcode colors or fonts. Tailwind maps utilities to these vars (see `ARCHITECTURE.md`).
 
 Color values are HSL triplets (consumed as `hsl(var(--background))`).
 
@@ -143,7 +143,7 @@ Scale (desktop → mobile):
 | Labels/eyebrows | `text-sm`, `text-muted-foreground`, small-caps tracking in classical |
 | Stat digits | `text-5xl md:text-6xl`, display font |
 
-Fonts load via `next/font/google` (see `architecture.md`); all six families declared with `display: swap`.
+Fonts load via `next/font/google` (see `ARCHITECTURE.md`); all six families declared with `display: swap`.
 
 ## 6. Liquid Glass (global surface language)
 
@@ -251,7 +251,7 @@ Full-width band, distinct from neighbors (uses `--secondary` surface or inverted
 
 ### 8.8 Contact Section
 - Two columns: left — h2 "Start the conversation.", office address, phone, email, social links (placeholders); right — simple form (name, email, phone, destination interest select, message).
-- **No backend.** Form submits via `mailto:` fallback or a third-party form endpoint (Formspree-class) configured by constant; decision deferred, documented in `architecture.md`. Client-side validation only.
+- **No backend.** Form submits via `mailto:` fallback or a third-party form endpoint (Formspree-class) configured by constant; decision deferred, documented in `ARCHITECTURE.md`. Client-side validation only.
 - Inputs: transparent background, `border-b` hairline only (editorial register), focus ring `--ring`.
 
 ### 8.9 Footer

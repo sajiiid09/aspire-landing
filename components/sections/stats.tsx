@@ -10,7 +10,7 @@ function StatTile({ stat }: { stat: Stat }) {
 
   return (
     <div ref={ref} className="liquid-glass relative rounded p-6">
-      {/* Corner dots (Ondex reference, design.md §8.3) */}
+      {/* Corner dots (Ondex reference, DESIGN.md §8.3) */}
       {["left-2 top-2", "right-2 top-2", "bottom-2 left-2", "bottom-2 right-2"].map(
         (pos) => (
           <span

@@ -1,7 +1,7 @@
 /**
  * External URLs and site metadata.
  * Portal + course finder live on an external white-labeled portal — this
- * site never implements auth or backend features (architecture.md §2).
+ * site never implements auth or backend features (ARCHITECTURE.md §2).
  */
 
 // PLACEHOLDER — pending real portal URLs from client

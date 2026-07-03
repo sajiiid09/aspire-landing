@@ -1,6 +1,6 @@
 # Architecture — Aspire Global Education Landing Page
 
-Technical source of truth. Visual system lives in `design.md`; agent conventions in `agent.md`.
+Technical source of truth. Visual system lives in `DESIGN.md`; agent conventions in `AGENT.md`.
 
 ## 1. Stack
 
@@ -46,7 +46,7 @@ aspire-landing/
 │   │   └── footer.tsx
 │   ├── theme/
 │   │   ├── theme-provider.tsx   # context: activeTheme, setTheme
-│   │   └── theme-switcher.tsx   # floating pill (design.md §9)
+│   │   └── theme-switcher.tsx   # floating pill (DESIGN.md §9)
 │   └── ui/                 # shadcn/ui components (generated, minimally edited)
 ├── lib/
 │   ├── content.ts          # ALL page copy/data as typed constants
@@ -58,7 +58,7 @@ aspire-landing/
 │   └── images/ videos/     # posters, destination photos, testimonial photos
 ├── next.config.ts          # output: 'export', images.unoptimized (see §7)
 ├── tailwind.config.ts
-├── design.md  architecture.md  agent.md  CLAUDE.md
+├── DESIGN.md  ARCHITECTURE.md  AGENT.md  CLAUDE.md
 ```
 
 ## 4. Theming Architecture
@@ -66,7 +66,7 @@ aspire-landing/
 Decision: **`data-theme` attribute + CSS variables. No theme library.**
 
 - Themes: `default`, `classical`, `cyberpunk`, `space` (canonical ids — use everywhere: CSS selectors, localStorage, switcher).
-- `styles/themes.css` holds one `[data-theme="x"]` block per theme overriding the token set defined in `design.md` §3–4. `:root` carries `default` values.
+- `styles/themes.css` holds one `[data-theme="x"]` block per theme overriding the token set defined in `DESIGN.md` §3–4. `:root` carries `default` values.
 - Tailwind config maps semantic utilities to vars: `colors: { background: 'hsl(var(--background))', … }`, `fontFamily: { display: 'var(--font-display)', body: 'var(--font-body)', accent: 'var(--font-accent)' }`. Components use only semantic utilities (`bg-background`, `text-muted-foreground`, `font-display`) — never raw palette classes.
 - **No-flash script:** inline `<script>` in `<head>` (via `dangerouslySetInnerHTML` in `layout.tsx`) reads `localStorage['aspire-theme']` and sets `document.documentElement.dataset.theme` before first paint. Must stay tiny and dependency-free.
 - `ThemeProvider` (client component, wraps body content): owns `activeTheme` state, syncs `data-theme` + localStorage on change. Consumed only by `theme-switcher.tsx`. Sections are theme-agnostic — they read tokens via CSS, never branch on theme in JSX.
@@ -105,7 +105,7 @@ interface Testimonial { quote: string; name: string; destination: string; univer
 ## 8. SEO
 
 - Metadata API in `layout.tsx`: title ("Aspire Global Education — Study Abroad Consultancy"), description, canonical, OG/Twitter card (`opengraph-image.png`).
-- Single `h1` (hero). Semantic landmarks per `design.md` §10.
+- Single `h1` (hero). Semantic landmarks per `DESIGN.md` §10.
 - `app/sitemap.ts` + `app/robots.ts` (both static-export compatible).
 - JSON-LD `EducationalOrganization` schema in layout (name, url, contact — placeholders until client data).
 

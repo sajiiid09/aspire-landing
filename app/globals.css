@@ -26,7 +26,7 @@
 }
 
 /* ---------------------------------- */
-/* Liquid glass — verbatim spec, see design.md §6 */
+/* Liquid glass — verbatim spec, see DESIGN.md §6 */
 /* In @layer components so positioning utilities (fixed/absolute) can override */
 /* ---------------------------------- */
 @layer components {
@@ -58,7 +58,7 @@
 }
 
 /* ---------------------------------- */
-/* Motion — verbatim spec, see design.md §7 */
+/* Motion — verbatim spec, see DESIGN.md §7 */
 /* ---------------------------------- */
 @keyframes fade-rise {
   from { opacity: 0; transform: translateY(24px); }
@@ -118,7 +118,7 @@
   to { transform: translateY(-120px); }
 }
 
-/* Reduced motion: kill all animation, see design.md §7 */
+/* Reduced motion: kill all animation, see DESIGN.md §7 */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
