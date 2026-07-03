@@ -6,6 +6,8 @@ import {
   BookOpenCheck,
   Compass,
   PlaneTakeoff,
+  BadgeCheck,
+  Route,
 } from "lucide-react";
 
 /**
@@ -28,8 +30,16 @@ export interface Service {
 export interface Destination {
   country: string;
   image: string;
+  imageAlt: string;
   statLine: string;
+  universities: string[];
   featured?: boolean;
+}
+
+export interface DestinationHighlight {
+  icon: LucideIcon;
+  title: string;
+  description: string;
 }
 
 export interface Testimonial {
@@ -62,7 +72,8 @@ export const HERO = {
   // PLACEHOLDER — design-phase asset; production video TBD (ARCHITECTURE.md §10)
   videoSrc:
     "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
-  poster: "/images/hero-poster.svg",
+  poster:
+    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop",
 } as const;
 
 // PLACEHOLDER — pending client BRD data
@@ -121,41 +132,117 @@ export const SERVICES: { eyebrow: string; title: string; items: Service[] } = {
   ],
 };
 
-// PLACEHOLDER — pending client BRD data
-export const DESTINATIONS: { eyebrow: string; title: string; items: Destination[] } = {
+// PLACEHOLDER — pending client BRD data (stat lines and partnership claims;
+// university names are real, partnership status unconfirmed)
+export const DESTINATIONS: {
+  eyebrow: string;
+  title: string;
+  items: Destination[];
+  highlights: DestinationHighlight[];
+} = {
   eyebrow: "Where you can go",
   title: "Study Destinations",
   items: [
     {
       country: "United Kingdom",
-      image: "/images/dest-uk.svg",
+      image:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Tower Bridge and the London skyline along the Thames",
       statLine: "40+ partner universities",
+      universities: [
+        "University of Oxford",
+        "UCL",
+        "University of Manchester",
+        "University of Edinburgh",
+        "King's College London",
+      ],
       featured: true,
     },
     {
       country: "United States",
-      image: "/images/dest-usa.svg",
+      image:
+        "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Times Square street view in New York City",
       statLine: "60+ partner universities",
+      universities: [
+        "New York University",
+        "Boston University",
+        "UIUC",
+        "Arizona State University",
+        "Northeastern University",
+      ],
     },
     {
       country: "Canada",
-      image: "/images/dest-canada.svg",
+      image:
+        "https://images.unsplash.com/photo-1517935706615-2717063c2225?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Toronto skyline with the CN Tower at sunset",
       statLine: "35+ partner universities",
+      universities: [
+        "University of Toronto",
+        "UBC",
+        "McGill University",
+        "University of Waterloo",
+      ],
     },
     {
       country: "Australia",
-      image: "/images/dest-australia.svg",
+      image:
+        "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Sydney Harbour with the Opera House and city skyline",
       statLine: "30+ partner universities",
+      universities: [
+        "University of Melbourne",
+        "Monash University",
+        "UNSW Sydney",
+        "University of Sydney",
+      ],
     },
     {
       country: "Germany",
-      image: "/images/dest-germany.svg",
+      image:
+        "https://images.unsplash.com/photo-1560969184-10fe8719e047?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Brandenburg Gate in Berlin under a summer sky",
       statLine: "25+ partner universities",
+      universities: [
+        "TU Munich",
+        "TU Berlin",
+        "RWTH Aachen",
+        "Heidelberg University",
+      ],
     },
     {
       country: "Malaysia",
-      image: "/images/dest-malaysia.svg",
+      image:
+        "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1600&auto=format&fit=crop",
+      imageAlt: "Petronas Towers rising over Kuala Lumpur at dusk",
       statLine: "20+ partner universities",
+      universities: [
+        "Universiti Malaya",
+        "Taylor's University",
+        "Sunway University",
+        "UKM",
+      ],
+    },
+  ],
+  highlights: [
+    {
+      icon: BadgeCheck,
+      title: "98% Visa Success",
+      description:
+        "Interview coaching and airtight document prep keep our approval rate among the highest in the region.",
+    },
+    {
+      icon: Award,
+      title: "Scholarships Secured",
+      description:
+        "Every intake, we match students with merit awards, grants, and tuition waivers they didn't know existed.",
+    },
+    {
+      icon: Route,
+      title: "End-to-End Support",
+      description:
+        "From your first consultation to airport pickup — one team, one plan, every step handled.",
     },
   ],
 };
@@ -177,7 +264,8 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       name: "Nusrat Rahman",
       destination: "United Kingdom",
       university: "University of Manchester",
-      image: "/images/student-1.svg",
+      image:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop",
     },
     {
       quote:
@@ -185,7 +273,8 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       name: "Arif Chowdhury",
       destination: "Canada",
       university: "University of Toronto",
-      image: "/images/student-2.svg",
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
     },
     {
       quote:
@@ -193,7 +282,8 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       name: "Mahia Islam",
       destination: "Australia",
       university: "Monash University",
-      image: "/images/student-3.svg",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=800&auto=format&fit=crop",
     },
     {
       quote:
@@ -201,7 +291,8 @@ export const TESTIMONIALS: { eyebrow: string; title: string; items: Testimonial[
       name: "Tanvir Ahmed",
       destination: "Germany",
       university: "TU Berlin",
-      image: "/images/student-4.svg",
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop",
     },
   ],
 };

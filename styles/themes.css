@@ -92,46 +92,48 @@
 }
 
 /* ---------------------------------------------------------- */
+/* Refined neo-noir: charcoal-blue base, dominant cyan/teal,
+   magenta demoted to the rarely-used accent token */
 [data-theme="cyberpunk"] {
-  --background: 260 30% 5%;
-  --foreground: 180 100% 92%;
-  --muted: 260 25% 12%;
-  --muted-foreground: 280 15% 60%;
-  --primary: 320 100% 60%;
-  --primary-foreground: 260 30% 5%;
-  --secondary: 260 25% 10%;
-  --accent: 180 100% 50%;
-  --border: 300 80% 30%;
-  --input: 300 80% 30%;
-  --ring: 180 100% 50%;
-  --glow: 180 100% 50%;
+  --background: 220 30% 6%;
+  --foreground: 195 25% 92%;
+  --muted: 220 24% 11%;
+  --muted-foreground: 210 12% 65%;
+  --primary: 187 85% 55%;
+  --primary-foreground: 220 30% 6%;
+  --secondary: 220 24% 9%;
+  --accent: 322 65% 58%;
+  --border: 200 25% 22%;
+  --input: 200 25% 22%;
+  --ring: 187 85% 55%;
+  --glow: 187 85% 55%;
 
   --font-display: var(--font-orbitron), sans-serif;
   --font-body: var(--font-space-grotesk), sans-serif;
   --font-accent: var(--font-jetbrains-mono), monospace;
 
-  --hero-overlay: linear-gradient(160deg, rgba(255, 0, 170, 0.25), rgba(0, 255, 255, 0.2));
-  --hero-video-filter: saturate(1.4) hue-rotate(-10deg);
+  --hero-overlay: linear-gradient(160deg, rgba(8, 20, 30, 0.55), rgba(0, 190, 210, 0.1));
+  --hero-video-filter: saturate(1.1) contrast(1.05);
 }
 
 [data-theme="cyberpunk"] .liquid-glass {
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    0 0 24px hsl(var(--glow) / 0.25);
+    0 0 16px hsl(var(--glow) / 0.12);
 }
 [data-theme="cyberpunk"] .stat-value,
 [data-theme="cyberpunk"] .nav-link {
   font-family: var(--font-accent);
 }
-/* Scanlines over hero video */
+/* Scanlines over hero video — kept faint */
 [data-theme="cyberpunk"] .hero-decor {
   display: block;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0, 255, 255, 0.06) 0px,
-    rgba(0, 255, 255, 0.06) 1px,
+    rgba(160, 220, 230, 0.03) 0px,
+    rgba(160, 220, 230, 0.03) 1px,
     transparent 1px,
-    transparent 3px
+    transparent 4px
   );
 }
 
