@@ -1,14 +1,28 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DESTINATIONS } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
 
 export function Destinations() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const autoplay = useRef(
+    Autoplay({ delay: 5000, stopOnMouseEnter: true, stopOnInteraction: false }),
+  );
+  // Stable across renders — an inline array/options object here would make
+  // embla reinit (and reset the autoplay timer) on every re-render.
+  const plugins = useMemo(() => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return reduced ? [] : [autoplay.current];
+  }, []);
+  const options = useMemo(() => ({ loop: true, align: "start" as const }), []);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -23,9 +37,21 @@ export function Destinations() {
     };
   }, [emblaApi]);
 
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-  const scrollTo = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+    autoplay.current.reset();
+  }, [emblaApi]);
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+    autoplay.current.reset();
+  }, [emblaApi]);
+  const scrollTo = useCallback(
+    (i: number) => {
+      emblaApi?.scrollTo(i);
+      autoplay.current.reset();
+    },
+    [emblaApi],
+  );
 
   return (
     <section id="destinations" className="py-24 md:py-32">
