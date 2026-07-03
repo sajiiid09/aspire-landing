@@ -92,22 +92,22 @@ Warm parchment editorial register (LimeIQ reference), cursive influence.
 | Hero treatment | Warm sepia tint overlay `linear-gradient(rgba(58,40,20,.45), rgba(58,40,20,.65))` + `sepia(.35) contrast(.95)` filter |
 | Decorative layer | Hairline rules above/below section headers; drop-cap on first testimonial |
 
-### 4.3 `cyberpunk` — Neon Circuit
+### 4.3 `cyberpunk` — Refined Neo-Noir
 
 | Token | Value |
 |---|---|
-| `--background` | `260 30% 5%` (near-black violet) |
-| `--foreground` | `180 100% 92%` |
-| `--muted-foreground` | `280 15% 60%` |
-| `--primary` / `--primary-foreground` | `320 100% 60%` (magenta) / `260 30% 5%` |
-| `--accent` | `180 100% 50%` (cyan) |
-| `--border` | `300 80% 30%` |
-| `--glow` | `180 100% 50%` |
+| `--background` | `220 30% 6%` (near-black blue-charcoal) |
+| `--foreground` | `195 25% 92%` (soft cool off-white) |
+| `--muted-foreground` | `210 12% 65%` (desaturated steel) |
+| `--primary` / `--primary-foreground` | `187 85% 55%` (cyan/teal) / `220 30% 6%` |
+| `--accent` | `322 65% 58%` (demoted magenta — rare highlights only) |
+| `--border` | `200 25% 22%` (desaturated blue-grey) |
+| `--glow` | `187 85% 55%` |
 | `--font-display` | `'Orbitron', sans-serif` |
 | `--font-body` | `'Space Grotesk', sans-serif` |
 | `--font-accent` | `'JetBrains Mono', monospace` — stats digits, nav links |
-| Hero treatment | Neon duotone overlay `linear-gradient(160deg, rgba(255,0,170,.25), rgba(0,255,255,.2))` + subtle scanline layer (repeating-linear-gradient, 3px, opacity .06) + `saturate(1.4) hue-rotate(-10deg)` |
-| Decorative layer | Glass elements gain `box-shadow: 0 0 24px hsl(var(--glow) / .25)`; borders shift to glow gradient |
+| Hero treatment | Dark charcoal wash with faint teal `linear-gradient(160deg, rgba(8,20,30,.55), rgba(0,190,210,.1))` + faint scanline layer (repeating-linear-gradient, 4px, opacity .03) + `saturate(1.1) contrast(1.05)` |
+| Decorative layer | Glass elements gain soft `box-shadow: 0 0 16px hsl(var(--glow) / .12)` |
 
 ### 4.4 `space` — Sky / Stars
 

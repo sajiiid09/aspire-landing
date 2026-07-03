@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { DESTINATIONS, FOOTER } from "@/lib/content";
 import { PORTAL_URL, SITE } from "@/lib/config";
 
@@ -6,8 +7,19 @@ export function Footer() {
     <footer className="bg-secondary/60">
       <div className="mx-auto grid max-w-7xl gap-12 px-8 py-16 md:grid-cols-4">
         <div>
-          <div className="font-display text-2xl tracking-tight text-foreground">
-            Aspire Global<sup className="text-xs">®</sup>
+          <div className="inline-flex items-center gap-3 font-display text-2xl tracking-tight text-foreground">
+            <span className="logo-chip h-8 w-8">
+              <Image
+                src="/asp-logo.png"
+                alt=""
+                width={28}
+                height={28}
+                className="h-full w-full object-contain"
+              />
+            </span>
+            <span>
+              Aspire Global<sup className="text-xs">®</sup>
+            </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             {FOOTER.tagline}

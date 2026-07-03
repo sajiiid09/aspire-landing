@@ -93,6 +93,17 @@
 .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
 .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.5s; }
 
+/* Logo chip — fixed light backing to match the cream logo PNG in every theme */
+.logo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: hsl(40 30% 96%);
+  border-radius: 0.5rem;
+  padding: 0.125rem;
+}
+
 /* Hero decor layer — appearance decided per theme in themes.css */
 .hero-overlay {
   position: absolute;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/content";
 import { PORTAL_URL } from "@/lib/config";
@@ -32,8 +33,22 @@ export function Header() {
       }
     >
       <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
-        <a href="#home" className="font-display text-3xl tracking-tight text-foreground">
-          Aspire Global<sup className="text-xs">®</sup>
+        <a
+          href="#home"
+          className="inline-flex items-center gap-3 font-display text-3xl tracking-tight text-foreground"
+        >
+          <span className="logo-chip h-9 w-9">
+            <Image
+              src="/asp-logo.png"
+              alt=""
+              width={32}
+              height={32}
+              className="h-full w-full object-contain"
+            />
+          </span>
+          <span>
+            Aspire Global<sup className="text-xs">®</sup>
+          </span>
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
