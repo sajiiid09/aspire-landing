@@ -143,29 +143,41 @@ export function Footer() {
       </div>
 
       {/* City skyline illustration, flush at the page's bottom edge.
-          bg-secondary matches the footer panel so the sky reads as the same
-          themed surface instead of the artwork's original white background. */}
-      <div className="relative isolate overflow-hidden bg-secondary">
+          --footer-skyline-bg matches the footer panel's rendered color per theme
+          so the sky reads as one seamless surface instead of the artwork's
+          original white background. */}
+      <div
+        className="relative isolate overflow-hidden"
+        style={{ background: "hsl(var(--footer-skyline-bg))" }}
+      >
         <svg
           aria-hidden
           viewBox="0 0 1920 950"
           preserveAspectRatio="none"
           className="block h-20 w-full md:h-32"
         >
-          {/* Skip the artwork's solid white "sky" field so the footer's own
-              themed background shows through behind the buildings instead */}
-          {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
-            <path key={i} d={layer.d} fill={layer.fill} transform={layer.transform} />
-          ))}
+          {/* Isolated so the color wash below only blends against the building
+              paths, not the transparent "sky" gaps (which must show the flat
+              --footer-skyline-bg untouched). */}
+          <g style={{ isolation: "isolate" }}>
+            {/* Skip the artwork's solid white "sky" field so the footer's own
+                themed background shows through behind the buildings instead */}
+            {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
+              <path key={i} d={layer.d} fill={layer.fill} transform={layer.transform} />
+            ))}
+            {/* Theme-color wash — mix-blend-mode "color" keeps the art's depth shading
+                (luminance) while shifting its hue to match each theme's primary token.
+                --primary carries more distinct hue across themes than --foreground does. */}
+            <rect
+              x="0"
+              y="0"
+              width="1920"
+              height="950"
+              fill="hsl(var(--primary))"
+              style={{ mixBlendMode: "color" }}
+            />
+          </g>
         </svg>
-        {/* Theme-color wash — mix-blend-mode "color" keeps the art's depth shading
-            (luminance) while shifting its hue to match each theme's primary token.
-            --primary carries more distinct hue across themes than --foreground does. */}
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{ background: "hsl(var(--primary))", mixBlendMode: "color" }}
-        />
       </div>
     </footer>
   );
