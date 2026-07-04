@@ -142,15 +142,19 @@ export function Footer() {
         </div>
       </div>
 
-      {/* City skyline illustration, flush at the page's bottom edge */}
-      <div className="relative isolate overflow-hidden">
+      {/* City skyline illustration, flush at the page's bottom edge.
+          bg-secondary matches the footer panel so the sky reads as the same
+          themed surface instead of the artwork's original white background. */}
+      <div className="relative isolate overflow-hidden bg-secondary">
         <svg
           aria-hidden
           viewBox="0 0 1920 950"
           preserveAspectRatio="none"
           className="block h-20 w-full md:h-32"
         >
-          {FOOTER_SKYLINE_LAYERS.map((layer, i) => (
+          {/* Skip the artwork's solid white "sky" field so the footer's own
+              themed background shows through behind the buildings instead */}
+          {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
             <path key={i} d={layer.d} fill={layer.fill} transform={layer.transform} />
           ))}
         </svg>
