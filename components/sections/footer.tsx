@@ -15,6 +15,13 @@ const SOCIAL_ICON_PATHS: Record<string, string> = {
     "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
 };
 
+// Skyline artwork fills are grayscale (#RRGGBB with R=G=B); reuse that value
+// as the opacity for a solid --primary fill so buildings pick up the theme's
+// hue while keeping the original artwork's depth shading.
+function grayscaleToOpacity(hex: string): number {
+  return parseInt(hex.slice(1, 3), 16) / 255;
+}
+
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-secondary/60">
@@ -145,7 +152,11 @@ export function Footer() {
       {/* City skyline illustration, flush at the page's bottom edge.
           --footer-skyline-bg matches the footer panel's rendered color per theme
           so the sky reads as one seamless surface instead of the artwork's
-          original white background. */}
+          original white background. Building fills are painted with the theme's
+          --primary color directly (opacity derived from the artwork's original
+          grayscale value) instead of a mix-blend-mode wash: blend modes have no
+          backdrop to blend against over the transparent sky gaps and end up
+          painting them solid, which is exactly the seam this is fixing. */}
       <div
         className="relative isolate overflow-hidden"
         style={{ background: "hsl(var(--footer-skyline-bg))" }}
@@ -156,27 +167,17 @@ export function Footer() {
           preserveAspectRatio="none"
           className="block h-20 w-full md:h-32"
         >
-          {/* Isolated so the color wash below only blends against the building
-              paths, not the transparent "sky" gaps (which must show the flat
-              --footer-skyline-bg untouched). */}
-          <g style={{ isolation: "isolate" }}>
-            {/* Skip the artwork's solid white "sky" field so the footer's own
-                themed background shows through behind the buildings instead */}
-            {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
-              <path key={i} d={layer.d} fill={layer.fill} transform={layer.transform} />
-            ))}
-            {/* Theme-color wash — mix-blend-mode "color" keeps the art's depth shading
-                (luminance) while shifting its hue to match each theme's primary token.
-                --primary carries more distinct hue across themes than --foreground does. */}
-            <rect
-              x="0"
-              y="0"
-              width="1920"
-              height="950"
+          {/* Skip the artwork's solid white "sky" field so the flat
+              --footer-skyline-bg shows through behind the buildings instead */}
+          {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
+            <path
+              key={i}
+              d={layer.d}
               fill="hsl(var(--primary))"
-              style={{ mixBlendMode: "color" }}
+              fillOpacity={grayscaleToOpacity(layer.fill)}
+              transform={layer.transform}
             />
-          </g>
+          ))}
         </svg>
       </div>
     </footer>
