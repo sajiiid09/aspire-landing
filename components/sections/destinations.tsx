@@ -10,7 +10,7 @@ import { Reveal } from "@/components/reveal";
 
 export function Destinations() {
   const autoplay = useRef(
-    Autoplay({ delay: 1000, stopOnMouseEnter: true, stopOnInteraction: false }),
+    Autoplay({ delay: 2000, stopOnMouseEnter: true, stopOnInteraction: false }),
   );
   // Stable across renders — an inline array/options object here would make
   // embla reinit (and reset the autoplay timer) on every re-render.
