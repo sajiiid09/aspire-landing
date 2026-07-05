@@ -19,6 +19,13 @@
     scroll-margin-top: 6rem;
   }
 
+  /* Paint-gate: non-default saved themes hide the body until the provider
+     resolves and the themed section order renders (PLAN.md §3.3).
+     visibility (not display) keeps the default tree DOM-crawlable. */
+  html.theme-boot body {
+    visibility: hidden;
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.9);
     color: hsl(var(--primary-foreground));
@@ -61,6 +68,32 @@ header.liquid-glass {
 }
 header.liquid-glass::before {
   display: none;
+}
+
+/* ---------------------------------- */
+/* Semantic panel surface — default (Clean White) rendering here;      */
+/* per-theme resolution in styles/themes.css (PLAN.md §3.2).           */
+/* ---------------------------------- */
+.surface {
+  position: relative;
+  background: hsl(var(--secondary) / 0.6);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--card-radius, var(--radius));
+}
+header.surface {
+  box-shadow: none;
+}
+
+/* Layout-token consumers */
+.section-pad {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: var(--section-py-md);
+    padding-bottom: var(--section-py-md);
+  }
 }
 }
 
@@ -134,6 +167,23 @@ header.liquid-glass::before {
 @keyframes star-drift {
   from { transform: translateY(0); }
   to { transform: translateY(-120px); }
+}
+
+/* Accordion open/close (components/ui/accordion.tsx) — tailwind.config.ts is
+   frozen, so the usual shadcn animation utilities live here instead */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+.accordion-content[data-state="open"] {
+  animation: accordion-down 0.2s ease-out;
+}
+.accordion-content[data-state="closed"] {
+  animation: accordion-up 0.2s ease-out;
 }
 
 /* Reduced motion: kill all animation, see DESIGN.md §7 */

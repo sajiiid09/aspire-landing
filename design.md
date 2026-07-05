@@ -54,13 +54,32 @@ Color values are HSL triplets (consumed as `hsl(var(--background))`).
 }
 ```
 
-## 4. The Four Themes (full skins)
+## 4. The Four Themes (structural variants)
 
-Layout and markup are identical across themes. Only token values (colors, fonts, hero overlay, decorative layer) change.
+Each theme is a structural variant: bespoke hero (`components/sections/hero/`), its own section order (`lib/theme-layouts.ts`), one unique section (`components/sections/unique/`), and a distinct `.surface` panel rendering — sharing one content source. Tokens below include layout (`--section-py`, `--grid-gap`, `--card-radius`) and emphasis (`--em-font`, `--em-style`).
 
-### 4.1 `default` — Cinematic Navy
+### 4.1 `default` — Clean White Agency
 
-Base theme, taken directly from the hero prompt.
+Formal white agency register (eduwizz reference). Sharp corners, no video.
+
+| Token | Value |
+|---|---|
+| `--background` | `0 0% 100%` (white) |
+| `--foreground` | `222 30% 12%` (ink navy) |
+| `--muted-foreground` | `220 10% 40%` |
+| `--primary` / `--primary-foreground` | `222 60% 16%` / `0 0% 100%` |
+| `--border`, `--input` | `220 14% 88%` (hairline) |
+| `--radius` | `0` (sharp-edged) |
+| `--font-display` | `'Space Grotesk', sans-serif` |
+| `--font-body` | `'Inter', sans-serif` |
+| `--font-accent` | `'Instrument Serif', serif` — italic emphasis words in headlines |
+| Hero | Eyebrow pill, italic-serif emphasis, 2 CTAs, trust stat + avatars, image collage. No video. |
+| `.surface` | Flat `secondary` fill, 1px hairline border, radius 0 |
+| Unique section | **Process** — full-bleed primary band, journey checklist |
+
+### 4.2 `classical` — Cinematic Navy
+
+The original navy video skin, relocated intact (verbatim hero-prompt tokens).
 
 | Token | Value |
 |---|---|
@@ -70,27 +89,12 @@ Base theme, taken directly from the hero prompt.
 | `--primary` / `--primary-foreground` | `0 0% 100%` / `0 0% 4%` |
 | `--secondary`, `--muted`, `--accent` | `0 0% 10%` |
 | `--border`, `--input` | `0 0% 18%` |
+| `--radius` | `0.75rem` |
 | `--font-display` | `'Instrument Serif', serif` |
 | `--font-body` | `'Inter', sans-serif` (weights 400/500) |
-| Hero treatment | Video untouched — no overlay, no filter. Video provides all depth. |
-| Decorative layer | None. Minimalist. |
-
-### 4.2 `classical` — Academic Manuscript
-
-Warm parchment editorial register (LimeIQ reference), cursive influence.
-
-| Token | Value |
-|---|---|
-| `--background` | `39 32% 89%` (parchment cream) |
-| `--foreground` | `24 25% 12%` (ink brown-black) |
-| `--muted-foreground` | `28 12% 40%` |
-| `--primary` / `--primary-foreground` | `24 25% 12%` / `39 32% 92%` |
-| `--border` | `30 15% 74%` (hairline sepia) |
-| `--font-display` | `'Cormorant Garamond', serif` |
-| `--font-body` | `'EB Garamond', serif` |
-| `--font-accent` | `'Pinyon Script', cursive` — emphasis words in headlines only, never body |
-| Hero treatment | Warm sepia tint overlay `linear-gradient(rgba(58,40,20,.45), rgba(58,40,20,.65))` + `sepia(.35) contrast(.95)` filter |
-| Decorative layer | Hairline rules above/below section headers; drop-cap on first testimonial |
+| Hero | The cinematic video hero — untouched: no overlay, no filter. |
+| `.surface` | Mirrors the verbatim `.liquid-glass` spec (§6) — glass panels with gradient ring |
+| Unique section | **Heritage** — editorial milestone timeline, serif years, hairline rules |
 
 ### 4.3 `cyberpunk` — Refined Neo-Noir
 
@@ -106,8 +110,9 @@ Warm parchment editorial register (LimeIQ reference), cursive influence.
 | `--font-display` | `'Orbitron', sans-serif` |
 | `--font-body` | `'Space Grotesk', sans-serif` |
 | `--font-accent` | `'JetBrains Mono', monospace` — stats digits, nav links |
-| Hero treatment | Dark charcoal wash with faint teal `linear-gradient(160deg, rgba(8,20,30,.55), rgba(0,190,210,.1))` + faint scanline layer (repeating-linear-gradient, 4px, opacity .03) + `saturate(1.1) contrast(1.05)` + headline RGB-split glitch bursts (`hero-glitch` keyframes on `.hero-title`, ~4s cycle, killed by reduced-motion) |
-| Decorative layer | Glass elements gain soft `box-shadow: 0 0 16px hsl(var(--glow) / .12)` |
+| Hero | Terminal/HUD, **no video** — boot-log panel, Orbitron glitch headline (`hero-glitch`, killed by reduced-motion), neon grid + scanlines, typed-prompt CTA with blinking caret |
+| `.surface` | Neon-bracket panel: cyan border + glow, corner brackets via `::before` |
+| Unique section | **SystemStatus** — HUD dashboard, count-up readouts, pulsing "SYSTEM ONLINE", mono log |
 
 ### 4.4 `space` — Sky / Stars
 
@@ -121,8 +126,9 @@ Warm parchment editorial register (LimeIQ reference), cursive influence.
 | `--border` | `240 30% 24%` |
 | `--font-display` | `'Sora', sans-serif` (clean geometric) |
 | `--font-body` | `'Inter', sans-serif` |
-| Hero treatment | Deep-space gradient overlay `linear-gradient(rgba(10,10,40,.55), rgba(10,10,40,.8))` + CSS starfield layer (two `radial-gradient` dot fields, parallax via slow `translateY` keyframes) above the video |
-| Decorative layer | Aurora gradient accent (`linear-gradient(90deg, violet, ice-blue)`) on section header underlines and stat digits; faint starfield repeats behind Statistics section |
+| Hero | Cosmos, **no video** — starfield + aurora glow layers, Sora headline with aurora-gradient emphasis, floating orb CTA |
+| `.surface` | Aurora-edged panel: muted fill, violet ring + soft accent glow |
+| Unique section | **JourneyMap** — destination constellation, aurora polyline draws in on scroll (static under reduced motion) |
 
 **Contrast rule:** every theme must hold WCAG AA (4.5:1) for body text on `--background` and on glass surfaces. `classical` is the light theme — verify glass tiles use dark ink text, not white.
 

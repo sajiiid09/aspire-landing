@@ -1,11 +1,56 @@
 /*
- * Theme skins — see DESIGN.md §4.
- * Layout/markup identical across themes; only these variables change.
+ * Theme skins — see DESIGN.md §4 and PLAN.md §3.2.
+ * Structure varies per theme via the composition layer; these variables
+ * plus per-theme .surface rules drive the visual language.
  * Canonical theme ids: default | classical | cyberpunk | space
  */
 
 :root {
-  /* default — Cinematic Navy (base tokens from approved hero prompt) */
+  /* default — Clean White Agency (sharp-edged, formal, no video) */
+  --background: 0 0% 100%;
+  --foreground: 222 30% 12%;
+  --muted: 220 20% 96%;
+  --muted-foreground: 220 10% 40%;
+  --primary: 222 60% 16%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 20% 97%;
+  --accent: 220 20% 94%;
+  --border: 220 14% 88%;
+  --input: 220 14% 88%;
+  --ring: 222 60% 16%;
+  --glow: 0 0% 0% / 0;
+  --footer-skyline-bg: 220 20% 96%;
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-accent: var(--font-instrument-serif), serif;
+
+  --radius: 0;
+
+  --hero-overlay: none;
+  --hero-video-filter: none;
+
+  /* Layout tokens (PLAN.md §3.2) */
+  --section-py: 5rem;
+  --section-py-md: 6.5rem;
+  --grid-gap: 2.5rem;
+  --card-radius: var(--radius);
+
+  /* Headline emphasis rendering (italic serif in the white default) */
+  --em-font: var(--font-accent);
+  --em-style: italic;
+}
+
+/* Emphasis words in headlines — per-theme via tokens */
+.hero-em,
+.title-em {
+  font-family: var(--em-font);
+  font-style: var(--em-style);
+}
+
+/* ---------------------------------------------------------- */
+[data-theme="classical"] {
+  /* classical — Cinematic Navy (relocated former default skin) */
   --background: 201 100% 13%;
   --foreground: 0 0% 100%;
   --muted: 0 0% 10%;
@@ -28,69 +73,52 @@
 
   --hero-overlay: none;
   --hero-video-filter: none;
+
+  --section-py: 6rem;
+  --section-py-md: 8rem;
+  --grid-gap: 3rem;
+  --card-radius: var(--radius);
+
+  /* Upright serif emphasis — matches the former default look exactly */
+  --em-font: var(--font-display);
+  --em-style: normal;
 }
 
-/* ---------------------------------------------------------- */
-[data-theme="classical"] {
-  --background: 39 32% 89%;
-  --foreground: 24 25% 12%;
-  --muted: 36 25% 82%;
-  --muted-foreground: 28 12% 40%;
-  --primary: 24 25% 12%;
-  --primary-foreground: 39 32% 92%;
-  --secondary: 36 28% 84%;
-  --accent: 36 28% 84%;
-  --border: 30 15% 74%;
-  --input: 30 15% 74%;
-  --ring: 24 25% 12%;
-  --glow: 24 25% 12% / 0;
-  --footer-skyline-bg: var(--secondary);
-
-  --font-display: var(--font-cormorant), serif;
-  --font-body: var(--font-eb-garamond), serif;
-  --font-accent: var(--font-pinyon), cursive;
-
-  --hero-overlay: linear-gradient(rgba(58, 40, 20, 0.45), rgba(58, 40, 20, 0.65));
-  --hero-video-filter: sepia(0.35) contrast(0.95);
-}
-
-/* Light theme: glass reads as warm ink, not white */
-[data-theme="classical"] .liquid-glass {
-  background: rgba(58, 40, 20, 0.04);
-  box-shadow: inset 0 1px 1px rgba(58, 40, 20, 0.12);
-}
-[data-theme="classical"] .liquid-glass::before {
-  background: linear-gradient(180deg,
-    rgba(58,40,20,0.35) 0%, rgba(58,40,20,0.12) 20%,
-    rgba(58,40,20,0) 40%, rgba(58,40,20,0) 60%,
-    rgba(58,40,20,0.12) 80%, rgba(58,40,20,0.35) 100%);
-}
-/* Content over the dark hero video keeps light ink in the light theme */
-[data-theme="classical"] .over-video {
-  --foreground: 39 32% 92%;
-  --muted-foreground: 36 20% 75%;
-}
-[data-theme="classical"] .over-video .liquid-glass {
+/*
+ * Classical .surface — MIRROR of .liquid-glass (DESIGN.md §6 verbatim spec).
+ * Never edit .liquid-glass in globals.css; if the spec ever changes with
+ * sign-off, update this block to match.
+ */
+[data-theme="classical"] .surface {
   background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
-/* Cursive emphasis words in headlines (DESIGN.md §4.2) */
-[data-theme="classical"] .hero-em {
-  font-family: var(--font-accent);
-  font-style: normal;
+[data-theme="classical"] .surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+    rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
-/* Drop-cap on first testimonial quote (DESIGN.md §8.7) */
-[data-theme="classical"] .testimonial-first::first-letter {
-  font-family: var(--font-accent);
-  font-size: 2.6em;
-  line-height: 0.8;
-  float: left;
-  padding-right: 0.12em;
+/* Header bar: sleek variant — mirrors header.liquid-glass exception */
+[data-theme="classical"] header.surface {
+  box-shadow: none;
 }
-[data-theme="classical"] .section-title {
-  border-top: 1px solid hsl(var(--border));
-  border-bottom: 1px solid hsl(var(--border));
-  padding: 0.5rem 0;
+[data-theme="classical"] header.surface::before {
+  display: none;
 }
 
 /* ---------------------------------------------------------- */
@@ -115,14 +143,68 @@
   --font-body: var(--font-space-grotesk), sans-serif;
   --font-accent: var(--font-jetbrains-mono), monospace;
 
+  --radius: 0.75rem;
+
   --hero-overlay: linear-gradient(160deg, rgba(8, 20, 30, 0.55), rgba(0, 190, 210, 0.1));
   --hero-video-filter: saturate(1.1) contrast(1.05);
+
+  --section-py: 6rem;
+  --section-py-md: 8rem;
+  --grid-gap: 2rem;
+  --card-radius: var(--radius);
+
+  --em-font: var(--font-display);
+  --em-style: normal;
 }
 
-[data-theme="cyberpunk"] .liquid-glass {
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.1),
-    0 0 16px hsl(var(--glow) / 0.12);
+/* Neon-bracket panel */
+[data-theme="cyberpunk"] .surface {
+  background: hsl(var(--secondary) / 0.7);
+  border: 1px solid hsl(var(--primary) / 0.35);
+  box-shadow: 0 0 16px hsl(var(--glow) / 0.12);
+}
+[data-theme="cyberpunk"] .surface::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(hsl(var(--primary)), hsl(var(--primary))) top left / 14px 1.5px,
+    linear-gradient(hsl(var(--primary)), hsl(var(--primary))) top left / 1.5px 14px,
+    linear-gradient(hsl(var(--primary)), hsl(var(--primary))) bottom right / 14px 1.5px,
+    linear-gradient(hsl(var(--primary)), hsl(var(--primary))) bottom right / 1.5px 14px;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+[data-theme="cyberpunk"] header.surface::before {
+  display: none;
+}
+
+/* Terminal hero: neon grid backdrop + blinking prompt caret */
+[data-theme="cyberpunk"] .hero-grid {
+  display: block;
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 85%);
+}
+[data-theme="cyberpunk"] .prompt-caret::after {
+  content: '_';
+  animation: caret-blink 1.1s steps(1, end) infinite;
+}
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+[data-theme="cyberpunk"] .status-dot {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px hsl(var(--primary) / 0.8); }
+  50% { opacity: 0.45; box-shadow: 0 0 2px hsl(var(--primary) / 0.3); }
 }
 [data-theme="cyberpunk"] .stat-value,
 [data-theme="cyberpunk"] .nav-link {
@@ -192,8 +274,62 @@
   --font-body: var(--font-inter), sans-serif;
   --font-accent: var(--font-sora), sans-serif;
 
+  --radius: 0.75rem;
+
   --hero-overlay: linear-gradient(rgba(10, 10, 40, 0.55), rgba(10, 10, 40, 0.8));
   --hero-video-filter: none;
+
+  --section-py: 6rem;
+  --section-py-md: 8rem;
+  --grid-gap: 3rem;
+  --card-radius: var(--radius);
+
+  --em-font: var(--font-display);
+  --em-style: normal;
+}
+
+/* Aurora-edged panel */
+[data-theme="space"] .surface {
+  background: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
+  box-shadow:
+    0 0 0 1px hsl(var(--primary) / 0.15),
+    0 8px 40px hsl(var(--accent) / 0.1);
+}
+[data-theme="space"] header.surface {
+  box-shadow: none;
+}
+
+/* Cosmos hero: aurora glow backdrop + floating orb CTA */
+[data-theme="space"] .hero-aurora {
+  display: block;
+  background:
+    radial-gradient(60% 50% at 20% 20%, hsl(255 85% 72% / 0.22), transparent 70%),
+    radial-gradient(50% 45% at 80% 65%, hsl(190 90% 65% / 0.16), transparent 70%);
+}
+[data-theme="space"] .orb-cta {
+  animation: orb-float 6s ease-in-out infinite;
+  box-shadow:
+    0 0 40px hsl(255 85% 72% / 0.35),
+    0 0 80px hsl(190 90% 65% / 0.2);
+}
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+/* Constellation path draw (journey map) */
+[data-theme="space"] .constellation-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2.4s ease-out;
+}
+[data-theme="space"] .is-visible .constellation-path {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="space"] .constellation-path {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Starfield above the video tint (DESIGN.md §4.4) */

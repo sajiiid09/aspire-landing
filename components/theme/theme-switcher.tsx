@@ -7,12 +7,12 @@ import { useTheme } from "./theme-provider";
 
 const THEME_META: Record<ThemeId, { label: string; swatch: string }> = {
   default: {
-    label: "Cinematic Navy",
-    swatch: "linear-gradient(135deg, hsl(201 100% 13%), hsl(201 60% 30%))",
+    label: "Clean White",
+    swatch: "linear-gradient(135deg, hsl(0 0% 100%), hsl(222 30% 25%))",
   },
   classical: {
-    label: "Academic Manuscript",
-    swatch: "linear-gradient(135deg, hsl(39 32% 89%), hsl(30 25% 65%))",
+    label: "Cinematic Navy",
+    swatch: "linear-gradient(135deg, hsl(201 100% 13%), hsl(201 60% 30%))",
   },
   cyberpunk: {
     label: "Neon Circuit",
@@ -57,7 +57,7 @@ export function ThemeSwitcher() {
 
   return (
     <div ref={rootRef} className="fixed bottom-6 right-6 z-50">
-      <div className="liquid-glass flex flex-col items-center gap-3 rounded-full p-2">
+      <div className="surface flex flex-col items-center gap-3 rounded-full p-2">
         {open && (
           <div
             role="radiogroup"
