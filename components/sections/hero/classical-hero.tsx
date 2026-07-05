@@ -1,6 +1,6 @@
 import { HERO } from "@/lib/content";
 
-export function Hero() {
+export function ClassicalHero() {
   return (
     <section id="home" className="over-video relative min-h-screen">
       <video
