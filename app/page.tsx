@@ -3,7 +3,7 @@ import { Hero } from "@/components/sections/hero/hero";
 import { Stats } from "@/components/sections/stats";
 import { Services } from "@/components/sections/services";
 import { Destinations } from "@/components/sections/destinations";
-import { CourseFinderCta } from "@/components/sections/course-finder-cta";
+import { CtaBanner } from "@/components/sections/cta-banner";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
@@ -18,7 +18,7 @@ export default function Home() {
         <Stats />
         <Services />
         <Destinations />
-        <CourseFinderCta />
+        <CtaBanner />
         <Testimonials />
         <Contact />
         <Footer />
