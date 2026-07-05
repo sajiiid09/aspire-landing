@@ -54,7 +54,7 @@ export function Destinations() {
   );
 
   return (
-    <section id="destinations" className="py-24 md:py-32">
+    <section id="destinations" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
           <div className="text-sm text-muted-foreground">{DESTINATIONS.eyebrow}</div>
@@ -111,14 +111,14 @@ export function Destinations() {
             <button
               aria-label="Previous destination"
               onClick={scrollPrev}
-              className="liquid-glass absolute left-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
+              className="surface absolute left-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next destination"
               onClick={scrollNext}
-              className="liquid-glass absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
+              className="surface absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
             >
               <ChevronRight className="h-5 w-5" />
             </button>

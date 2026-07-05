@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { NAV_LINKS } from "@/lib/content";
+import { Menu, MessageCircle, Phone, X } from "lucide-react";
+import { HEADER_CONTACT, NAV_LINKS } from "@/lib/content";
 import { PORTAL_URL } from "@/lib/config";
 
 export function Header() {
@@ -28,7 +28,7 @@ export function Header() {
     <header
       className={
         scrolled
-          ? "liquid-glass fixed inset-x-0 top-0 z-40"
+          ? "surface fixed inset-x-0 top-0 z-40"
           : "over-video absolute inset-x-0 top-0 z-40"
       }
     >
@@ -69,10 +69,26 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <a
+            href={HEADER_CONTACT.phoneHref}
+            className="hidden items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground lg:inline-flex"
+          >
+            <Phone className="h-4 w-4" aria-hidden />
+            {HEADER_CONTACT.phoneLabel}
+          </a>
+          <a
+            href={HEADER_CONTACT.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="hidden text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
+          >
+            <MessageCircle className="h-5 w-5" aria-hidden />
+          </a>
+          <a
             href={PORTAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="liquid-glass hidden rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03] md:inline-block"
+            className="surface hidden rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03] md:inline-block"
           >
             Student Portal
           </a>
@@ -88,7 +104,7 @@ export function Header() {
       </nav>
 
       {menuOpen && (
-        <div className="liquid-glass fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 bg-[hsl(var(--background)/0.9)] md:hidden">
+        <div className="surface fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 bg-[hsl(var(--background)/0.9)] md:hidden">
           <button
             aria-label="Close menu"
             onClick={() => setMenuOpen(false)}
@@ -107,10 +123,18 @@ export function Header() {
             </a>
           ))}
           <a
+            href={HEADER_CONTACT.phoneHref}
+            onClick={() => setMenuOpen(false)}
+            className="inline-flex items-center gap-2 text-base text-muted-foreground"
+          >
+            <Phone className="h-4 w-4" aria-hidden />
+            {HEADER_CONTACT.phoneLabel}
+          </a>
+          <a
             href={PORTAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="liquid-glass mt-4 rounded-full px-8 py-3 text-base text-foreground"
+            className="surface mt-4 rounded-full px-8 py-3 text-base text-foreground"
           >
             Student Portal
           </a>

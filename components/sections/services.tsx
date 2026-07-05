@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 
 export function Services() {
   return (
-    <section id="services" className="py-24 md:py-32">
+    <section id="services" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
           <div className="text-sm text-muted-foreground">{SERVICES.eyebrow}</div>

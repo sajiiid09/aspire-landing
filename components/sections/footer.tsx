@@ -35,7 +35,7 @@ export function Footer() {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-8 py-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div className="relative mx-auto grid max-w-7xl gap-[var(--grid-gap)] px-8 py-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <div className="inline-flex items-center gap-3 font-display text-2xl tracking-tight text-foreground">
             <span className="logo-chip h-10 w-10">
@@ -123,7 +123,7 @@ export function Footer() {
             href={PORTAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="liquid-glass mt-6 inline-block rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03]"
+            className="surface mt-6 inline-block rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03]"
           >
             Student Portal
           </a>

@@ -46,7 +46,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 md:py-32">
+    <section id="contact" className="relative overflow-hidden section-pad">
       <Image
         src={CONTACT.backgroundImage}
         alt=""
@@ -152,7 +152,7 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="liquid-glass mt-4 self-start rounded-full px-10 py-4 text-base text-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
+              className="surface mt-4 self-start rounded-full px-10 py-4 text-base text-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
             >
               {status === "sending" ? "Sending…" : "Send Message"}
             </button>
