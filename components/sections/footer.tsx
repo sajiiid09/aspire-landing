@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { DESTINATIONS, FOOTER } from "@/lib/content";
 import { PORTAL_URL, SITE } from "@/lib/config";
-import { FOOTER_SKYLINE_LAYERS } from "@/lib/footer-skyline-paths";
 
 // Brand glyph paths (lucide dropped brand icons); rendered with currentColor
 const SOCIAL_ICON_PATHS: Record<string, string> = {
@@ -14,13 +13,6 @@ const SOCIAL_ICON_PATHS: Record<string, string> = {
   YouTube:
     "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
 };
-
-// Skyline artwork fills are grayscale (#RRGGBB with R=G=B); reuse that value
-// as the opacity for a solid --primary fill so buildings pick up the theme's
-// hue while keeping the original artwork's depth shading.
-function grayscaleToOpacity(hex: string): number {
-  return parseInt(hex.slice(1, 3), 16) / 255;
-}
 
 export function Footer() {
   return (
@@ -152,33 +144,31 @@ export function Footer() {
       {/* City skyline illustration, flush at the page's bottom edge.
           --footer-skyline-bg matches the footer panel's rendered color per theme
           so the sky reads as one seamless surface instead of the artwork's
-          original white background. Building fills are painted with the theme's
-          --primary color directly (opacity derived from the artwork's original
-          grayscale value) instead of a mix-blend-mode wash: blend modes have no
-          backdrop to blend against over the transparent sky gaps and end up
-          painting them solid, which is exactly the seam this is fixing. */}
+          original white background. The artwork is applied as a CSS mask (not
+          an <img>) so it can be recolored with the theme's --primary color;
+          the mask's luminance reproduces the original grayscale depth shading
+          as varying opacity. `auto 100%` + repeat-x tiles the artwork at its
+          natural aspect ratio instead of stretching a fixed viewBox to fit an
+          arbitrary footer width. */}
       <div
         className="relative isolate overflow-hidden"
         style={{ background: "hsl(var(--footer-skyline-bg))" }}
       >
-        <svg
+        <div
           aria-hidden
-          viewBox="0 0 1920 950"
-          preserveAspectRatio="none"
-          className="block h-20 w-full md:h-32"
-        >
-          {/* Skip the artwork's solid white "sky" field so the flat
-              --footer-skyline-bg shows through behind the buildings instead */}
-          {FOOTER_SKYLINE_LAYERS.filter((layer) => layer.fill !== "#FCFCFC").map((layer, i) => (
-            <path
-              key={i}
-              d={layer.d}
-              fill="hsl(var(--primary))"
-              fillOpacity={grayscaleToOpacity(layer.fill)}
-              transform={layer.transform}
-            />
-          ))}
-        </svg>
+          className="h-20 w-full md:h-32"
+          style={{
+            backgroundColor: "hsl(var(--primary))",
+            WebkitMaskImage: "url(/images/skylines.svg)",
+            maskImage: "url(/images/skylines.svg)",
+            WebkitMaskRepeat: "repeat-x",
+            maskRepeat: "repeat-x",
+            WebkitMaskPosition: "bottom",
+            maskPosition: "bottom",
+            WebkitMaskSize: "auto 100%",
+            maskSize: "auto 100%",
+          }}
+        />
       </div>
     </footer>
   );
