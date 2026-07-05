@@ -62,6 +62,32 @@ header.liquid-glass {
 header.liquid-glass::before {
   display: none;
 }
+
+/* ---------------------------------- */
+/* Semantic panel surface — default (Clean White) rendering here;      */
+/* per-theme resolution in styles/themes.css (PLAN.md §3.2).           */
+/* ---------------------------------- */
+.surface {
+  position: relative;
+  background: hsl(var(--secondary) / 0.6);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--card-radius, var(--radius));
+}
+header.surface {
+  box-shadow: none;
+}
+
+/* Layout-token consumers */
+.section-pad {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: var(--section-py-md);
+    padding-bottom: var(--section-py-md);
+  }
+}
 }
 
 /* ---------------------------------- */

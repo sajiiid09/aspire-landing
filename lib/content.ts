@@ -21,6 +21,11 @@ export interface Stat {
   label: string;
 }
 
+export interface HeadlinePart {
+  text: string;
+  em?: boolean;
+}
+
 export interface Service {
   icon: LucideIcon;
   title: string;
@@ -58,8 +63,26 @@ export const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export const HERO = {
-  // Emphasis segments render muted (and cursive in classical theme)
+/**
+ * Superset hero data — each theme's hero variant renders only the fields it
+ * needs (PLAN.md §6). `cta` stays the primary CTA label for all variants.
+ */
+export const HERO: {
+  eyebrow: string;
+  headline: readonly HeadlinePart[];
+  subtext: string;
+  cta: string;
+  secondaryCta: { label: string; href: string };
+  trustStats: readonly Stat[];
+  avatars: readonly { src: string; alt: string }[];
+  videoSrc: string;
+  poster: string;
+  collage: readonly { src: string; alt: string }[];
+  terminalLines: readonly string[];
+} = {
+  // PLACEHOLDER — pending client BRD data (eyebrow, trust copy, terminal log)
+  eyebrow: "UK · USA · Canada · Australia · Germany · Malaysia",
+  // Emphasis segments render muted (and italic-serif in default theme)
   headline: [
     { text: "Where " },
     { text: "ambition", em: true },
@@ -69,12 +92,30 @@ export const HERO = {
   subtext:
     "We guide students from first question to first day abroad — universities, visas, scholarships, and everything between. Calm, expert, end to end.",
   cta: "Begin Your Journey",
+  secondaryCta: { label: "Explore Destinations", href: "#destinations" },
+  trustStats: [{ value: 98, suffix: "%", label: "Visa success rate" }],
+  avatars: [
+    { src: "/images/student-1.jpg", alt: "Aspire student" },
+    { src: "/images/student-2.jpg", alt: "Aspire student" },
+    { src: "/images/student-3.jpg", alt: "Aspire student" },
+  ],
   // PLACEHOLDER — design-phase asset; production video TBD (ARCHITECTURE.md §10)
   videoSrc:
     "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
   poster:
     "/images/hero-poster.jpg",
-} as const;
+  collage: [
+    { src: "/images/hero-poster.jpg", alt: "University campus at golden hour" },
+    { src: "/images/dest-uk.jpg", alt: "London skyline along the Thames" },
+    { src: "/images/student-4.jpg", alt: "Student settled abroad" },
+  ],
+  terminalLines: [
+    "> init aspire_global --mode=student",
+    "> scanning 250+ partner universities … ok",
+    "> visa_success_rate: 98%",
+    "> destination_matrix: [UK, USA, CA, AU, DE, MY]",
+  ],
+};
 
 // PLACEHOLDER — pending client BRD data
 export const STATS: { eyebrow: string; title: string; body: string; items: Stat[] } = {
@@ -311,6 +352,222 @@ export const CONTACT = {
     "Malaysia",
     "Not sure yet",
   ],
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Structural-variant slices (PLAN.md §6). All PLACEHOLDER until BRD.  */
+/* ------------------------------------------------------------------ */
+
+// PLACEHOLDER — pending client BRD data (real partner names/logos)
+export const TRUST_LOGOS: { eyebrow: string; items: { name: string }[] } = {
+  eyebrow: "Trusted by partner universities worldwide",
+  items: [
+    { name: "University of Manchester" },
+    { name: "University of Toronto" },
+    { name: "Monash University" },
+    { name: "TU Berlin" },
+    { name: "UNSW Sydney" },
+    { name: "Universiti Malaya" },
+  ],
+};
+
+// PLACEHOLDER — pending client BRD data
+export const ABOUT: {
+  eyebrow: string;
+  title: readonly HeadlinePart[];
+  paragraphs: string[];
+  image: string;
+  imageAlt: string;
+  statBadge: Stat;
+  tags: string[];
+} = {
+  eyebrow: "About Aspire",
+  title: [{ text: "Be a part of " }, { text: "our success.", em: true }],
+  paragraphs: [
+    "Aspire Global Education is a full-service study-abroad consultancy. From your first counseling session to your first day on campus, one dedicated team plans, prepares, and files everything with you.",
+    "We match students to universities and scholarships across six destination countries, coach every visa interview, and stay reachable long after you land.",
+  ],
+  image: "/images/dest-uk.jpg",
+  imageAlt: "Students walking through a historic university campus",
+  statBadge: { value: 5000, suffix: "+", label: "Students placed" },
+  tags: ["Admissions", "Visa Filing", "Scholarships", "Test Prep", "Career Counseling", "Pre-Departure"],
+};
+
+// PLACEHOLDER — pending client BRD data
+export const WHY_CHOOSE_US: {
+  eyebrow: string;
+  title: string;
+  body: string;
+  cta: { label: string; href: string };
+  items: { title: string; description: string }[];
+} = {
+  eyebrow: "Why choose us",
+  title: "An honest, practical path abroad.",
+  body: "We pride ourselves on straight answers, airtight paperwork, and counselors who stay with you from shortlist to arrival.",
+  cta: { label: "Talk to a Counselor", href: "#contact" },
+  items: [
+    {
+      title: "Dedicated Counselor",
+      description: "One expert owns your case end to end — no handoffs, no repeated stories.",
+    },
+    {
+      title: "Airtight Applications",
+      description: "Document prep and review that keeps our visa success rate at 98%.",
+    },
+    {
+      title: "Scholarship-First",
+      description: "Every profile is screened against funding options before we file.",
+    },
+    {
+      title: "After-Landing Support",
+      description: "Housing, banking, and arrival logistics arranged before you fly.",
+    },
+  ],
+};
+
+// PLACEHOLDER — pending client BRD data
+export const PROCESS_STEPS: {
+  eyebrow: string;
+  title: string;
+  body: string;
+  steps: { title: string; description: string }[];
+} = {
+  eyebrow: "How it works",
+  title: "Your journey, step by step.",
+  body: "A clear, guided path from first consultation to your first day abroad.",
+  steps: [
+    { title: "Profile Assessment", description: "Free consultation to map goals, budget, and eligibility." },
+    { title: "University Shortlist", description: "Programs matched to your career plan across six countries." },
+    { title: "Applications Filed", description: "Documents, essays, and offers handled with you." },
+    { title: "Visa Approved", description: "Coaching and airtight filing for a confident interview." },
+    { title: "Pre-Departure", description: "Housing, banking, and culture briefing before you fly." },
+    { title: "Arrival & Beyond", description: "Airport pickup coordination and on-the-ground support." },
+  ],
+};
+
+// PLACEHOLDER — reuses existing imagery pending client gallery
+export const GALLERY: {
+  eyebrow: string;
+  title: string;
+  items: { image: string; alt: string; caption?: string }[];
+} = {
+  eyebrow: "Moments",
+  title: "Achievements & departures.",
+  items: [
+    { image: "/images/student-1.jpg", alt: "Student celebrating an offer letter", caption: "UK offer secured" },
+    { image: "/images/student-2.jpg", alt: "Student at visa approval", caption: "Canada visa approved" },
+    { image: "/images/student-3.jpg", alt: "Student before departure", caption: "Off to Australia" },
+    { image: "/images/student-4.jpg", alt: "Student settled abroad", caption: "First week in Berlin" },
+    { image: "/images/dest-canada.jpg", alt: "Toronto skyline at sunset", caption: "New horizons" },
+    { image: "/images/dest-australia.jpg", alt: "Sydney Harbour", caption: "Intake season" },
+  ],
+};
+
+// PLACEHOLDER — pending client BRD data
+export const FAQ_ITEMS: {
+  eyebrow: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+  items: { question: string; answer: string }[];
+} = {
+  eyebrow: "FAQ",
+  title: "Frequently asked questions.",
+  image: "/images/dest-usa.jpg",
+  imageAlt: "City view of a study destination",
+  items: [
+    {
+      question: "How early should I start my application?",
+      answer:
+        "Ideally 10–12 months before your target intake. That leaves time for tests, shortlisting, applications, and visa processing without rush fees.",
+    },
+    {
+      question: "Do you help with scholarships?",
+      answer:
+        "Yes — every profile is screened against merit awards, grants, and tuition waivers before we file a single application.",
+    },
+    {
+      question: "What does your service cost?",
+      answer:
+        "Initial counseling is free. Service fees depend on destination and package — a counselor will share the full breakdown up front.",
+    },
+    {
+      question: "Which English tests do you prepare students for?",
+      answer: "IELTS, TOEFL, SAT, and GRE — with structured plans and mock testing.",
+    },
+    {
+      question: "Do you support students after arrival?",
+      answer:
+        "Yes. Housing, banking, and airport pickup are arranged pre-departure, and your counselor stays reachable after you land.",
+    },
+  ],
+};
+
+// PLACEHOLDER — fictional milestones pending real company history
+export const HERITAGE_MILESTONES: {
+  eyebrow: string;
+  title: string;
+  items: { year: string; title: string; description: string }[];
+} = {
+  eyebrow: "Our heritage",
+  title: "A decade of departures.",
+  items: [
+    { year: "2015", title: "Founded in Dhaka", description: "A two-desk office and a promise: honest guidance, end to end." },
+    { year: "2017", title: "First 500 students placed", description: "Partnerships signed across the UK and Malaysia." },
+    { year: "2020", title: "Six destinations", description: "Canada, Australia, Germany, and the USA join the map." },
+    { year: "2023", title: "250+ partner universities", description: "Scholarship-first filing becomes standard for every profile." },
+    { year: "2026", title: "5,000 students and counting", description: "One team, one plan — every step still handled with care." },
+  ],
+};
+
+// PLACEHOLDER — pending client BRD data
+export const SYSTEM_STATUS: {
+  eyebrow: string;
+  title: string;
+  statusLabel: string;
+  readouts: Stat[];
+  logLines: string[];
+} = {
+  eyebrow: "Live telemetry",
+  title: "System status: operational.",
+  statusLabel: "SYSTEM ONLINE",
+  readouts: [
+    { value: 5000, suffix: "+", label: "students_placed" },
+    { value: 98, suffix: "%", label: "visa_success" },
+    { value: 250, suffix: "+", label: "partner_nodes" },
+    { value: 12, suffix: "", label: "destinations" },
+  ],
+  logLines: [
+    "[ok] admissions_pipeline … active",
+    "[ok] visa_filing_queue … clear",
+    "[ok] scholarship_scanner … 41 matches today",
+    "[ok] counselor_uplink … 1 business day",
+  ],
+};
+
+// PLACEHOLDER — node positions are layout coordinates (% of container)
+export const JOURNEY_NODES: {
+  eyebrow: string;
+  title: string;
+  nodes: { label: string; sub?: string; x: number; y: number }[];
+} = {
+  eyebrow: "Mission path",
+  title: "Chart your constellation.",
+  nodes: [
+    { label: "Dhaka", sub: "Launch", x: 8, y: 72 },
+    { label: "Kuala Lumpur", sub: "20+ universities", x: 26, y: 48 },
+    { label: "Berlin", sub: "25+ universities", x: 42, y: 26 },
+    { label: "London", sub: "40+ universities", x: 58, y: 52 },
+    { label: "Toronto", sub: "35+ universities", x: 74, y: 24 },
+    { label: "Sydney", sub: "30+ universities", x: 90, y: 60 },
+  ],
+};
+
+// PLACEHOLDER — pending real phone/WhatsApp numbers (SITE.phone in lib/config.ts)
+export const HEADER_CONTACT = {
+  phoneLabel: "+880 1XXX-XXXXXX",
+  phoneHref: "tel:+8801XXXXXXXXX",
+  whatsappHref: "https://wa.me/8801XXXXXXXXX",
 } as const;
 
 export const FOOTER = {
