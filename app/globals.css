@@ -19,6 +19,13 @@
     scroll-margin-top: 6rem;
   }
 
+  /* Paint-gate: non-default saved themes hide the body until the provider
+     resolves and the themed section order renders (PLAN.md §3.3).
+     visibility (not display) keeps the default tree DOM-crawlable. */
+  html.theme-boot body {
+    visibility: hidden;
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.9);
     color: hsl(var(--primary-foreground));

@@ -104,8 +104,13 @@ export const metadata: Metadata = {
   },
 };
 
-/** Sets data-theme before first paint — must stay tiny and dependency-free. */
-const noFlashScript = `try{var t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});if(${JSON.stringify(THEMES)}.indexOf(t)>-1){document.documentElement.dataset.theme=t}}catch(e){}`;
+/**
+ * Sets data-theme before first paint — must stay tiny and dependency-free.
+ * Non-default saved themes also paint-gate the body (html.theme-boot) until
+ * the ThemeProvider swaps in the right section order; a 3s timeout guarantees
+ * content is never stranded hidden (PLAN.md §3.3).
+ */
+const noFlashScript = `try{var t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});if(${JSON.stringify(THEMES)}.indexOf(t)>-1){document.documentElement.dataset.theme=t;if(t!=="default"){var d=document.documentElement;d.classList.add("theme-boot");setTimeout(function(){d.classList.remove("theme-boot")},3000)}}}catch(e){}`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -124,6 +129,9 @@ export default function RootLayout({
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
+        <noscript>
+          <style>{`html.theme-boot body{visibility:visible !important}`}</style>
+        </noscript>
         <Script
           id="json-ld"
           type="application/ld+json"
