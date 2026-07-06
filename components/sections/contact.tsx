@@ -9,9 +9,6 @@ import { Reveal } from "@/components/reveal";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-const inputClasses =
-  "w-full border-b border-input bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:border-[hsl(var(--ring))] focus:outline-none";
-
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -94,67 +91,79 @@ export function Contact() {
         </Reveal>
 
         <Reveal>
-          <form onSubmit={onSubmit} className="flex flex-col gap-6">
-            <label className="sr-only" htmlFor="contact-name">Name</label>
-            <input
-              id="contact-name"
-              name="name"
-              required
-              placeholder="Full name"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-email">Email</label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              required
-              placeholder="Email address"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-phone">Phone</label>
-            <input
-              id="contact-phone"
-              name="phone"
-              type="tel"
-              placeholder="Phone (optional)"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-destination">
-              Destination interest
-            </label>
-            <select
-              id="contact-destination"
-              name="destination"
-              required
-              defaultValue=""
-              className={`${inputClasses} appearance-none`}
-            >
-              <option value="" disabled>
+          <form onSubmit={onSubmit} className="form-shell surface flex flex-col gap-6 p-8">
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-name">Name</label>
+              <input
+                id="contact-name"
+                name="name"
+                required
+                placeholder="Full name"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-email">Email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                placeholder="Email address"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-phone">Phone</label>
+              <input
+                id="contact-phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone (optional)"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-destination">
                 Destination interest
-              </option>
-              {CONTACT.destinationOptions.map((opt) => (
-                <option key={opt} value={opt} className="bg-background text-foreground">
-                  {opt}
+              </label>
+              <select
+                id="contact-destination"
+                name="destination"
+                required
+                defaultValue=""
+                className="form-input form-select"
+              >
+                <option value="" disabled>
+                  Destination interest
                 </option>
-              ))}
-            </select>
-            <label className="sr-only" htmlFor="contact-message">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows={4}
-              required
-              placeholder="Tell us about your plans"
-              className={inputClasses}
-            />
+                {CONTACT.destinationOptions.map((opt) => (
+                  <option key={opt} value={opt} className="bg-background text-foreground">
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={4}
+                required
+                placeholder="Tell us about your plans"
+                className="form-input form-textarea"
+              />
+            </div>
 
             <button
               type="submit"
               disabled={status === "sending"}
-              className="surface mt-4 self-start rounded-full px-10 py-4 text-base text-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
+              className="form-submit mt-4 self-start"
             >
-              {status === "sending" ? "Sending…" : "Send Message"}
+              <span className="form-submit-label prompt-caret">
+                {status === "sending" ? "Sending…" : "Send Message"}
+              </span>
             </button>
 
             <p aria-live="polite" className="text-sm text-muted-foreground">

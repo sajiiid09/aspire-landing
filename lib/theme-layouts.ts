@@ -69,8 +69,8 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
   space: [
     "hero",
     "journey-map",
-    "destinations",
     "trust-logos",
+    "destinations",
     "stats",
     "why-choose-us",
     "testimonials",

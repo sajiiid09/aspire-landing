@@ -84,6 +84,43 @@ header.surface {
   box-shadow: none;
 }
 
+/* ---------------------------------- */
+/* Contact form — shared baseline; per-theme deltas in styles/themes.css */
+/* ---------------------------------- */
+.form-field {
+  position: relative;
+}
+.form-input {
+  width: 100%;
+  border-bottom: 1px solid hsl(var(--input));
+  background: transparent;
+  padding: 0.75rem 0;
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+}
+.form-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+.form-input:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+}
+.form-select {
+  appearance: none;
+}
+.form-submit {
+  border-radius: var(--radius);
+  padding: 1rem 2.5rem;
+  color: hsl(var(--foreground));
+  transition: transform 0.2s ease;
+}
+.form-submit:hover {
+  transform: scale(1.03);
+}
+.form-submit:disabled {
+  opacity: 0.6;
+}
+
 /* Layout-token consumers */
 .section-pad {
   padding-top: var(--section-py);

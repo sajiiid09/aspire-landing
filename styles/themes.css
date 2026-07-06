@@ -121,6 +121,16 @@
   display: none;
 }
 
+/* Contact form — serif fields inside the liquid-glass panel */
+[data-theme="classical"] .form-input {
+  font-family: var(--font-display);
+  padding: 1rem 1.25rem;
+}
+[data-theme="classical"] .form-submit {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
 /* ---------------------------------------------------------- */
 /* Refined neo-noir: charcoal-blue base, dominant cyan/teal,
    magenta demoted to the rarely-used accent token */
@@ -179,6 +189,27 @@
 }
 [data-theme="cyberpunk"] header.surface::before {
   display: none;
+}
+
+/* Contact form — monospace terminal-style fields inside the neon-bracket panel */
+[data-theme="cyberpunk"] .form-input {
+  font-family: var(--font-accent);
+  padding-left: 1.75rem;
+}
+[data-theme="cyberpunk"] .form-field::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  top: 0.75rem;
+  color: hsl(var(--primary));
+  font-family: var(--font-accent);
+}
+[data-theme="cyberpunk"] .form-input:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.4), 0 0 12px hsl(var(--glow) / 0.5);
+}
+[data-theme="cyberpunk"] .form-submit {
+  font-family: var(--font-accent);
 }
 
 /* Terminal hero: neon grid backdrop + blinking prompt caret */
@@ -298,6 +329,22 @@
 }
 [data-theme="space"] header.surface {
   box-shadow: none;
+}
+
+/* Contact form — aurora-ring focus glow, glowing gradient-pill submit */
+[data-theme="space"] .form-input:focus {
+  border-color: hsl(var(--accent));
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3), 0 0 20px hsl(var(--accent) / 0.25);
+}
+[data-theme="space"] .form-submit {
+  border-radius: 999px;
+  border: none;
+  color: hsl(var(--primary-foreground));
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.85), hsl(var(--accent) / 0.85));
+  box-shadow: 0 0 24px hsl(var(--primary) / 0.35), 0 0 48px hsl(var(--accent) / 0.2);
+}
+[data-theme="space"] .form-submit:hover {
+  animation: orb-float 6s ease-in-out infinite;
 }
 
 /* Cosmos hero: aurora glow backdrop + floating orb CTA */

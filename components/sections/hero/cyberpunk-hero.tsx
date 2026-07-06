@@ -1,10 +1,23 @@
 import { HERO } from "@/lib/content";
 
-/** Terminal/HUD hero — boot log, glitch headline, typed-prompt CTA.
- *  Scanlines (.hero-decor) and neon grid (.hero-grid) resolve in themes.css. */
+/** Terminal/HUD hero — background video, boot log, glitch headline, typed-prompt CTA.
+ *  HUD overlay/filter (.hero-overlay, .hero-video), scanlines (.hero-decor), and
+ *  neon grid (.hero-grid) resolve in themes.css. */
 export function CyberpunkHero() {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
+      <video
+        className="hero-video absolute inset-0 z-0 h-full w-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden
+      >
+        <source src={HERO.videoSrcCyberpunk} type="video/mp4" />
+      </video>
+      <div className="hero-overlay" aria-hidden />
       <div className="hero-grid absolute inset-0 z-0" aria-hidden />
       <div className="hero-decor" aria-hidden />
 

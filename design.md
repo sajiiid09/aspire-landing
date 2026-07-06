@@ -110,7 +110,7 @@ The original navy video skin, relocated intact (verbatim hero-prompt tokens).
 | `--font-display` | `'Orbitron', sans-serif` |
 | `--font-body` | `'Space Grotesk', sans-serif` |
 | `--font-accent` | `'JetBrains Mono', monospace` — stats digits, nav links |
-| Hero | Terminal/HUD, **no video** — boot-log panel, Orbitron glitch headline (`hero-glitch`, killed by reduced-motion), neon grid + scanlines, typed-prompt CTA with blinking caret |
+| Hero | Terminal/HUD, background video (dark HUD overlay + saturate/contrast filter) — boot-log panel, Orbitron glitch headline (`hero-glitch`, killed by reduced-motion), neon grid + scanlines, typed-prompt CTA with blinking caret |
 | `.surface` | Neon-bracket panel: cyan border + glow, corner brackets via `::before` |
 | Unique section | **SystemStatus** — HUD dashboard, count-up readouts, pulsing "SYSTEM ONLINE", mono log |
 

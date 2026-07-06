@@ -20,7 +20,7 @@ export function TrustLogos() {
                       alt={logo.name}
                       width={128}
                       height={40}
-                      className="h-full w-full object-contain grayscale opacity-80 transition-[filter,opacity] duration-300 hover:grayscale-0 hover:opacity-100"
+                      className="h-full w-full object-contain"
                     />
                   </span>
                 </li>
@@ -35,7 +35,7 @@ export function TrustLogos() {
                       alt=""
                       width={128}
                       height={40}
-                      className="h-full w-full object-contain grayscale opacity-80"
+                      className="h-full w-full object-contain"
                     />
                   </span>
                 </li>

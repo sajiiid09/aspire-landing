@@ -76,6 +76,7 @@ export const HERO: {
   trustStats: readonly Stat[];
   avatars: readonly { src: string; alt: string }[];
   videoSrc: string;
+  videoSrcCyberpunk: string;
   poster: string;
   collage: readonly { src: string; alt: string }[];
   terminalLines: readonly string[];
@@ -102,6 +103,8 @@ export const HERO: {
   // PLACEHOLDER — design-phase asset; production video TBD (ARCHITECTURE.md §10)
   videoSrc:
     "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
+  // PLACEHOLDER — design-phase asset; production video TBD (ARCHITECTURE.md §10)
+  videoSrcCyberpunk: "https://cdn.pixabay.com/video/2024/06/12/216369_large.mp4",
   poster:
     "/images/hero-poster.jpg",
   collage: [
