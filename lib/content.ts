@@ -359,15 +359,17 @@ export const CONTACT = {
 /* ------------------------------------------------------------------ */
 
 // PLACEHOLDER — pending client BRD data (real partner names/logos)
-export const TRUST_LOGOS: { eyebrow: string; items: { name: string }[] } = {
+export const TRUST_LOGOS: { eyebrow: string; items: { name: string; logo: string }[] } = {
   eyebrow: "Trusted by partner universities worldwide",
   items: [
-    { name: "University of Manchester" },
-    { name: "University of Toronto" },
-    { name: "Monash University" },
-    { name: "TU Berlin" },
-    { name: "UNSW Sydney" },
-    { name: "Universiti Malaya" },
+    { name: "University of Manchester", logo: "/logos/manchester.svg" },
+    { name: "University of Toronto", logo: "/logos/toronto.svg" },
+    { name: "Monash University", logo: "/logos/monash.svg" },
+    { name: "TU Berlin", logo: "/logos/tu-berlin.svg" },
+    { name: "UNSW Sydney", logo: "/logos/unsw-sydney.png" },
+    { name: "Universiti Malaya", logo: "/logos/universiti-malaya.svg" },
+    { name: "University of Oxford", logo: "/logos/oxford.svg" },
+    { name: "NUS Singapore", logo: "/logos/nus-singapore.svg" },
   ],
 };
 
@@ -458,8 +460,6 @@ export const GALLERY: {
     { image: "/images/student-2.jpg", alt: "Student at visa approval", caption: "Canada visa approved" },
     { image: "/images/student-3.jpg", alt: "Student before departure", caption: "Off to Australia" },
     { image: "/images/student-4.jpg", alt: "Student settled abroad", caption: "First week in Berlin" },
-    { image: "/images/dest-canada.jpg", alt: "Toronto skyline at sunset", caption: "New horizons" },
-    { image: "/images/dest-australia.jpg", alt: "Sydney Harbour", caption: "Intake season" },
   ],
 };
 

@@ -42,6 +42,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
   ],
   classical: [
     "hero",
+    "trust-logos",
     "stats",
     "heritage",
     "about",
@@ -55,6 +56,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
   cyberpunk: [
     "hero",
     "system-status",
+    "trust-logos",
     "why-choose-us",
     "stats",
     "destinations",
@@ -68,6 +70,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
     "hero",
     "journey-map",
     "destinations",
+    "trust-logos",
     "stats",
     "why-choose-us",
     "testimonials",

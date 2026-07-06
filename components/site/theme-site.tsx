@@ -14,15 +14,48 @@ import { SECTION_REGISTRY } from "@/lib/section-registry";
  * (html.theme-boot) until this component re-renders with the resolved order
  * and the provider reveals it.
  */
+const SPACE_BACKDROP_BOUNDARY = "stats";
+
 export function ThemeSite() {
   const { theme, resolved } = useTheme();
   const active = resolved ? theme : "default";
+  const order = THEME_LAYOUTS[active];
+
+  if (active === "space") {
+    const boundary = order.indexOf(SPACE_BACKDROP_BOUNDARY);
+    const before = order.slice(0, boundary);
+    const after = order.slice(boundary);
+    return (
+      <>
+        <Header />
+        <main>
+          <div className="relative isolate overflow-hidden">
+            <div className="hero-aurora absolute inset-0 z-0" aria-hidden />
+            <div className="hero-decor" aria-hidden />
+            {before.map((id) => {
+              const Section = SECTION_REGISTRY[id];
+              return (
+                <div key={id} className="relative z-10">
+                  <Section />
+                </div>
+              );
+            })}
+          </div>
+          {after.map((id) => {
+            const Section = SECTION_REGISTRY[id];
+            return <Section key={id} />;
+          })}
+        </main>
+        <ThemeSwitcher />
+      </>
+    );
+  }
 
   return (
     <>
       <Header />
       <main>
-        {THEME_LAYOUTS[active].map((id) => {
+        {order.map((id) => {
           const Section = SECTION_REGISTRY[id];
           return <Section key={id} />;
         })}

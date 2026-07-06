@@ -32,8 +32,8 @@ export function JourneyMap() {
           >
             <defs>
               <linearGradient id="journey-aurora" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="hsl(255 85% 72%)" />
-                <stop offset="100%" stopColor="hsl(190 90% 65%)" />
+                <stop offset="0%" stopColor="hsl(233 48% 63%)" />
+                <stop offset="100%" stopColor="hsl(203 55% 56%)" />
               </linearGradient>
             </defs>
             <polyline

@@ -169,6 +169,18 @@ header.surface {
   to { transform: translateY(-120px); }
 }
 
+/* Trust-logo marquee — theme-agnostic continuous scroll */
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* Accordion open/close (components/ui/accordion.tsx) — tailwind.config.ts is
    frozen, so the usual shadcn animation utilities live here instead */
 @keyframes accordion-down {

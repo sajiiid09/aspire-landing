@@ -260,14 +260,14 @@
   --foreground: 220 60% 96%;
   --muted: 240 35% 14%;
   --muted-foreground: 230 25% 68%;
-  --primary: 255 85% 72%;
+  --primary: 233 48% 63%;
   --primary-foreground: 240 45% 8%;
   --secondary: 240 35% 12%;
-  --accent: 190 90% 65%;
+  --accent: 203 55% 56%;
   --border: 240 30% 24%;
   --input: 240 30% 24%;
-  --ring: 190 90% 65%;
-  --glow: 255 85% 72% / 0;
+  --ring: 203 55% 56%;
+  --glow: 233 48% 63% / 0;
   --footer-skyline-bg: 240 38% 10%;
 
   --font-display: var(--font-sora), sans-serif;
@@ -304,14 +304,14 @@
 [data-theme="space"] .hero-aurora {
   display: block;
   background:
-    radial-gradient(60% 50% at 20% 20%, hsl(255 85% 72% / 0.22), transparent 70%),
-    radial-gradient(50% 45% at 80% 65%, hsl(190 90% 65% / 0.16), transparent 70%);
+    radial-gradient(60% 50% at 20% 20%, hsl(233 48% 63% / 0.22), transparent 70%),
+    radial-gradient(50% 45% at 80% 65%, hsl(203 55% 56% / 0.16), transparent 70%);
 }
 [data-theme="space"] .orb-cta {
   animation: orb-float 6s ease-in-out infinite;
   box-shadow:
-    0 0 40px hsl(255 85% 72% / 0.35),
-    0 0 80px hsl(190 90% 65% / 0.2);
+    0 0 40px hsl(233 48% 63% / 0.35),
+    0 0 80px hsl(203 55% 56% / 0.2);
 }
 @keyframes orb-float {
   0%, 100% { transform: translateY(0); }
@@ -345,12 +345,12 @@
     radial-gradient(1px 1px at 33% 10%, rgba(255, 255, 255, 0.7) 50%, transparent 50%),
     radial-gradient(1.5px 1.5px at 70% 40%, rgba(255, 255, 255, 0.6) 50%, transparent 50%);
   background-size: 340px 340px;
-  animation: star-drift 60s linear infinite;
+  animation: star-drift 26s linear infinite;
 }
 /* Aurora accents (DESIGN.md §4.4) */
 [data-theme="space"] .stat-value,
 [data-theme="space"] .aurora-text {
-  background: linear-gradient(90deg, hsl(255 85% 72%), hsl(190 90% 65%));
+  background: linear-gradient(90deg, hsl(233 48% 63%), hsl(203 55% 56%));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -358,5 +358,5 @@
 [data-theme="space"] .aurora-band {
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  border-image: linear-gradient(90deg, hsl(255 85% 72%), hsl(190 90% 65%)) 1;
+  border-image: linear-gradient(90deg, hsl(233 48% 63%), hsl(203 55% 56%)) 1;
 }
