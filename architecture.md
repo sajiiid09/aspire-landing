@@ -18,7 +18,7 @@ The reference hero prompt mentioned Vite; that was design reference only. This p
 
 ## 2. Scope Boundaries (hard rules)
 
-- **Public landing page only. Single route `/`.**
+- **Public marketing site only. Routes: `/` (themed landing) + `/about`, `/services` (skin-only inner pages — one fixed layout composed by `components/site/page-shell.tsx`, re-skinned via CSS variables, no theme branching).**
 - **No login, no dashboard, no backend, no API routes, no database.**
 - "Student Portal" and "Course Finder" buttons are plain `<a target="_blank" rel="noopener noreferrer">` to an external white-labeled portal. URL from `NEXT_PUBLIC_PORTAL_URL` (and `NEXT_PUBLIC_COURSE_FINDER_URL`), defined in `.env.local` / host env, with placeholder fallback in `lib/config.ts`.
 - Contact form has no backend: v1 uses a third-party form endpoint (Formspree-class) via `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`; `mailto:` fallback when unset. Client-side validation only. **Open item: client to choose provider.**
@@ -31,11 +31,15 @@ aspire-landing/
 ├── app/
 │   ├── layout.tsx          # fonts, metadata, no-flash + paint-gate script, ThemeProvider
 │   ├── page.tsx            # thin wrapper → <ThemeSite/>
+│   ├── about/ services/    # skin-only inner pages (PageShell + content from lib/content.ts)
 │   ├── globals.css         # Tailwind layers, liquid-glass, .surface base, keyframes
 │   └── icon.svg / opengraph-image.png
 ├── components/
 │   ├── site/
-│   │   └── theme-site.tsx  # composition resolver: renders the per-theme section order
+│   │   ├── theme-site.tsx  # composition resolver: renders the per-theme section order
+│   │   ├── page-shell.tsx  # inner-page chrome: solid header, main, switcher, footer
+│   │   ├── page-hero.tsx   # shared inner-page top band
+│   │   └── page-cta.tsx    # shared inner-page closing CTA band
 │   ├── sections/           # shared section pool, self-contained
 │   │   ├── header.tsx  stats.tsx  services.tsx  destinations.tsx
 │   │   ├── trust-logos.tsx  about.tsx  why-choose-us.tsx  gallery.tsx  faq.tsx

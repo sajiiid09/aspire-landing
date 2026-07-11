@@ -2,20 +2,32 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, MessageCircle, Phone, X } from "lucide-react";
 import { HEADER_CONTACT, NAV_LINKS } from "@/lib/content";
 import { PORTAL_URL } from "@/lib/config";
 
-export function Header() {
+interface HeaderProps {
+  /** overlay = transparent over hero until scroll (landing); solid = surface bar from scroll 0 (inner pages) */
+  variant?: "overlay" | "solid";
+}
+
+export function Header({ variant = "overlay" }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Route links highlight on their page; hash links never highlight
+  const isActive = (href: string) => !href.includes("#") && pathname === href;
 
   useEffect(() => {
+    if (variant === "solid") return;
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [variant]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -24,17 +36,19 @@ export function Header() {
     };
   }, [menuOpen]);
 
+  const solid = variant === "solid" || scrolled;
+
   return (
     <header
       className={
-        scrolled
+        solid
           ? "surface fixed inset-x-0 top-0 z-40"
           : "over-video absolute inset-x-0 top-0 z-40"
       }
     >
       <nav className="mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-3">
-        <a
-          href="#home"
+        <Link
+          href="/"
           className="inline-flex items-center gap-3 font-display text-2xl tracking-tight text-foreground"
         >
           <span className="logo-chip h-8 w-8">
@@ -49,21 +63,21 @@ export function Header() {
           <span>
             Aspire Global<sup className="text-xs">®</sup>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={`nav-link text-sm transition-colors ${
-                "active" in link && link.active
+                isActive(link.href)
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -113,14 +127,14 @@ export function Header() {
             <X className="h-6 w-6" />
           </button>
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
               className="font-display text-3xl text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a
             href={HEADER_CONTACT.phoneHref}

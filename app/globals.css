@@ -181,6 +181,14 @@ header.surface {
   padding: 0.125rem;
 }
 
+/* Full-bleed photo hero (default theme) — light-on-dark token remap scoped
+   to the section so semantic utilities flip without touching other sections */
+.hero-photo {
+  --foreground: 0 0% 100%;
+  --muted-foreground: 0 0% 86%;
+  --border: 0 0% 100% / 0.5;
+}
+
 /* Hero decor layer — appearance decided per theme in themes.css */
 .hero-overlay {
   position: absolute;

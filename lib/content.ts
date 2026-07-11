@@ -54,11 +54,12 @@ export interface Testimonial {
 }
 
 export const NAV_LINKS = [
-  { label: "Home", href: "#home", active: true },
-  { label: "Services", href: "#services" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Stories", href: "#stories" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Destinations", href: "/#destinations" },
+  { label: "Stories", href: "/#stories" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 /**
@@ -73,6 +74,7 @@ export const HERO: {
   secondaryCta: { label: string; href: string };
   trustStats: readonly Stat[];
   avatars: readonly { src: string; alt: string }[];
+  backgroundImage: { src: string; alt: string };
   videoSrc: string;
   videoSrcCyberpunk: string;
   poster: string;
@@ -92,6 +94,12 @@ export const HERO: {
   cta: "Begin Your Journey",
   secondaryCta: { label: "Explore Destinations", href: "#destinations" },
   trustStats: [{ value: 98, suffix: "%", label: "Visa success rate" }],
+  // PLACEHOLDER — BRD V2 §5 brief: wide-angle campus lifestyle shot, historic
+  // architecture + glass innovation labs, soft natural morning light
+  backgroundImage: {
+    src: "/images/hero-campus.jpg",
+    alt: "Wide-angle view of a modern university campus in soft morning light",
+  },
   avatars: [
     { src: "/images/student-1.jpg", alt: "Aspire student" },
     { src: "/images/student-2.jpg", alt: "Aspire student" },
@@ -133,9 +141,15 @@ export const STATS: { eyebrow: string; title: string; body: string; items: Stat[
   ],
 };
 
-export const SERVICES: { eyebrow: string; title: string; items: Service[] } = {
+export const SERVICES: {
+  eyebrow: string;
+  title: string;
+  cta: { label: string; href: string };
+  items: Service[];
+} = {
   eyebrow: "What we do",
   title: "Every step, handled.",
+  cta: { label: "Explore our services in depth", href: "/services" },
   items: [
     {
       icon: Compass,
@@ -389,6 +403,7 @@ export const ABOUT: {
   imageAlt: string;
   statBadge: Stat;
   tags: string[];
+  cta: { label: string; href: string };
 } = {
   eyebrow: "About Aspire",
   title: [
@@ -404,6 +419,7 @@ export const ABOUT: {
   imageAlt: "Students walking through a historic university campus",
   statBadge: { value: 750, suffix: "+", label: "University partners" },
   tags: ["Global Counseling", "Admissions & Documentation", "Visa Guidance", "Scholarship Mapping", "Tier-1 Destinations", "Schengen & EU"],
+  cta: { label: "Learn more about us", href: "/about" },
 };
 
 // PLACEHOLDER — pending client BRD data
@@ -661,7 +677,7 @@ export const HEADER_CONTACT = {
 
 export const FOOTER = {
   tagline: "Guiding students from first question to first day abroad.",
-  explore: NAV_LINKS.filter((l) => l.href !== "#home"),
+  explore: NAV_LINKS.filter((l) => l.href !== "/"),
   legal: [
     { label: "Privacy", href: "#" }, // PLACEHOLDER
     { label: "Terms", href: "#" }, // PLACEHOLDER
@@ -674,3 +690,205 @@ export const FOOTER = {
     { label: "YouTube", href: "#" },
   ],
 } as const;
+
+/* ------------------------------------------------------------------ */
+/* Inner pages (/about, /services) — BRD V2 §4A/§4B copy.              */
+/* Skin-only pages: fixed layout, themed via CSS variables.            */
+/* ------------------------------------------------------------------ */
+
+export interface PageHero {
+  eyebrow: string;
+  title: readonly HeadlinePart[];
+  intro: string;
+}
+
+export interface ServiceDetail {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  deliverables: string[];
+  image: string;
+  imageAlt: string;
+}
+
+export interface PageCta {
+  title: string;
+  body: string;
+  label: string;
+  href: string;
+}
+
+export const ABOUT_PAGE: {
+  meta: { title: string; description: string };
+  hero: PageHero;
+  paragraphs: string[];
+  image: string;
+  imageAlt: string;
+  stats: readonly Stat[];
+  destinations: {
+    eyebrow: string;
+    title: string;
+    tier1: { label: string; description: string; countries: string[] };
+    europe: { label: string; description: string; countries: string[] };
+  };
+  cta: PageCta;
+} = {
+  meta: {
+    title: "About Us — Aspire Global Education",
+    description:
+      "Aspire Global Education stands at the forefront of global student mobility — a definitive pipeline to the world's leading universities across 13+ destinations.",
+  },
+  hero: {
+    eyebrow: "About Aspire",
+    title: [
+      { text: "Democratizing " },
+      { text: "elite international education", em: true },
+      { text: " across the globe." },
+    ],
+    intro:
+      "Founded on the principles of absolute transparency and operational excellence, we serve as a definitive pipeline to the world's leading universities.",
+  },
+  // BRD V2 §4A body copy
+  paragraphs: [
+    "Aspire Global Education stands at the forefront of global student mobility. Founded on the principles of absolute transparency and operational excellence, we serve as a definitive pipeline to the world's leading universities.",
+    "Our dynamic platform bridges boundaries — spanning the classic educational centers of the UK, USA, Canada, Australia, and New Zealand, alongside a strong presence in mainland Europe's premier destinations including Germany, Sweden, Spain, Greece, Cyprus, Latvia, Lithuania, and Malta.",
+    "We remove the geographic and bureaucratic friction from international admissions, matching ambitious minds with over 75,000 premium courses worldwide. By combining deep human expertise with an enterprise-grade digital infrastructure, we ensure that your transition from local ambition to international success is swift, secure, and certain.",
+  ],
+  // PLACEHOLDER — §5 brief: diverse students walking an international campus quadrant
+  image: "/images/hero-campus.jpg",
+  imageAlt: "Students walking through an international campus quadrant in morning light",
+  stats: [
+    { value: 750, suffix: "+", label: "Partner universities" },
+    { value: 75000, suffix: "+", label: "Courses worldwide" },
+    { value: 98, suffix: "%", label: "Visa success rate" },
+    { value: 13, suffix: "+", label: "Destination countries" },
+  ],
+  destinations: {
+    eyebrow: "Global reach",
+    title: "A truly global scale.",
+    tier1: {
+      label: "Tier-1 English Speaking Destinations",
+      description:
+        "Direct access to elite educational institutions in major global tech hubs.",
+      countries: [
+        "United Kingdom",
+        "United States",
+        "Australia",
+        "Canada",
+        "New Zealand",
+      ],
+    },
+    europe: {
+      label: "Schengen & European Union Destinations",
+      description:
+        "Robust European academic centers and emerging academic hubs.",
+      countries: [
+        "Germany",
+        "Sweden",
+        "Spain",
+        "Greece",
+        "Cyprus",
+        "Latvia",
+        "Lithuania",
+        "Malta",
+      ],
+    },
+  },
+  cta: {
+    title: "From local ambition to international success.",
+    body: "Tell us where you want to go — a counselor will reach out within one business day.",
+    label: "Start the Conversation",
+    href: "/#contact",
+  },
+};
+
+export const SERVICES_PAGE: {
+  meta: { title: string; description: string };
+  hero: PageHero;
+  items: ServiceDetail[];
+  cta: PageCta;
+} = {
+  meta: {
+    title: "Our Services — Aspire Global Education",
+    description:
+      "Personalized global counseling, admission and documentation support, visa guidance, and scholarship mapping — every step of your journey abroad, handled.",
+  },
+  hero: {
+    eyebrow: "Services deep-dive",
+    title: [
+      { text: "Every step, " },
+      { text: "handled with precision.", em: true },
+    ],
+    intro:
+      "Four service domains cover your journey end to end — from the first profile evaluation to the day your visa is approved.",
+  },
+  // BRD V2 §4B table copy (full deep-dive versions)
+  items: [
+    {
+      icon: Compass,
+      title: "Personalized Global Counseling",
+      description:
+        "Data-driven profile evaluation mapping your unique academic history and career aspirations against high-growth global trajectories. We look specifically at multi-destination eligibility, allowing you to compare benefits between Tier-1 nations and cost-effective European Union options.",
+      deliverables: [
+        "Data-driven profile evaluation",
+        "Career-trajectory mapping",
+        "Multi-destination eligibility comparison",
+        "Tier-1 vs. EU cost-benefit analysis",
+      ],
+      // PLACEHOLDER — §5 brief imagery pending
+      image: "/images/student-1.jpg",
+      imageAlt: "Counselor reviewing a student profile in consultation",
+    },
+    {
+      icon: GraduationCap,
+      title: "University Admission & Documentation Support",
+      description:
+        "Meticulous processing of university applications, including structural refinement of Statements of Purpose (SOPs) and strategic alignment of Letters of Recommendation (LORs). We handle institutional communication directly with our 750+ university partners to expedite fast-track letter releases.",
+      deliverables: [
+        "Structural SOP refinement",
+        "Strategic LOR alignment",
+        "Direct institutional communication",
+        "Fast-track offer-letter releases",
+      ],
+      // PLACEHOLDER — §5 brief imagery pending
+      image: "/images/dest-uk.jpg",
+      imageAlt: "Historic university architecture",
+    },
+    {
+      icon: StampIcon,
+      title: "Global Visa Application Guidance",
+      description:
+        "High-tier navigating of changing international compliance codes across multiple regions — Schengen requirements, UKVI regulations, US F-1 pathways. Our compliance team conducts stringent mock visa interviews modeled exactly after embassy guidelines to maximize your success ratios.",
+      deliverables: [
+        "Schengen, UKVI, and US F-1 expertise",
+        "Compliance-code monitoring across regions",
+        "Embassy-modeled mock interviews",
+        "Maximized visa success ratios",
+      ],
+      // PLACEHOLDER — §5 brief imagery pending
+      image: "/images/student-2.jpg",
+      imageAlt: "Student at a visa approval milestone",
+    },
+    {
+      icon: Award,
+      title: "Scholarship & Financial Mapping",
+      description:
+        "Comprehensive evaluation of available institutional aid, state-sponsored European grants, and merit-based bursaries to significantly lower the financial overhead of your international education.",
+      deliverables: [
+        "Institutional aid evaluation",
+        "State-sponsored European grants",
+        "Merit-based bursary matching",
+        "Lower total financial overhead",
+      ],
+      // PLACEHOLDER — §5 brief imagery pending
+      image: "/images/student-3.jpg",
+      imageAlt: "Student celebrating a scholarship award",
+    },
+  ],
+  cta: {
+    title: "Ready to map your route abroad?",
+    body: "Initial counseling is free. A counselor will reach out within one business day.",
+    label: "Talk to a Counselor",
+    href: "/#contact",
+  },
+};

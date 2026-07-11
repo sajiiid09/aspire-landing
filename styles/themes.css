@@ -27,7 +27,15 @@
 
   --radius: 0;
 
-  --hero-overlay: none;
+  /* Full-bleed photo hero scrim — darker top (header legibility) and
+     mid-left weight for the overlaid copy (BRD V2 §5 hero brief) */
+  --hero-overlay: linear-gradient(
+      180deg,
+      hsl(222 45% 8% / 0.6) 0%,
+      hsl(222 45% 8% / 0.35) 40%,
+      hsl(222 45% 8% / 0.55) 100%
+    ),
+    linear-gradient(90deg, hsl(222 45% 8% / 0.45) 0%, hsl(222 45% 8% / 0.05) 70%);
   --hero-video-filter: none;
 
   /* Layout tokens (PLAN.md §3.2) */
@@ -46,6 +54,24 @@
 .title-em {
   font-family: var(--em-font);
   font-style: var(--em-style);
+}
+
+/* Default-theme header over the photo hero: light tokens pre-scroll only.
+   Scoped to the nav bar (> nav) so the scrolled .surface header and the
+   mobile menu overlay keep their dark-on-white rendering. Default theme
+   matches both no-attribute (fresh visit) and data-theme="default". */
+:root:not([data-theme]) header.over-video > nav,
+[data-theme="default"] header.over-video > nav {
+  --foreground: 0 0% 100%;
+  --muted-foreground: 0 0% 86%;
+  --border: 0 0% 100%;
+}
+:root:not([data-theme]) header.over-video > nav .surface,
+[data-theme="default"] header.over-video > nav .surface {
+  background: hsl(0 0% 100% / 0.12);
+  border-color: hsl(0 0% 100% / 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 /* ---------------------------------------------------------- */
