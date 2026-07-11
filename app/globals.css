@@ -19,6 +19,13 @@
     scroll-margin-top: 6rem;
   }
 
+  /* Paint-gate: non-default saved themes hide the body until the provider
+     resolves and the themed section order renders (PLAN.md §3.3).
+     visibility (not display) keeps the default tree DOM-crawlable. */
+  html.theme-boot body {
+    visibility: hidden;
+  }
+
   ::selection {
     background: hsl(var(--primary) / 0.9);
     color: hsl(var(--primary-foreground));
@@ -54,6 +61,76 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+/* Header bar: sleek variant — no outline or inset highlight on the nav itself */
+header.liquid-glass {
+  box-shadow: none;
+}
+header.liquid-glass::before {
+  display: none;
+}
+
+/* ---------------------------------- */
+/* Semantic panel surface — default (Clean White) rendering here;      */
+/* per-theme resolution in styles/themes.css (PLAN.md §3.2).           */
+/* ---------------------------------- */
+.surface {
+  position: relative;
+  background: hsl(var(--secondary) / 0.6);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--card-radius, var(--radius));
+}
+header.surface {
+  box-shadow: none;
+}
+
+/* ---------------------------------- */
+/* Contact form — shared baseline; per-theme deltas in styles/themes.css */
+/* ---------------------------------- */
+.form-field {
+  position: relative;
+}
+.form-input {
+  width: 100%;
+  border-bottom: 1px solid hsl(var(--input));
+  background: transparent;
+  padding: 0.75rem 0;
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+}
+.form-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+.form-input:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+}
+.form-select {
+  appearance: none;
+}
+.form-submit {
+  border-radius: var(--radius);
+  padding: 1rem 2.5rem;
+  color: hsl(var(--foreground));
+  transition: transform 0.2s ease;
+}
+.form-submit:hover {
+  transform: scale(1.03);
+}
+.form-submit:disabled {
+  opacity: 0.6;
+}
+
+/* Layout-token consumers */
+.section-pad {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: var(--section-py-md);
+    padding-bottom: var(--section-py-md);
+  }
 }
 }
 
@@ -93,6 +170,17 @@
 .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.4s; }
 .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.5s; }
 
+/* Logo chip — fixed light backing to match the cream logo PNG in every theme */
+.logo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: hsl(40 30% 96%);
+  border-radius: 0.5rem;
+  padding: 0.125rem;
+}
+
 /* Hero decor layer — appearance decided per theme in themes.css */
 .hero-overlay {
   position: absolute;
@@ -116,6 +204,35 @@
 @keyframes star-drift {
   from { transform: translateY(0); }
   to { transform: translateY(-120px); }
+}
+
+/* Trust-logo marquee — theme-agnostic continuous scroll */
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Accordion open/close (components/ui/accordion.tsx) — tailwind.config.ts is
+   frozen, so the usual shadcn animation utilities live here instead */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+.accordion-content[data-state="open"] {
+  animation: accordion-down 0.2s ease-out;
+}
+.accordion-content[data-state="closed"] {
+  animation: accordion-up 0.2s ease-out;
 }
 
 /* Reduced motion: kill all animation, see DESIGN.md §7 */

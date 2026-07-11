@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 
 export function Services() {
   return (
-    <section id="services" className="py-24 md:py-32">
+    <section id="services" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
           <div className="text-sm text-muted-foreground">{SERVICES.eyebrow}</div>
@@ -15,12 +15,12 @@ export function Services() {
 
         <Reveal
           stagger
-          className="mt-16 grid grid-cols-1 border-t border-border md:grid-cols-3"
+          className="mt-16 grid grid-cols-1 border-t border-border md:grid-cols-2 lg:grid-cols-4"
         >
           {SERVICES.items.map((service) => (
             <div
               key={service.title}
-              className="group relative flex flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(3n)]:border-r-0"
+              className="group relative flex flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
             >
               <service.icon
                 aria-hidden

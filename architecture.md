@@ -29,28 +29,28 @@ The reference hero prompt mentioned Vite; that was design reference only. This p
 ```
 aspire-landing/
 ├── app/
-│   ├── layout.tsx          # fonts, metadata, no-flash theme script, ThemeProvider
-│   ├── page.tsx            # composes all 9 sections in order
-│   ├── globals.css         # Tailwind layers, token defaults, liquid-glass, keyframes
+│   ├── layout.tsx          # fonts, metadata, no-flash + paint-gate script, ThemeProvider
+│   ├── page.tsx            # thin wrapper → <ThemeSite/>
+│   ├── globals.css         # Tailwind layers, liquid-glass, .surface base, keyframes
 │   └── icon.svg / opengraph-image.png
 ├── components/
-│   ├── sections/           # one file per landing section, self-contained
-│   │   ├── header.tsx
-│   │   ├── hero.tsx
-│   │   ├── stats.tsx
-│   │   ├── services.tsx
-│   │   ├── destinations.tsx
-│   │   ├── course-finder-cta.tsx
-│   │   ├── testimonials.tsx
-│   │   ├── contact.tsx
-│   │   └── footer.tsx
+│   ├── site/
+│   │   └── theme-site.tsx  # composition resolver: renders the per-theme section order
+│   ├── sections/           # shared section pool, self-contained
+│   │   ├── header.tsx  stats.tsx  services.tsx  destinations.tsx
+│   │   ├── trust-logos.tsx  about.tsx  why-choose-us.tsx  gallery.tsx  faq.tsx
+│   │   ├── cta-banner.tsx  testimonials.tsx  contact.tsx  footer.tsx
+│   │   ├── hero/           # hero.tsx (resolver) + 4 theme variants
+│   │   └── unique/         # process, heritage, system-status, journey-map
 │   ├── theme/
-│   │   ├── theme-provider.tsx   # context: activeTheme, setTheme
+│   │   ├── theme-provider.tsx   # context: theme, setTheme (reload), resolved
 │   │   └── theme-switcher.tsx   # floating pill (DESIGN.md §9)
 │   └── ui/                 # shadcn/ui components (generated, minimally edited)
 ├── lib/
 │   ├── content.ts          # ALL page copy/data as typed constants
 │   ├── config.ts           # portal URLs, form endpoint, site metadata constants
+│   ├── theme-layouts.ts    # Record<ThemeId, SectionId[]> — per-theme order
+│   ├── section-registry.tsx # SectionId → component map
 │   └── hooks.ts            # useScrollReveal (IntersectionObserver), useCountUp
 ├── styles/
 │   └── themes.css          # [data-theme="…"] variable blocks for all 4 themes
@@ -63,13 +63,15 @@ aspire-landing/
 
 ## 4. Theming Architecture
 
-Decision: **`data-theme` attribute + CSS variables. No theme library.**
+Decision: **structural theme variants — `data-theme` + CSS variables for skin, a composition layer for structure. No theme library.**
 
 - Themes: `default`, `classical`, `cyberpunk`, `space` (canonical ids — use everywhere: CSS selectors, localStorage, switcher).
-- `styles/themes.css` holds one `[data-theme="x"]` block per theme overriding the token set defined in `DESIGN.md` §3–4. `:root` carries `default` values.
+- `styles/themes.css` holds one `[data-theme="x"]` block per theme overriding the token set defined in `DESIGN.md` §3–4. `:root` carries `default` (Clean White) values. Tokens include layout (`--section-py`, `--section-py-md`, `--grid-gap`, `--card-radius`) and emphasis (`--em-font`, `--em-style`) alongside colors/fonts.
+- **`.surface` semantic panel:** shared sections use `.surface` (base in `globals.css`); each theme resolves it in `themes.css` — default flat hairline, classical mirrors the verbatim `.liquid-glass` spec, cyberpunk neon brackets, space aurora edge.
+- **Composition layer:** `lib/theme-layouts.ts` (per-theme `SectionId[]`) + `lib/section-registry.tsx` (id → component) + `components/site/theme-site.tsx` (client resolver). SSG prerenders the `default` order — the only fully-indexed tree; non-default orders swap in post-hydration.
 - Tailwind config maps semantic utilities to vars: `colors: { background: 'hsl(var(--background))', … }`, `fontFamily: { display: 'var(--font-display)', body: 'var(--font-body)', accent: 'var(--font-accent)' }`. Components use only semantic utilities (`bg-background`, `text-muted-foreground`, `font-display`) — never raw palette classes.
-- **No-flash script:** inline `<script>` in `<head>` (via `dangerouslySetInnerHTML` in `layout.tsx`) reads `localStorage['aspire-theme']` and sets `document.documentElement.dataset.theme` before first paint. Must stay tiny and dependency-free.
-- `ThemeProvider` (client component, wraps body content): owns `activeTheme` state, syncs `data-theme` + localStorage on change. Consumed only by `theme-switcher.tsx`. Sections are theme-agnostic — they read tokens via CSS, never branch on theme in JSX.
+- **No-flash + paint-gate script:** inline `<script>` in `<head>` reads `localStorage['aspire-theme']`, sets `document.documentElement.dataset.theme` before first paint, and — for non-default themes — adds `html.theme-boot` (body `visibility:hidden`) until the provider resolves and swaps in the right section order. Safety nets: 3s timeout reveal + `<noscript>` style; content is never stranded hidden.
+- `ThemeProvider` (client component): owns `theme` + `resolved` state; `setTheme` writes localStorage and reloads the page (full-reload switch keeps SSR/scroll/animation state coherent). Theme is read only by the switcher and the resolvers (`theme-site.tsx`, `section-registry.tsx`, `hero/hero.tsx`); section internals never branch on theme.
 - Hero overlay/filter and decorative layers (starfield, scanlines) are driven by theme vars (`--hero-overlay`, `--hero-video-filter`) and `[data-theme="x"] .hero-decor { … }` CSS — markup renders one generic decor element; CSS decides its appearance/visibility per theme.
 - Fonts: all six Google families loaded once in `layout.tsx` via `next/font/google`, each exposing a CSS variable (`--font-inter`, `--font-cormorant`, …). Theme blocks in `themes.css` assign `--font-display: var(--font-cormorant)` etc. Cost: all fonts load regardless of theme — acceptable for v1 with `display: swap`; revisit if perf budget demands.
 

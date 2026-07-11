@@ -1,15 +1,13 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/content";
 import { CONTACT_FORM_ENDPOINT, SITE } from "@/lib/config";
 import { Reveal } from "@/components/reveal";
 
 type Status = "idle" | "sending" | "sent" | "error";
-
-const inputClasses =
-  "w-full border-b border-input bg-transparent py-3 text-foreground placeholder:text-muted-foreground focus:border-[hsl(var(--ring))] focus:outline-none";
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
@@ -45,8 +43,25 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-secondary/40 py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-16 px-8 md:grid-cols-2">
+    <section id="contact" className="relative overflow-hidden section-pad">
+      <Image
+        src={CONTACT.backgroundImage}
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
+        aria-hidden
+      />
+      {/* Overlay keeps form and text legible over the photo in every theme */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(105deg, hsl(var(--background) / 0.96) 35%, hsl(var(--background) / 0.82))",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-7xl gap-16 px-8 md:grid-cols-2">
         <Reveal>
           <div className="text-sm text-muted-foreground">{CONTACT.eyebrow}</div>
           <h2 className="section-title mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
@@ -76,67 +91,79 @@ export function Contact() {
         </Reveal>
 
         <Reveal>
-          <form onSubmit={onSubmit} className="flex flex-col gap-6">
-            <label className="sr-only" htmlFor="contact-name">Name</label>
-            <input
-              id="contact-name"
-              name="name"
-              required
-              placeholder="Full name"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-email">Email</label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              required
-              placeholder="Email address"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-phone">Phone</label>
-            <input
-              id="contact-phone"
-              name="phone"
-              type="tel"
-              placeholder="Phone (optional)"
-              className={inputClasses}
-            />
-            <label className="sr-only" htmlFor="contact-destination">
-              Destination interest
-            </label>
-            <select
-              id="contact-destination"
-              name="destination"
-              required
-              defaultValue=""
-              className={`${inputClasses} appearance-none`}
-            >
-              <option value="" disabled>
+          <form onSubmit={onSubmit} className="form-shell surface flex flex-col gap-6 p-8">
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-name">Name</label>
+              <input
+                id="contact-name"
+                name="name"
+                required
+                placeholder="Full name"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-email">Email</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                placeholder="Email address"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-phone">Phone</label>
+              <input
+                id="contact-phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone (optional)"
+                className="form-input"
+              />
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-destination">
                 Destination interest
-              </option>
-              {CONTACT.destinationOptions.map((opt) => (
-                <option key={opt} value={opt} className="bg-background text-foreground">
-                  {opt}
+              </label>
+              <select
+                id="contact-destination"
+                name="destination"
+                required
+                defaultValue=""
+                className="form-input form-select"
+              >
+                <option value="" disabled>
+                  Destination interest
                 </option>
-              ))}
-            </select>
-            <label className="sr-only" htmlFor="contact-message">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows={4}
-              required
-              placeholder="Tell us about your plans"
-              className={inputClasses}
-            />
+                {CONTACT.destinationOptions.map((opt) => (
+                  <option key={opt} value={opt} className="bg-background text-foreground">
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-field">
+              <label className="sr-only" htmlFor="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows={4}
+                required
+                placeholder="Tell us about your plans"
+                className="form-input form-textarea"
+              />
+            </div>
 
             <button
               type="submit"
               disabled={status === "sending"}
-              className="liquid-glass mt-4 self-start rounded-full px-10 py-4 text-base text-foreground transition-transform hover:scale-[1.03] disabled:opacity-60"
+              className="form-submit mt-4 self-start"
             >
-              {status === "sending" ? "Sending…" : "Send Message"}
+              <span className="form-submit-label prompt-caret">
+                {status === "sending" ? "Sending…" : "Send Message"}
+              </span>
             </button>
 
             <p aria-live="polite" className="text-sm text-muted-foreground">

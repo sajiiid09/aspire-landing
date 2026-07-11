@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 
 export function Testimonials() {
   return (
-    <section id="stories" className="py-24 md:py-32">
+    <section id="stories" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
           <div className="text-sm text-muted-foreground">{TESTIMONIALS.eyebrow}</div>
