@@ -15,6 +15,7 @@ export type SectionId =
   | "stats"
   | "testimonials"
   | "gallery"
+  | "offers"
   | "faq"
   | "cta-banner"
   | "contact"
@@ -29,12 +30,13 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
     "hero",
     "trust-logos",
     "about",
+    "services",
     "why-choose-us",
     "destinations",
     "process",
     "stats",
     "testimonials",
-    "gallery",
+    "offers",
     "faq",
     "cta-banner",
     "contact",
@@ -48,6 +50,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
     "about",
     "services",
     "destinations",
+    "offers",
     "testimonials",
     "cta-banner",
     "contact",
@@ -60,6 +63,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
     "why-choose-us",
     "stats",
     "destinations",
+    "offers",
     "testimonials",
     "faq",
     "cta-banner",
@@ -72,6 +76,7 @@ export const THEME_LAYOUTS: Record<ThemeId, readonly SectionId[]> = {
     "trust-logos",
     "destinations",
     "stats",
+    "offers",
     "why-choose-us",
     "testimonials",
     "cta-banner",

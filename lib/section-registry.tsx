@@ -9,6 +9,7 @@ import { Destinations } from "@/components/sections/destinations";
 import { Stats } from "@/components/sections/stats";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Gallery } from "@/components/sections/gallery";
+import { Offers } from "@/components/sections/offers";
 import { Faq } from "@/components/sections/faq";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { Contact } from "@/components/sections/contact";
@@ -33,6 +34,7 @@ export const SECTION_REGISTRY: Record<SectionId, ComponentType> = {
   stats: Stats,
   testimonials: Testimonials,
   gallery: Gallery,
+  offers: Offers,
   faq: Faq,
   "cta-banner": CtaBanner,
   contact: Contact,

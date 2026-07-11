@@ -3,9 +3,7 @@ import {
   GraduationCap,
   StampIcon,
   Award,
-  BookOpenCheck,
   Compass,
-  PlaneTakeoff,
   BadgeCheck,
   Route,
 } from "lucide-react";
@@ -81,8 +79,7 @@ export const HERO: {
   collage: readonly { src: string; alt: string }[];
   terminalLines: readonly string[];
 } = {
-  // PLACEHOLDER — pending client BRD data (eyebrow, trust copy, terminal log)
-  eyebrow: "UK · USA · Canada · Australia · Germany · Malaysia",
+  eyebrow: "UK · USA · Canada · Australia · New Zealand · Europe",
   // Emphasis segments render muted (and italic-serif in default theme)
   headline: [
     { text: "Where " },
@@ -108,28 +105,31 @@ export const HERO: {
   poster:
     "/images/hero-poster.jpg",
   collage: [
-    { src: "/images/hero-poster.jpg", alt: "University campus at golden hour" },
+    {
+      src: "/images/hero-campus.jpg",
+      alt: "Wide-angle view of a university campus quadrangle in soft morning light",
+    },
     { src: "/images/dest-uk.jpg", alt: "London skyline along the Thames" },
     { src: "/images/student-4.jpg", alt: "Student settled abroad" },
   ],
   terminalLines: [
     "> init aspire_global --mode=student",
-    "> scanning 250+ partner universities … ok",
+    "> scanning 750+ partner universities … ok",
+    "> indexing 75,000+ courses … ok",
     "> visa_success_rate: 98%",
-    "> destination_matrix: [UK, USA, CA, AU, DE, MY]",
+    "> destination_matrix: [UK, USA, CA, AU, NZ, DE, SE, ES, GR, CY, LV, LT, MT]",
   ],
 };
 
-// PLACEHOLDER — pending client BRD data
 export const STATS: { eyebrow: string; title: string; body: string; items: Stat[] } = {
   eyebrow: "Our Impact",
   title: "Proven Guidance, Real Outcomes",
-  body: "A decade of helping students cross borders with confidence — from application to arrival, every step handled with care.",
+  body: "Enterprise-grade infrastructure behind every application — from first counseling session to arrival, every step handled with care.",
   items: [
-    { value: 5000, suffix: "+", label: "Students placed worldwide" },
+    { value: 750, suffix: "+", label: "Partner universities" },
+    { value: 75000, suffix: "+", label: "Courses worldwide" },
     { value: 98, suffix: "%", label: "Visa success rate" },
-    { value: 12, suffix: "", label: "Destination countries" },
-    { value: 250, suffix: "+", label: "Partner universities" },
+    { value: 13, suffix: "+", label: "Destination countries" },
   ],
 };
 
@@ -138,40 +138,28 @@ export const SERVICES: { eyebrow: string; title: string; items: Service[] } = {
   title: "Every step, handled.",
   items: [
     {
-      icon: GraduationCap,
-      title: "University Admissions",
+      icon: Compass,
+      title: "Personalized Global Counseling",
       description:
-        "Shortlisting, applications, and offer negotiation with universities that fit your goals.",
+        "Data-driven profile evaluation mapping your academic history and career aspirations against high-growth global trajectories — comparing Tier-1 nations with cost-effective European Union options.",
+    },
+    {
+      icon: GraduationCap,
+      title: "Admission & Documentation Support",
+      description:
+        "Meticulous application processing, from structural refinement of SOPs to strategic alignment of LORs. We deal directly with our 750+ university partners to expedite fast-track offers.",
     },
     {
       icon: StampIcon,
-      title: "Visa Guidance",
+      title: "Global Visa Application Guidance",
       description:
-        "Document preparation, interview coaching, and end-to-end visa filing support.",
+        "High-tier navigation of changing compliance codes — Schengen requirements, UKVI regulations, US F-1 pathways — with stringent mock interviews modeled on embassy guidelines.",
     },
     {
       icon: Award,
-      title: "Scholarship Support",
+      title: "Scholarship & Financial Mapping",
       description:
-        "Finding and winning funding — merit awards, grants, and tuition waivers.",
-    },
-    {
-      icon: BookOpenCheck,
-      title: "Test Preparation",
-      description:
-        "IELTS, TOEFL, SAT, and GRE prep with structured plans and mock testing.",
-    },
-    {
-      icon: Compass,
-      title: "Career Counseling",
-      description:
-        "Course and country choices mapped to the career you actually want.",
-    },
-    {
-      icon: PlaneTakeoff,
-      title: "Pre-Departure Briefing",
-      description:
-        "Housing, banking, culture, and arrival logistics — ready before you fly.",
+        "Comprehensive evaluation of institutional aid, state-sponsored European grants, and merit-based bursaries to significantly lower the financial overhead of your education.",
     },
   ],
 };
@@ -256,16 +244,32 @@ export const DESTINATIONS: {
       ],
     },
     {
-      country: "Malaysia",
+      country: "New Zealand",
       image:
-        "/images/dest-malaysia.jpg",
-      imageAlt: "Petronas Towers rising over Kuala Lumpur at dusk",
-      statLine: "20+ partner universities",
+        "/images/dest-new-zealand.jpg",
+      imageAlt: "Auckland skyline with the Sky Tower across the harbour",
+      statLine: "15+ partner universities",
       universities: [
-        "Universiti Malaya",
-        "Taylor's University",
-        "Sunway University",
-        "UKM",
+        "University of Auckland",
+        "University of Otago",
+        "Victoria University of Wellington",
+        "Massey University",
+      ],
+    },
+    {
+      country: "Europe (Schengen)",
+      image:
+        "/images/dest-europe.jpg",
+      imageAlt: "Cobbled old-town street with half-timbered houses in Europe at dusk",
+      statLine: "7 more Schengen destinations",
+      universities: [
+        "Sweden",
+        "Spain",
+        "Greece",
+        "Cyprus",
+        "Latvia",
+        "Lithuania",
+        "Malta",
       ],
     },
   ],
@@ -351,8 +355,9 @@ export const CONTACT = {
     "United States",
     "Canada",
     "Australia",
+    "New Zealand",
     "Germany",
-    "Malaysia",
+    "Europe (Schengen)",
     "Not sure yet",
   ],
 } as const;
@@ -376,7 +381,6 @@ export const TRUST_LOGOS: { eyebrow: string; items: { name: string; logo: string
   ],
 };
 
-// PLACEHOLDER — pending client BRD data
 export const ABOUT: {
   eyebrow: string;
   title: readonly HeadlinePart[];
@@ -387,15 +391,19 @@ export const ABOUT: {
   tags: string[];
 } = {
   eyebrow: "About Aspire",
-  title: [{ text: "Be a part of " }, { text: "our success.", em: true }],
+  title: [
+    { text: "Democratizing " },
+    { text: "elite international education", em: true },
+    { text: " across the globe." },
+  ],
   paragraphs: [
-    "Aspire Global Education is a full-service study-abroad consultancy. From your first counseling session to your first day on campus, one dedicated team plans, prepares, and files everything with you.",
-    "We match students to universities and scholarships across six destination countries, coach every visa interview, and stay reachable long after you land.",
+    "Aspire Global Education stands at the forefront of global student mobility. Founded on the principles of absolute transparency and operational excellence, we serve as a definitive pipeline to the world's leading universities — spanning the classic educational centers of the UK, USA, Canada, Australia, and New Zealand, alongside a strong presence in mainland Europe's premier destinations including Germany, Sweden, Spain, Greece, Cyprus, Latvia, Lithuania, and Malta.",
+    "We remove the geographic and bureaucratic friction from international admissions, matching ambitious minds with over 75,000 premium courses worldwide. By combining deep human expertise with enterprise-grade digital infrastructure, we ensure your transition from local ambition to international success is swift, secure, and certain.",
   ],
   image: "/images/dest-uk.jpg",
   imageAlt: "Students walking through a historic university campus",
-  statBadge: { value: 5000, suffix: "+", label: "Students placed" },
-  tags: ["Admissions", "Visa Filing", "Scholarships", "Test Prep", "Career Counseling", "Pre-Departure"],
+  statBadge: { value: 750, suffix: "+", label: "University partners" },
+  tags: ["Global Counseling", "Admissions & Documentation", "Visa Guidance", "Scholarship Mapping", "Tier-1 Destinations", "Schengen & EU"],
 };
 
 // PLACEHOLDER — pending client BRD data
@@ -447,6 +455,84 @@ export const PROCESS_STEPS: {
     { title: "Visa Approved", description: "Coaching and airtight filing for a confident interview." },
     { title: "Pre-Departure", description: "Housing, banking, and culture briefing before you fly." },
     { title: "Arrival & Beyond", description: "Airport pickup coordination and on-the-ground support." },
+  ],
+};
+
+export interface OfferPoster {
+  src: string;
+  alt: string;
+  label: string;
+  width: number;
+  height: number;
+}
+
+// Client-supplied promo posters (BRD V2 delivery, Jul 2026)
+export const OFFERS: {
+  eyebrow: string;
+  title: string;
+  body: string;
+  items: OfferPoster[];
+} = {
+  eyebrow: "University Spotlights",
+  title: "Current offers from our partners.",
+  body: "Live intakes, scholarships, and early-bird discounts across our partner universities — tap any card to see the full details.",
+  items: [
+    {
+      src: "/posters/8.jpeg",
+      alt: "Arden University UK early-bird discount — save GBP 2,500 on tuition for September 2026 enrolment: Manchester GBP 10,000, London GBP 11,000.",
+      label: "Arden University — Early-Bird Offer",
+      width: 1080,
+      height: 1350,
+    },
+    {
+      src: "/posters/1.jpeg",
+      alt: "University of Hull, London — MSc Business Management, Digital Marketing, and AI & Data Science; bachelor's with 50%+, IELTS 6.0, tuition GBP 17,000–18,000 with GBP 3,000 scholarship; intakes Sep 2026, Jan and May 2027.",
+      label: "University of Hull, London",
+      width: 899,
+      height: 1599,
+    },
+    {
+      src: "/posters/3.jpeg",
+      alt: "Aston University, London — MSc Business Analytics, Data Science, Cyber Security Management, and Project Management; tuition GBP 13,950 after scholarship, scholarships available for all programmes.",
+      label: "Aston University, London",
+      width: 1080,
+      height: 1350,
+    },
+    {
+      src: "/posters/5.jpeg",
+      alt: "Think big, think Germany — continue with a second master's in Germany after a UK master's: affordable quality education, high visa success, and a streamlined process.",
+      label: "UK to Germany Pathway",
+      width: 1280,
+      height: 1600,
+    },
+    {
+      src: "/posters/2.jpeg",
+      alt: "Kingston University — MSc International Business, Accounting and Finance, and Data Science; IELTS 6.0–6.5, tuition GBP 19,700–25,000 with scholarships up to GBP 5,000; PG application deadline 3 Jul 2026.",
+      label: "Kingston University",
+      width: 810,
+      height: 1440,
+    },
+    {
+      src: "/posters/6.jpeg",
+      alt: "University of East London — TEF Silver rated with flexible payment plans; tuition GBP 16,000–19,500, scholarships up to GBP 5,000, initial deposit GBP 1,500.",
+      label: "University of East London",
+      width: 810,
+      height: 1440,
+    },
+    {
+      src: "/posters/7.jpeg",
+      alt: "Study in Canada — Fairleigh Dickinson University, Vancouver: Master of Administrative Science with specialisations in Computer Security & Forensic Administration and Global Technology Administration.",
+      label: "FDU Vancouver — Study in Canada",
+      width: 899,
+      height: 1599,
+    },
+    {
+      src: "/posters/4.jpeg",
+      alt: "Highly-ranked UK universities with low deposits — minimum deposits from GBP 500 at Roehampton, Birmingham City, Buckinghamshire New, East London, Chester, and Ulster.",
+      label: "UK Universities — Low Deposits",
+      width: 899,
+      height: 1599,
+    },
   ],
 };
 
@@ -518,7 +604,7 @@ export const HERITAGE_MILESTONES: {
     { year: "2015", title: "Founded in Dhaka", description: "A two-desk office and a promise: honest guidance, end to end." },
     { year: "2017", title: "First 500 students placed", description: "Partnerships signed across the UK and Malaysia." },
     { year: "2020", title: "Six destinations", description: "Canada, Australia, Germany, and the USA join the map." },
-    { year: "2023", title: "250+ partner universities", description: "Scholarship-first filing becomes standard for every profile." },
+    { year: "2023", title: "750+ partner universities", description: "Scholarship-first filing becomes standard for every profile." },
     { year: "2026", title: "5,000 students and counting", description: "One team, one plan — every step still handled with care." },
   ],
 };
@@ -535,10 +621,10 @@ export const SYSTEM_STATUS: {
   title: "System status: operational.",
   statusLabel: "SYSTEM ONLINE",
   readouts: [
-    { value: 5000, suffix: "+", label: "students_placed" },
+    { value: 75000, suffix: "+", label: "courses_indexed" },
     { value: 98, suffix: "%", label: "visa_success" },
-    { value: 250, suffix: "+", label: "partner_nodes" },
-    { value: 12, suffix: "", label: "destinations" },
+    { value: 750, suffix: "+", label: "partner_nodes" },
+    { value: 13, suffix: "+", label: "destinations" },
   ],
   logLines: [
     "[ok] admissions_pipeline … active",
@@ -558,7 +644,7 @@ export const JOURNEY_NODES: {
   title: "Chart your constellation.",
   nodes: [
     { label: "Dhaka", sub: "Launch", x: 8, y: 72 },
-    { label: "Kuala Lumpur", sub: "20+ universities", x: 26, y: 48 },
+    { label: "Auckland", sub: "15+ universities", x: 26, y: 48 },
     { label: "Berlin", sub: "25+ universities", x: 42, y: 26 },
     { label: "London", sub: "40+ universities", x: 58, y: 52 },
     { label: "Toronto", sub: "35+ universities", x: 74, y: 24 },

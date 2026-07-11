@@ -15,12 +15,12 @@ export function Services() {
 
         <Reveal
           stagger
-          className="mt-16 grid grid-cols-1 border-t border-border md:grid-cols-3"
+          className="mt-16 grid grid-cols-1 border-t border-border md:grid-cols-2 lg:grid-cols-4"
         >
           {SERVICES.items.map((service) => (
             <div
               key={service.title}
-              className="group relative flex flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(3n)]:border-r-0"
+              className="group relative flex flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
             >
               <service.icon
                 aria-hidden
