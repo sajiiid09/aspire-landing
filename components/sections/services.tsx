@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SERVICES } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
@@ -41,6 +42,16 @@ export function Services() {
               </span>
             </div>
           ))}
+        </Reveal>
+
+        <Reveal className="mt-10">
+          <Link
+            href={SERVICES.cta.href}
+            className="inline-flex items-center gap-2 text-sm text-foreground underline-offset-4 transition-colors hover:text-muted-foreground hover:underline"
+          >
+            {SERVICES.cta.label}
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
         </Reveal>
       </div>
     </section>

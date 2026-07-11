@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { ABOUT } from "@/lib/content";
 import { useCountUp, useInView } from "@/lib/hooks";
 import { Reveal } from "@/components/reveal";
@@ -68,6 +70,13 @@ export function About() {
               </li>
             ))}
           </ul>
+          <Link
+            href={ABOUT.cta.href}
+            className="mt-8 inline-flex items-center gap-2 text-sm text-foreground underline-offset-4 transition-colors hover:text-muted-foreground hover:underline"
+          >
+            {ABOUT.cta.label}
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </Link>
         </Reveal>
       </div>
     </section>

@@ -4,7 +4,7 @@ Rules for AI agents (and humans) working in this repo. `DESIGN.md` = visual sour
 
 ## Project in one paragraph
 
-Static landing page for Aspire Global Education (study-abroad consultancy). Next.js 15 App Router + TypeScript strict + Tailwind + shadcn/ui, `output: 'export'`. Single route `/`, four **structural** theme variants (`default`, `classical`, `cyberpunk`, `space`): each theme has its own hero, section order (`lib/theme-layouts.ts`), and one unique section, composed by `components/site/theme-site.tsx` from a shared section pool. Skins ride on `data-theme` + CSS variables; only the default order is prerendered (SEO); switching themes reloads the page.
+Static site for Aspire Global Education (study-abroad consultancy). Next.js 15 App Router + TypeScript strict + Tailwind + shadcn/ui, `output: 'export'`. Three routes: the landing page `/` plus skin-only inner pages `/about` and `/services`. The landing page has four **structural** theme variants (`default`, `classical`, `cyberpunk`, `space`): each theme has its own hero, section order (`lib/theme-layouts.ts`), and one unique section, composed by `components/site/theme-site.tsx` from a shared section pool. Inner pages have **one fixed layout** composed by `components/site/page-shell.tsx` (solid header variant, ThemeSwitcher, Footer) and re-skin purely via CSS variables — no per-theme structure and no theme branching. Skins ride on `data-theme` + CSS variables; only the default landing order is prerendered (SEO); switching themes reloads the page.
 
 ## Commands
 
@@ -38,6 +38,9 @@ npx tsc --noEmit     # typecheck
 | New section wiring | `lib/section-registry.tsx` (+ id in `theme-layouts.ts`) |
 | Hero variants | `components/sections/hero/` (resolver = `hero.tsx`) |
 | Theme-unique sections | `components/sections/unique/` |
+| Inner-page chrome (header/footer/switcher shell) | `components/site/page-shell.tsx` |
+| Inner-page shared bands (hero band, CTA band) | `components/site/page-hero.tsx`, `components/site/page-cta.tsx` |
+| Inner-page routes + metadata | `app/about/page.tsx`, `app/services/page.tsx` (copy in `lib/content.ts`) |
 | New shared animation/behavior | `lib/hooks.ts` |
 | Section layout | that section's file in `components/sections/` |
 | shadcn primitives | `components/ui/` |

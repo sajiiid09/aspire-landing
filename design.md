@@ -73,7 +73,7 @@ Formal white agency register (eduwizz reference). Sharp corners, no video.
 | `--font-display` | `'Space Grotesk', sans-serif` |
 | `--font-body` | `'Inter', sans-serif` |
 | `--font-accent` | `'Instrument Serif', serif` — italic emphasis words in headlines |
-| Hero | Eyebrow pill, italic-serif emphasis, 2 CTAs, trust stat + avatars, image collage. No video. |
+| Hero | Full-bleed campus photo (BRD V2 §5 brief), gradient scrim (`--hero-overlay`), liquid-glass eyebrow + secondary CTA, italic-serif emphasis, trust stat + avatars. Light-on-dark copy via `.hero-photo` token remap. No video. |
 | `.surface` | Flat `secondary` fill, 1px hairline border, radius 0 |
 | Unique section | **Process** — full-bleed primary band, journey checklist |
 
@@ -218,7 +218,7 @@ Rules:
 ### 8.2 Hero
 Per prompt, adapted copy:
 - Fullscreen `<video autoPlay loop muted playsInline preload="metadata" poster={…}>`, `absolute inset-0 w-full h-full object-cover z-0`. Source: `https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4` *(design-phase asset; production video TBD)*.
-- Theme overlay layer (`--hero-overlay`, `--hero-video-filter`) between video (z-0) and content (z-10); `default` theme renders none.
+- Theme overlay layer (`--hero-overlay`, `--hero-video-filter`) between media (z-0) and content (z-10); `default` uses it as a photo scrim over the full-bleed hero image.
 - Content: flex column, centered, `text-center px-6 pt-32 pb-40 py-[90px]`.
 - H1: "Where **ambition** finds **its horizon.**" — emphasis words in `<em class="not-italic text-muted-foreground">` (in `classical`, emphasis words additionally take `--font-accent` cursive).
 - Subtext: `text-muted-foreground text-base sm:text-lg max-w-2xl mt-8 leading-relaxed`.
