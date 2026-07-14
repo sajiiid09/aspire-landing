@@ -24,12 +24,10 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        glow: "hsl(var(--glow))",
       },
       fontFamily: {
         display: "var(--font-display)",
         body: "var(--font-body)",
-        accent: "var(--font-accent)",
       },
       borderRadius: {
         DEFAULT: "var(--radius)",
