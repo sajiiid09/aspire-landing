@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+/node_modules/
 
 # next.js
 /.next/
@@ -7,10 +7,14 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
-npm-debug.log*
+*.log
+.vercel/
+coverage/
 
-# env files
+# environment files
+.env
 .env*.local
 
 # typescript

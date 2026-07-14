@@ -1,48 +1,27 @@
-# Agent Conventions — aspire-landing
+# Agent Conventions
 
-Rules for AI agents (and humans) working in this repo. `DESIGN.md` = visual source of truth. `ARCHITECTURE.md` = structural source of truth. When code and docs conflict, flag it — don't silently pick one.
+## Project
 
-## Project in one paragraph
+Aspire Global Education is a static, public marketing site built with Next.js 15, TypeScript, Tailwind CSS, and `output: 'export'`. It uses one approved Cinematic Navy design across all routes.
 
-Static site for Aspire Global Education (study-abroad consultancy). Next.js 15 App Router + TypeScript strict + Tailwind + shadcn/ui, `output: 'export'`. Three routes: the landing page `/` plus skin-only inner pages `/about` and `/services`. The landing page has four **structural** theme variants (`default`, `classical`, `cyberpunk`, `space`): each theme has its own hero, section order (`lib/theme-layouts.ts`), and one unique section, composed by `components/site/theme-site.tsx` from a shared section pool. Inner pages have **one fixed layout** composed by `components/site/page-shell.tsx` (solid header variant, ThemeSwitcher, Footer) and re-skin purely via CSS variables — no per-theme structure and no theme branching. Skins ride on `data-theme` + CSS variables; only the default landing order is prerendered (SEO); switching themes reloads the page.
+## Rules
 
-## Commands
+1. Do not add a backend, authentication, API routes, middleware, database, or runtime image optimization.
+2. Student Portal and Course Finder remain external links configured in `lib/config.ts`.
+3. Keep visible marketing copy and structured content in `lib/content.ts`.
+4. Use semantic CSS variables and Tailwind utilities. Do not add route-specific color palettes.
+5. Preserve the approved `.liquid-glass` and `fade-rise` definitions unless the client approves a change.
+6. Do not publish unverified testimonials, performance claims, milestones, or university partnerships.
+7. Use Server Components by default and isolate browser behavior in small Client Components.
+8. Honor reduced motion, keyboard navigation, visible focus, semantic landmarks, and WCAG AA contrast.
+9. Every change must pass TypeScript, ESLint, and the static production build.
 
-```bash
-npm run dev          # dev server
-npm run build        # static export → out/
-npm run lint         # ESLint
-npx tsc --noEmit     # typecheck
-```
+## Placement
 
-## Hard rules
-
-1. **Never add backend, auth, API routes, or a database.** "Student Portal" / "Course Finder" are plain external `<a>` links using constants from `lib/config.ts`. If a task seems to require a backend, stop and ask.
-2. **Theme tokens via CSS variables; structure via the composition layer.** Theme branching is permitted **only** inside `components/site/theme-site.tsx`, `lib/section-registry.tsx`, and `components/sections/hero/hero.tsx`. Inline `if (theme === …)` inside section internals remains forbidden. Theme-specific **styling** still lives in `styles/themes.css` under `[data-theme="…"]` selectors (panels use the semantic `.surface` class, resolved per theme). Only the switcher and those resolvers read the active theme from context.
-3. **Semantic Tailwind utilities only** — `bg-background`, `text-muted-foreground`, `font-display`. Never raw palette classes (`bg-slate-900`) or hex values in components.
-4. **All copy/data lives in `lib/content.ts`.** No literal marketing strings inside section components. Placeholder data keeps its `// PLACEHOLDER` comment until real client data lands.
-5. **Sections stay self-contained** in `components/sections/` — one file per landing section, no cross-imports between sections. Shared behavior goes in `lib/hooks.ts` or `components/theme/`.
-6. **shadcn/ui components go in `components/ui/`** via the shadcn CLI; edit them minimally. Don't hand-write components that shadcn already provides.
-7. **Static export constraints:** no server-only features (dynamic routes with runtime data, next/image optimization API, headers/middleware). Anything added must survive `next build` with `output: 'export'`.
-8. **Preserve the verbatim specs** in `DESIGN.md` §6–7 (`.liquid-glass`, `fade-rise`) — these came from the approved design prompt; change only with explicit user sign-off.
-9. **Every visual change must be checked in all four themes** and under `prefers-reduced-motion`. A change that looks right only in `default` is not done.
-10. **Accessibility bar is non-negotiable:** WCAG AA contrast per theme, keyboard-operable switcher and menu, single `h1`, semantic landmarks.
-
-## Where things go
-
-| Change | File(s) |
-|---|---|
-| Copy / stats / testimonials | `lib/content.ts` |
-| Theme colors / fonts / layout tokens / `.surface` skins | `styles/themes.css` (+ token docs in `DESIGN.md`) |
-| Per-theme section order | `lib/theme-layouts.ts` |
-| New section wiring | `lib/section-registry.tsx` (+ id in `theme-layouts.ts`) |
-| Hero variants | `components/sections/hero/` (resolver = `hero.tsx`) |
-| Theme-unique sections | `components/sections/unique/` |
-| Inner-page chrome (header/footer/switcher shell) | `components/site/page-shell.tsx` |
-| Inner-page shared bands (hero band, CTA band) | `components/site/page-hero.tsx`, `components/site/page-cta.tsx` |
-| Inner-page routes + metadata | `app/about/page.tsx`, `app/services/page.tsx` (copy in `lib/content.ts`) |
-| New shared animation/behavior | `lib/hooks.ts` |
-| Section layout | that section's file in `components/sections/` |
-| shadcn primitives | `components/ui/` |
-| External URLs, site metadata | `lib/config.ts` |
-| Global CSS, glass, keyframes, `.surface` base | `app/globals.css` |
+- Copy, navigation, page models: `lib/content.ts`
+- External URLs and site metadata: `lib/config.ts`
+- Shared chrome: `components/site/`
+- Homepage sections: `components/sections/`
+- Route composition and metadata: `app/<route>/page.tsx`
+- Global tokens: `styles/themes.css`
+- Shared CSS and approved effects: `app/globals.css`
