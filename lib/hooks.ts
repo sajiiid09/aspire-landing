@@ -13,6 +13,7 @@ export function useScrollReveal<T extends HTMLElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    el.classList.add("motion-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,7 +28,10 @@ export function useScrollReveal<T extends HTMLElement>() {
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      el.classList.remove("motion-ready");
+    };
   }, []);
 
   return ref;
