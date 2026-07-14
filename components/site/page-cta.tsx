@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { PageCta as PageCtaContent } from "@/lib/content";
+import type { PageCtaContent } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
 
-/** Closing CTA band for inner pages — routes back to the landing contact form. */
+/** Closing CTA band for inner pages. */
 export function PageCta({ content }: { content: PageCtaContent }) {
   return (
     <section className="section-pad">
@@ -18,12 +18,8 @@ export function PageCta({ content }: { content: PageCtaContent }) {
                 {content.body}
               </p>
             </div>
-            <Link
-              href={content.href}
-              className="inline-flex shrink-0 items-center gap-2 bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              {content.label}
-              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            <Link href={content.href} className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]">
+              {content.label}<ArrowUpRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
         </Reveal>

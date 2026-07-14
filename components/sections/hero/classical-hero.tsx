@@ -1,44 +1,19 @@
+import Link from "next/link";
 import { HERO } from "@/lib/content";
+import { HeroVideo } from "./hero-video";
 
-export function ClassicalHero() {
+export function Hero() {
   return (
-    <section id="home" className="over-video relative min-h-screen">
-      <video
-        className="hero-video absolute inset-0 z-0 h-full w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        poster={HERO.poster}
-        aria-hidden
-      >
-        <source src={HERO.videoSrc} type="video/mp4" />
-      </video>
+    <section className="relative flex min-h-[100dvh] items-center overflow-hidden">
+      <div data-header-sentinel className="pointer-events-none absolute left-0 top-[72vh] h-px w-px" aria-hidden />
+      <HeroVideo src={HERO.videoSrc} poster={HERO.poster} />
       <div className="hero-overlay" aria-hidden />
-      <div className="hero-decor" aria-hidden />
-
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pb-40 pt-32 text-center">
-        <h1 className="hero-title animate-fade-rise max-w-7xl font-display text-5xl font-normal leading-[0.95] tracking-[-2.46px] text-foreground sm:text-7xl md:text-8xl">
-          {HERO.headline.map((part, i) =>
-            "em" in part && part.em ? (
-              <em key={i} className="hero-em not-italic text-muted-foreground">
-                {part.text}
-              </em>
-            ) : (
-              <span key={i}>{part.text}</span>
-            ),
-          )}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-28 text-center sm:px-8">
+        <h1 className="hero-title animate-fade-rise mx-auto max-w-5xl font-display text-5xl leading-[1.02] tracking-[-0.025em] text-foreground sm:text-7xl lg:text-[5.5rem]">
+          {HERO.headline.map((part, index) => part.em ? <em key={index} className="hero-em pb-1">{part.text}</em> : <span key={index}>{part.text}</span>)}
         </h1>
-        <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {HERO.subtext}
-        </p>
-        <a
-          href="#course-finder"
-          className="liquid-glass animate-fade-rise-delay-2 mt-12 cursor-pointer rounded-full px-14 py-5 text-base text-foreground transition-transform hover:scale-[1.03]"
-        >
-          {HERO.cta}
-        </a>
+        <p className="animate-fade-rise-delay mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">{HERO.subtext}</p>
+        <Link href="/contact" className="liquid-glass animate-fade-rise-delay-2 mt-9 inline-flex rounded-lg px-9 py-4 text-base text-foreground transition-transform hover:scale-[1.02] active:scale-[0.98]">{HERO.cta}</Link>
       </div>
     </section>
   );

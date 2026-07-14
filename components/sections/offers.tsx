@@ -12,7 +12,7 @@ export function Offers() {
   const autoplay = useRef(
     Autoplay({ delay: 3500, stopOnMouseEnter: true, stopOnInteraction: false }),
   );
-  // Stable across renders — an inline array/options object here would make
+  // Stable across renders. An inline array/options object here would make
   // embla reinit (and reset the autoplay timer) on every re-render.
   const plugins = useMemo(() => {
     const reduced =
@@ -52,16 +52,16 @@ export function Offers() {
 
   const scrollPrev = useCallback(() => {
     emblaApi?.scrollPrev();
-    autoplay.current.reset();
+    emblaApi?.plugins().autoplay?.reset();
   }, [emblaApi]);
   const scrollNext = useCallback(() => {
     emblaApi?.scrollNext();
-    autoplay.current.reset();
+    emblaApi?.plugins().autoplay?.reset();
   }, [emblaApi]);
   const scrollTo = useCallback(
     (i: number) => {
       emblaApi?.scrollTo(i);
-      autoplay.current.reset();
+      emblaApi?.plugins().autoplay?.reset();
     },
     [emblaApi],
   );
@@ -104,8 +104,7 @@ export function Offers() {
     <section id="offers" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
-          <div className="text-sm text-muted-foreground">{OFFERS.eyebrow}</div>
-          <h2 className="section-title mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
+          <h2 className="section-title font-display text-4xl leading-tight text-foreground md:text-5xl">
             {OFFERS.title}
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">

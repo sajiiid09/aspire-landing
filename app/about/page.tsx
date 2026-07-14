@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ABOUT_PAGE } from "@/lib/content";
-import { PageShell } from "@/components/site/page-shell";
+import { ABOUT_PAGE, HOW_IT_WORKS, STATS } from "@/lib/content";
+import { SiteShell } from "@/components/site/page-shell";
 import { PageHero } from "@/components/site/page-hero";
 import { PageCta } from "@/components/site/page-cta";
 import { Reveal } from "@/components/reveal";
@@ -13,87 +13,33 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const { destinations } = ABOUT_PAGE;
-
   return (
-    <PageShell>
+    <SiteShell>
       <PageHero content={ABOUT_PAGE.hero} />
-
       <section className="section-pad">
-        <div className="mx-auto grid max-w-7xl items-center gap-[var(--grid-gap)] px-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
-            {ABOUT_PAGE.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="mt-6 leading-relaxed text-muted-foreground first:mt-0"
-              >
-                {paragraph}
-              </p>
-            ))}
+            {ABOUT_PAGE.paragraphs.map((paragraph) => <p key={paragraph} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground first:mt-0">{paragraph}</p>)}
           </Reveal>
-          <Reveal className="relative">
-            <div className="relative aspect-[4/3] w-full border border-border">
-              <Image
-                src={ABOUT_PAGE.image}
-                alt={ABOUT_PAGE.imageAlt}
-                fill
-                sizes="(min-width: 768px) 45vw, 90vw"
-                className="object-cover"
-              />
-            </div>
+          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-xl">
+            <Image src="/images/hero-campus.jpg" alt="Students walking through an international university campus" fill sizes="(min-width: 1024px) 42vw, 90vw" className="object-cover" />
           </Reveal>
         </div>
       </section>
-
-      <section className="border-y border-border">
-        <Reveal
-          stagger
-          className="mx-auto grid max-w-7xl grid-cols-2 divide-border px-8 md:grid-cols-4 md:divide-x"
-        >
-          {ABOUT_PAGE.stats.map((stat) => (
-            <div key={stat.label} className="py-10 md:px-8 md:first:pl-0">
-              <p className="font-display text-4xl text-foreground">
-                {stat.value.toLocaleString()}
-                {stat.suffix}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
-            </div>
-          ))}
+      <section className="border-y border-border bg-secondary/30 py-14">
+        <Reveal stagger className="mx-auto grid max-w-7xl gap-px overflow-hidden rounded-xl bg-border px-6 sm:grid-cols-3 sm:px-8">
+          {STATS.items.map((stat) => <div key={stat.label} className="bg-background p-7"><p className="font-display text-4xl text-foreground">{stat.value.toLocaleString()}{stat.suffix}</p><p className="mt-2 text-sm text-muted-foreground">{stat.label}</p></div>)}
         </Reveal>
       </section>
-
       <section className="section-pad">
-        <div className="mx-auto max-w-7xl px-8">
-          <Reveal>
-            <div className="text-sm text-muted-foreground">{destinations.eyebrow}</div>
-            <h2 className="section-title mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
-              {destinations.title}
-            </h2>
-          </Reveal>
-          <Reveal stagger className="mt-12 grid gap-[var(--grid-gap)] md:grid-cols-2">
-            {[destinations.tier1, destinations.europe].map((group) => (
-              <div key={group.label} className="surface p-8 md:p-10">
-                <h3 className="font-display text-2xl text-foreground">{group.label}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {group.description}
-                </p>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {group.countries.map((country) => (
-                    <li
-                      key={country}
-                      className="rounded-full border border-border px-3 py-1 text-xs text-foreground"
-                    >
-                      {country}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <Reveal><h2 className="font-display text-4xl text-foreground md:text-5xl">{HOW_IT_WORKS.title}</h2><p className="mt-4 max-w-xl text-muted-foreground">{HOW_IT_WORKS.body}</p></Reveal>
+          <Reveal stagger className="mt-12 grid gap-8 border-l border-border pl-7 md:grid-cols-3 md:border-l-0 md:border-t md:pl-0 md:pt-8">
+            {HOW_IT_WORKS.items.map((item) => <article key={item.title}><item.icon className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} /><h3 className="mt-5 font-display text-2xl text-foreground">{item.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
           </Reveal>
         </div>
       </section>
-
       <PageCta content={ABOUT_PAGE.cta} />
-    </PageShell>
+    </SiteShell>
   );
 }

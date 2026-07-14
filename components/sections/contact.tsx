@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/content";
@@ -11,15 +11,25 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
+  const [inquiryType, setInquiryType] = useState<(typeof CONTACT.inquiryTypes)[number]>("Student inquiry");
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("type") === "partner") {
+      setInquiryType("Partner inquiry");
+    }
+  }, []);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
     const data = new FormData(form);
 
-    // No backend: third-party endpoint when configured, mailto fallback otherwise
     if (!CONTACT_FORM_ENDPOINT) {
-      const subject = encodeURIComponent("Study abroad inquiry");
+      if (!SITE.email) {
+        setStatus("error");
+        return;
+      }
+      const subject = encodeURIComponent(`${data.get("inquiryType")} for Aspire Global Education`);
       const body = encodeURIComponent(
         `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}\nDestination: ${data.get("destination")}\n\n${data.get("message")}`,
       );
@@ -29,150 +39,71 @@ export function Contact() {
 
     setStatus("sending");
     try {
-      const res = await fetch(CONTACT_FORM_ENDPOINT, {
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
       });
-      if (!res.ok) throw new Error(`Form endpoint returned ${res.status}`);
-      setStatus("sent");
+      if (!response.ok) throw new Error(`Contact endpoint returned ${response.status}`);
       form.reset();
+      setInquiryType("Student inquiry");
+      setStatus("sent");
     } catch {
       setStatus("error");
     }
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden section-pad">
-      <Image
-        src={CONTACT.backgroundImage}
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover"
-        aria-hidden
-      />
-      {/* Overlay keeps form and text legible over the photo in every theme */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(105deg, hsl(var(--background) / 0.96) 35%, hsl(var(--background) / 0.82))",
-        }}
-      />
-      <div className="relative mx-auto grid max-w-7xl gap-16 px-8 md:grid-cols-2">
+    <section className="relative overflow-hidden section-pad">
+      <Image src={CONTACT.backgroundImage} alt="" fill sizes="100vw" className="object-cover" aria-hidden />
+      <div className="absolute inset-0 bg-[linear-gradient(105deg,hsl(var(--background)/0.98)_30%,hsl(var(--background)/0.86))]" aria-hidden />
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-6 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
-          <div className="text-sm text-muted-foreground">{CONTACT.eyebrow}</div>
-          <h2 className="section-title mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl">
-            {CONTACT.title}
-          </h2>
-          <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
-            {CONTACT.body}
-          </p>
-
-          <address className="mt-10 flex flex-col gap-4 text-sm not-italic text-muted-foreground">
-            <span className="flex items-center gap-3">
-              <MapPin aria-hidden className="h-4 w-4" /> {SITE.address}
-            </span>
-            <a
-              href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`}
-              className="flex items-center gap-3 transition-colors hover:text-foreground"
-            >
-              <Phone aria-hidden className="h-4 w-4" /> {SITE.phone}
-            </a>
-            <a
-              href={`mailto:${SITE.email}`}
-              className="flex items-center gap-3 transition-colors hover:text-foreground"
-            >
-              <Mail aria-hidden className="h-4 w-4" /> {SITE.email}
-            </a>
-          </address>
+          <h2 className="font-display text-4xl text-foreground md:text-5xl">{CONTACT.title}</h2>
+          <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{CONTACT.body}</p>
+          {(SITE.address || SITE.phone || SITE.email) && <address className="mt-10 grid gap-4 text-sm not-italic text-muted-foreground">
+            {SITE.address && <span className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />{SITE.address}</span>}
+            {SITE.phone && <a href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4" aria-hidden />{SITE.phone}</a>}
+            {SITE.email && <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4" aria-hidden />{SITE.email}</a>}
+          </address>}
         </Reveal>
 
         <Reveal>
-          <form onSubmit={onSubmit} className="form-shell surface flex flex-col gap-6 p-8">
-            <div className="form-field">
-              <label className="sr-only" htmlFor="contact-name">Name</label>
-              <input
-                id="contact-name"
-                name="name"
-                required
-                placeholder="Full name"
-                className="form-input"
-              />
-            </div>
-            <div className="form-field">
-              <label className="sr-only" htmlFor="contact-email">Email</label>
-              <input
-                id="contact-email"
-                name="email"
-                type="email"
-                required
-                placeholder="Email address"
-                className="form-input"
-              />
-            </div>
-            <div className="form-field">
-              <label className="sr-only" htmlFor="contact-phone">Phone</label>
-              <input
-                id="contact-phone"
-                name="phone"
-                type="tel"
-                placeholder="Phone (optional)"
-                className="form-input"
-              />
-            </div>
-            <div className="form-field">
-              <label className="sr-only" htmlFor="contact-destination">
-                Destination interest
-              </label>
-              <select
-                id="contact-destination"
-                name="destination"
-                required
-                defaultValue=""
-                className="form-input form-select"
-              >
-                <option value="" disabled>
-                  Destination interest
-                </option>
-                {CONTACT.destinationOptions.map((opt) => (
-                  <option key={opt} value={opt} className="bg-background text-foreground">
-                    {opt}
-                  </option>
-                ))}
+          <form onSubmit={onSubmit} className="surface grid gap-6 rounded-xl p-6 sm:grid-cols-2 sm:p-8">
+            <Field label={CONTACT.form.inquiryType} htmlFor="inquiry-type">
+              <select id="inquiry-type" name="inquiryType" value={inquiryType} onChange={(event) => setInquiryType(event.target.value as typeof inquiryType)} className="form-input" required>
+                {CONTACT.inquiryTypes.map((type) => <option key={type} value={type} className="bg-background text-foreground">{type}</option>)}
               </select>
+            </Field>
+            <Field label={CONTACT.form.destination} htmlFor="destination">
+              <select id="destination" name="destination" defaultValue="" className="form-input" required>
+                <option value="" disabled className="bg-background">{CONTACT.form.destinationPrompt}</option>
+                {CONTACT.destinations.map((destination) => <option key={destination} value={destination} className="bg-background text-foreground">{destination}</option>)}
+              </select>
+            </Field>
+            <Field label={CONTACT.form.name} htmlFor="name"><input id="name" name="name" autoComplete="name" className="form-input" required minLength={2} /></Field>
+            <Field label={CONTACT.form.email} htmlFor="email"><input id="email" name="email" type="email" autoComplete="email" className="form-input" required /></Field>
+            <Field label={CONTACT.form.phone} htmlFor="phone"><input id="phone" name="phone" type="tel" autoComplete="tel" className="form-input" /></Field>
+            <div className="sm:col-span-2">
+              <Field label={CONTACT.form.message} htmlFor="message"><textarea id="message" name="message" rows={5} className="form-input resize-y" required minLength={10} /></Field>
             </div>
-            <div className="form-field">
-              <label className="sr-only" htmlFor="contact-message">Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={4}
-                required
-                placeholder="Tell us about your plans"
-                className="form-input form-textarea"
-              />
+            <p className="text-xs leading-relaxed text-muted-foreground sm:col-span-2">{CONTACT.form.consent}</p>
+            <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
+              <button type="submit" disabled={status === "sending"} className="rounded-lg bg-primary px-8 py-4 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60">
+                {status === "sending" ? CONTACT.form.sending : CONTACT.form.submit}
+              </button>
+              <p aria-live="polite" className={`${status === "error" ? "text-red-200" : "text-muted-foreground"} text-sm`}>
+                {status === "sent" && CONTACT.form.success}
+                {status === "error" && CONTACT.form.error}
+              </p>
             </div>
-
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="form-submit mt-4 self-start"
-            >
-              <span className="form-submit-label prompt-caret">
-                {status === "sending" ? "Sending…" : "Send Message"}
-              </span>
-            </button>
-
-            <p aria-live="polite" className="text-sm text-muted-foreground">
-              {status === "sent" && "Thanks — we will reach out within one business day."}
-              {status === "error" && "Something went wrong. Please email us directly."}
-            </p>
           </form>
         </Reveal>
       </div>
     </section>
   );
+}
+
+function Field({ label, htmlFor, children }: { label: string; htmlFor: string; children: React.ReactNode }) {
+  return <div className="grid gap-2"><label htmlFor={htmlFor} className="text-sm font-medium text-foreground">{label}</label>{children}</div>;
 }
