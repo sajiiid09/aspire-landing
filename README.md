@@ -1,41 +1,39 @@
-# Aspire Global Education — Landing Page
+# Aspire Global Education
 
-Static marketing landing page for Aspire Global Education, a study-abroad consultancy. Public page only — no login, no dashboard, no backend. The Student Portal button redirects to an external white-labeled portal.
+Static multi-page marketing site for a study-abroad consultancy. The approved visual direction is a single Cinematic Navy system with editorial serif typography, restrained motion, and liquid-glass surfaces.
 
-## Stack
+## Routes
 
-Next.js 15 (App Router) · TypeScript · Tailwind CSS · static export (`output: 'export'`)
+- `/` overview and conversion path
+- `/about` company and operating model
+- `/services` counseling, admissions, visa, and scholarship support
+- `/destinations` 13 study destinations
+- `/stories` verified-story placeholder until approved content is supplied
+- `/partners` B2B sub-agent information
+- `/contact` student and partner inquiry form
 
-## Features
+Student Portal and Course Finder are external links. This repository contains no backend or authentication.
 
-- Nine sections: hero (fullscreen video), stats counter, services, study destinations, course finder CTA, testimonials, contact, footer
-- Four switchable full-skin themes (default navy, classical, cyberpunk, space) via a floating theme switcher — CSS variables only, persisted in localStorage
-- Liquid-glass surface language, scroll-reveal motion, `prefers-reduced-motion` support
-
-## Getting started
+## Commands
 
 ```bash
-npm install
-npm run dev        # http://localhost:3000
-npm run build      # static export → out/
+npm run dev
+npm run build
 npm run lint
+npx tsc --noEmit
 ```
-
-Deploy the `out/` directory to any static host.
 
 ## Configuration
 
-Set in `.env.local` (placeholders used when unset):
+Copy the required values into `.env.local` or the hosting environment:
 
-| Variable | Purpose |
-|---|---|
-| `NEXT_PUBLIC_PORTAL_URL` | External student portal link |
-| `NEXT_PUBLIC_COURSE_FINDER_URL` | External course finder link |
-| `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT` | Form provider endpoint (mailto fallback when empty) |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for SEO |
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_PORTAL_URL`
+- `NEXT_PUBLIC_COURSE_FINDER_URL`
+- `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`
+- `NEXT_PUBLIC_CONTACT_EMAIL`
+- `NEXT_PUBLIC_CONTACT_PHONE`
+- `NEXT_PUBLIC_CONTACT_ADDRESS`
+- `NEXT_PUBLIC_WHATSAPP_URL`
 
-## Documentation
-
-- [DESIGN.md](DESIGN.md) — design system, theme tokens, per-section specs
-- [ARCHITECTURE.md](ARCHITECTURE.md) — stack, structure, theming architecture
-- [AGENT.md](AGENT.md) — conventions and hard rules for contributors/AI agents
+Unconfigured portal, course-search, and contact details stay hidden. The contact form uses the configured third-party endpoint and falls back to the configured email address when the endpoint is unset.

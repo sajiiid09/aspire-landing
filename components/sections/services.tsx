@@ -8,20 +8,19 @@ export function Services() {
     <section id="services" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
         <Reveal>
-          <div className="text-sm text-muted-foreground">{SERVICES.eyebrow}</div>
-          <h2 className="section-title mt-4 max-w-2xl font-display text-4xl leading-tight text-foreground md:text-5xl">
+          <h2 className="section-title max-w-2xl font-display text-4xl leading-tight text-foreground md:text-5xl">
             {SERVICES.title}
           </h2>
         </Reveal>
 
         <Reveal
           stagger
-          className="mt-16 grid grid-cols-1 border-t border-border md:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 grid grid-cols-1 border-t border-border md:grid-cols-2"
         >
           {SERVICES.items.map((service) => (
             <div
               key={service.title}
-              className="group relative flex flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0"
+              className="group relative flex min-h-64 flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(2n)]:border-r-0"
             >
               <service.icon
                 aria-hidden

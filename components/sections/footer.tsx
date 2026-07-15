@@ -1,174 +1,40 @@
 import Image from "next/image";
-import { DESTINATIONS, FOOTER } from "@/lib/content";
+import Link from "next/link";
+import { FOOTER } from "@/lib/content";
 import { PORTAL_URL, SITE } from "@/lib/config";
-
-// Brand glyph paths (lucide dropped brand icons); rendered with currentColor
-const SOCIAL_ICON_PATHS: Record<string, string> = {
-  Facebook:
-    "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z",
-  Instagram:
-    "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z",
-  LinkedIn:
-    "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z",
-  YouTube:
-    "M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
-};
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-secondary/60">
-      {/* Gradient hairline separating footer from page */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.35), transparent)",
-        }}
-      />
-
-      <div className="relative mx-auto grid max-w-7xl gap-[var(--grid-gap)] px-8 py-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <footer className="border-t border-border bg-secondary/70">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <div className="inline-flex items-center gap-3 font-display text-2xl tracking-tight text-foreground">
-            <span className="logo-chip h-10 w-10">
-              <Image
-                src="/asp-logo.png"
-                alt=""
-                width={36}
-                height={36}
-                className="h-full w-full object-contain"
-              />
-            </span>
-            <span>
-              Aspire Global<sup className="text-xs">®</sup>
-            </span>
-          </div>
-          <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            {FOOTER.tagline}
-          </p>
-          <ul className="mt-6 flex gap-3">
-            {FOOTER.socials.map((social) => (
-              <li key={social.label}>
-                <a
-                  href={social.href}
-                  aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-[hsl(var(--ring))] hover:text-foreground"
-                >
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-4 w-4"
-                  >
-                    <path d={SOCIAL_ICON_PATHS[social.label]} />
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <Link href="/" className="inline-flex items-center gap-3 font-display text-2xl text-foreground">
+            <span className="logo-chip h-10 w-10"><Image src="/asp-logo.png" alt="" width={40} height={40} className="h-full w-full object-contain" /></span>
+            Aspire Global
+          </Link>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{FOOTER.tagline}</p>
         </div>
-
-        <nav aria-label="Explore">
-          <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Explore</h3>
-          <ul className="mt-5 flex flex-col gap-3">
-            {FOOTER.explore.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+        <nav aria-label="Footer navigation">
+          <h2 className="font-display text-lg text-foreground">Explore</h2>
+          <ul className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-1">
+            {FOOTER.explore.map((link) => <li key={link.href}><Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground">{link.label}</Link></li>)}
           </ul>
         </nav>
-
-        <nav aria-label="Destinations">
-          <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Destinations
-          </h3>
-          <ul className="mt-5 flex flex-col gap-3">
-            {DESTINATIONS.items.map((dest) => (
-              <li key={dest.country}>
-                <a
-                  href="#destinations"
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {dest.country}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Contact</h3>
-          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            {SITE.address}
-            <br />
-            {SITE.phone}
-            <br />
-            {SITE.email}
-          </p>
-          <a
-            href={PORTAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="surface mt-6 inline-block rounded-full px-6 py-2.5 text-sm text-foreground transition-transform hover:scale-[1.03]"
-          >
-            Student Portal
-          </a>
-        </div>
+        {(SITE.address || SITE.phone || SITE.email || PORTAL_URL) && <div>
+          <h2 className="font-display text-lg text-foreground">Contact</h2>
+          <address className="mt-5 grid gap-1 text-sm not-italic text-muted-foreground">
+            {SITE.address && <span>{SITE.address}</span>}
+            {SITE.phone && <a href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`}>{SITE.phone}</a>}
+            {SITE.email && <a href={`mailto:${SITE.email}`}>{SITE.email}</a>}
+          </address>
+          {PORTAL_URL && <a href={PORTAL_URL} target="_blank" rel="noopener noreferrer" className="surface mt-6 inline-block rounded-lg px-6 py-3 text-sm text-foreground">Student Portal</a>}
+        </div>}
       </div>
-
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-8 py-6 text-sm text-muted-foreground sm:flex-row">
-          <span>
-            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
-          </span>
-          <span className="flex gap-6">
-            {FOOTER.legal.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            ))}
-          </span>
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
+          {FOOTER.legal.length > 0 && <nav aria-label="Legal"><ul className="flex gap-5">{FOOTER.legal.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul></nav>}
         </div>
-      </div>
-
-      {/* City skyline illustration, flush at the page's bottom edge.
-          --footer-skyline-bg matches the footer panel's rendered color per theme
-          so the sky reads as one seamless surface instead of the artwork's
-          original white background. The artwork is applied as a CSS mask (not
-          an <img>) so it can be recolored with the theme's --primary color;
-          the mask's luminance reproduces the original grayscale depth shading
-          as varying opacity. `auto 100%` + repeat-x tiles the artwork at its
-          natural aspect ratio instead of stretching a fixed viewBox to fit an
-          arbitrary footer width. */}
-      <div
-        className="relative isolate overflow-hidden"
-        style={{ background: "hsl(var(--footer-skyline-bg))" }}
-      >
-        <div
-          aria-hidden
-          className="h-20 w-full md:h-32"
-          style={{
-            backgroundColor: "hsl(var(--primary))",
-            WebkitMaskImage: "url(/images/skylines.svg)",
-            maskImage: "url(/images/skylines.svg)",
-            WebkitMaskRepeat: "repeat-x",
-            maskRepeat: "repeat-x",
-            WebkitMaskPosition: "bottom",
-            maskPosition: "bottom",
-            WebkitMaskSize: "auto 100%",
-            maskSize: "auto 100%",
-          }}
-        />
       </div>
     </footer>
   );

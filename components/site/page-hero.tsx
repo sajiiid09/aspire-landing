@@ -1,21 +1,18 @@
-import type { PageHero as PageHeroContent } from "@/lib/content";
+import type { PageHeroContent } from "@/lib/content";
 
-/** Shared top band for inner pages — eyebrow pill, h1 with emphasis, intro. */
 export function PageHero({ content }: { content: PageHeroContent }) {
   return (
-    <div className="border-b border-border pt-32">
-      <div className="mx-auto max-w-7xl px-8 pb-16 md:pb-20">
-        <p className="surface animate-fade-rise inline-block rounded-full px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          {content.eyebrow}
-        </p>
-        <h1 className="animate-fade-rise mt-6 max-w-4xl font-display text-4xl font-medium leading-[1.05] tracking-[-1px] text-foreground sm:text-5xl lg:text-6xl">
-          {content.title.map((part, i) =>
+    <section className="relative overflow-hidden border-b border-border pb-16 pt-32 md:pb-24 md:pt-40">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,hsl(var(--accent)/0.12),transparent_38%)]" aria-hidden />
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+        <h1 className="animate-fade-rise max-w-4xl font-display text-5xl leading-[1.04] tracking-[-0.02em] text-foreground sm:text-6xl lg:text-[4.5rem]">
+          {content.title.map((part, index) =>
             part.em ? (
-              <em key={i} className="title-em text-muted-foreground">
+              <em key={index} className="title-em pb-1">
                 {part.text}
               </em>
             ) : (
-              <span key={i}>{part.text}</span>
+              <span key={index}>{part.text}</span>
             ),
           )}
         </h1>
@@ -23,6 +20,6 @@ export function PageHero({ content }: { content: PageHeroContent }) {
           {content.intro}
         </p>
       </div>
-    </div>
+    </section>
   );
 }
