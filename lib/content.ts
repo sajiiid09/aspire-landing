@@ -63,7 +63,7 @@ export const HERO = {
 } as const;
 
 export const STATS = {
-  title: "Global scale. Local guidance.",
+  title: "Global reach. Personal support.",
   body: "A broad course network, supported by counselors who understand each application in detail.",
   items: [
     { value: 750, suffix: "+", label: "Universities in the network" },
