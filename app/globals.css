@@ -113,10 +113,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  background: hsl(40 30% 96%);
-  padding: 0.125rem;
+  background: transparent;
 }
 
 .hero-overlay {

@@ -12,3 +12,8 @@ The following locally stored images were downloaded from Unsplash and are used u
 | `faq-library.webp` | Fer Troulik | `https://unsplash.com/photos/people-studying-at-tables-in-a-modern-library-ct1NZSUSWUc` |
 | `partners-team.webp` | Mimi Thian | `https://images.unsplash.com/photo-1531545514256-b1400bc00f31` |
 | `contact-library.webp` | Zoshua Colah | `https://unsplash.com/photos/large-library-with-a-person-sitting-at-a-table-dONCzml7nw4` |
+| `dest-uk-premium.webp` | Jeffrey Zhang | `https://unsplash.com/photos/london-skyline-at-dusk-with-big-ben-8TulBvHx8sI` |
+| `dest-usa-premium.webp` | Anthony Sebbo | `https://unsplash.com/photos/new-york-city-skyline-across-the-water-at-dusk-Nc83yQDP8G0` |
+| `dest-canada-premium.webp` | Mauricio Noronha | `https://unsplash.com/photos/toronto-skyline-at-dusk-with-the-cn-tower-xnOpEMoOv3w` |
+| `dest-australia-premium.webp` | Photoholgic | `https://unsplash.com/photos/opera-house-sydney-australia-xdGCrwu2CWM` |
+| `dest-new-zealand-premium.webp` | Uran Wang | `https://unsplash.com/photos/a-city-skyline-at-night-with-a-sailboat-in-the-foreground-_LkCpx3QVm4` |
