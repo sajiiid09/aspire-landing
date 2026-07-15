@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site/page-shell";
 import { PageHero } from "@/components/site/page-hero";
 import { PageCta } from "@/components/site/page-cta";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 export const metadata: Metadata = { title: PARTNERS_PAGE.meta.title, description: PARTNERS_PAGE.meta.description, alternates: { canonical: "/partners" } };
 
@@ -26,9 +27,9 @@ export default function PartnersPage() {
       </section>
       <section className="section-pad bg-secondary/25">
         <div className="mx-auto max-w-7xl px-6 sm:px-8">
-          <Reveal><h2 className="font-display text-4xl text-foreground md:text-5xl">{PARTNERS_PAGE.workflowTitle}</h2></Reveal>
-          <Reveal stagger className="mt-12 grid gap-px overflow-hidden rounded-xl bg-border md:grid-cols-3">
-            {PARTNERS_PAGE.workflow.map((item) => <article key={item.title} className="bg-background p-8"><h3 className="font-display text-2xl text-foreground">{item.title}</h3><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
+          <TextReveal className="font-display text-4xl text-foreground md:text-5xl">{PARTNERS_PAGE.workflowTitle}</TextReveal>
+          <Reveal stagger className="mt-12 grid gap-5 md:grid-cols-3">
+            {PARTNERS_PAGE.workflow.map((item) => <article key={item.title} className="rounded-xl bg-secondary/50 p-8"><h3 className="font-display text-2xl text-foreground">{item.title}</h3><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
           </Reveal>
         </div>
       </section>

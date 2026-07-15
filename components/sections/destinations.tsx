@@ -3,14 +3,15 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { DESTINATIONS } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 export function Destinations() {
   const featured = DESTINATIONS.items.slice(0, 5);
   return (
     <section className="section-pad bg-secondary/25">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
+        <TextReveal className="font-display text-4xl leading-tight text-foreground md:text-5xl">{DESTINATIONS.title}</TextReveal>
         <Reveal>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">{DESTINATIONS.title}</h2>
           <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">{DESTINATIONS.body}</p>
         </Reveal>
         <Reveal stagger className="mt-12 grid auto-rows-[240px] gap-4 md:grid-cols-12">

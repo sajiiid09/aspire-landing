@@ -5,7 +5,7 @@ import { PORTAL_URL, SITE } from "@/lib/config";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-secondary/70">
+    <footer className="bg-secondary/70">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3 font-display text-2xl text-foreground">
@@ -30,7 +30,7 @@ export function Footer() {
           {PORTAL_URL && <a href={PORTAL_URL} target="_blank" rel="noopener noreferrer" className="surface mt-6 inline-block rounded-lg px-6 py-3 text-sm text-foreground">Student Portal</a>}
         </div>}
       </div>
-      <div className="border-t border-border">
+      <div className="bg-secondary/80">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>
           {FOOTER.legal.length > 0 && <nav aria-label="Legal"><ul className="flex gap-5">{FOOTER.legal.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul></nav>}

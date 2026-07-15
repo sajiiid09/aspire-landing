@@ -167,9 +167,9 @@ export const DESTINATIONS = {
     { country: "Australia", region: "English-speaking", image: "/images/dest-australia.jpg", imageAlt: "Sydney Harbour and the Opera House" },
     { country: "New Zealand", region: "English-speaking", image: "/images/dest-new-zealand.jpg", imageAlt: "Auckland skyline across the harbour" },
     { country: "Germany", region: "Europe", image: "/images/dest-germany.jpg", imageAlt: "Brandenburg Gate in Berlin" },
-    { country: "Sweden", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Historic European university district" },
-    { country: "Spain", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Historic European city architecture" },
-    { country: "Greece", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Mediterranean European cityscape" },
+    { country: "Sweden", region: "Europe", image: "/images/dest-sweden.jpg", imageAlt: "Stockholm old town waterfront at dusk" },
+    { country: "Spain", region: "Europe", image: "/images/dest-spain.jpg", imageAlt: "Gran Via boulevard in Madrid at sunset" },
+    { country: "Greece", region: "Europe", image: "/images/dest-greece.jpg", imageAlt: "The Parthenon on the Acropolis of Athens" },
     { country: "Cyprus", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Mediterranean coastal architecture" },
     { country: "Latvia", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Northern European old town" },
     { country: "Lithuania", region: "Europe", image: "/images/dest-europe.jpg", imageAlt: "Northern European university city" },
@@ -222,6 +222,45 @@ export const OFFERS = {
     { src: "/posters/7.jpeg", alt: "Fairleigh Dickinson University Vancouver study information", label: "FDU Vancouver", width: 899, height: 1599 },
     { src: "/posters/4.jpeg", alt: "UK university deposit information", label: "UK Universities Low Deposits", width: 899, height: 1599 },
   ] satisfies OfferPoster[],
+} as const;
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+// PLACEHOLDER — replace with client-approved copy
+export const FAQ = {
+  badge: "FAQ",
+  title: [{ text: "Frequently asked " }, { text: "questions.", em: true }] satisfies readonly HeadlinePart[],
+  image: "/images/faq-campus.jpg",
+  imageAlt: "University campus building behind a green lawn",
+  items: [
+    {
+      question: "Which destinations and programs can Aspire help with?",
+      answer: "We guide applications to universities across 13 destinations, including the UK, USA, Canada, Australia, and Europe — covering undergraduate, postgraduate, and pathway programs in most major disciplines.",
+    },
+    {
+      question: "How does the application process work?",
+      answer: "It starts with a free counseling session to map your goals, budget, and academic profile. We then shortlist universities, prepare and submit your applications, and coordinate directly with institutions until you hold an offer.",
+    },
+    {
+      question: "Are scholarships or financial aid available?",
+      answer: "Many partner universities offer merit awards, early-bird tuition discounts, and bursaries. We review every profile against current scholarship criteria and build funding options into your university shortlist.",
+    },
+    {
+      question: "Do you support the student visa process?",
+      answer: "Yes. We prepare your document checklist, review financial evidence, and run mock interviews so your visa application is submitted correctly the first time.",
+    },
+    {
+      question: "How early should I start planning?",
+      answer: "Ideally 6–12 months before your target intake. That leaves comfortable time for admissions tests, scholarship deadlines, and visa processing — though we also handle tighter timelines when intakes allow.",
+    },
+    {
+      question: "What support do I get after I arrive?",
+      answer: "Pre-departure briefings cover accommodation, banking, and enrolment, and our counselors stay reachable during your first term to help you settle in.",
+    },
+  ] satisfies readonly FaqItem[],
 } as const;
 
 export const CONTACT = {

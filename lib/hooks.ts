@@ -3,41 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Fire-once scroll reveal. Attach returned ref to the element;
- * `is-visible` class is added when 20% of it enters the viewport.
- * Pair with `.reveal` / `.reveal-stagger` classes (globals.css).
- */
-export function useScrollReveal<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.classList.add("motion-ready");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      el.classList.remove("motion-ready");
-    };
-  }, []);
-
-  return ref;
-}
-
-/**
  * Count-up from 0 to `target` when `start` flips true (~1.5s ease-out).
  * Renders final value immediately under prefers-reduced-motion.
  */

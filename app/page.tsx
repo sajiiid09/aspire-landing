@@ -8,6 +8,7 @@ import { Services } from "@/components/sections/services";
 import { Destinations } from "@/components/sections/destinations";
 import { Offers } from "@/components/sections/offers";
 import { PartnersPreview } from "@/components/sections/partners-preview";
+import { Faq } from "@/components/sections/faq";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { HOME_CONTACT_CTA } from "@/lib/content";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Destinations />
       <Offers />
       <PartnersPreview />
+      <Faq />
       <CtaBanner />
       <PageCta content={HOME_CONTACT_CTA} />
     </SiteShell>

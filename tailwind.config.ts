@@ -20,6 +20,10 @@ const config: Config = {
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: "hsl(var(--secondary))",
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          foreground: "hsl(var(--cream-foreground))",
+        },
         accent: "hsl(var(--accent))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

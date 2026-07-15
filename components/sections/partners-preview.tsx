@@ -2,16 +2,19 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PARTNERS } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 export function PartnersPreview() {
   return (
     <section className="section-pad">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <Reveal>
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">{PARTNERS.title}</h2>
+        <div>
+          <TextReveal className="font-display text-4xl leading-tight text-foreground md:text-5xl">{PARTNERS.title}</TextReveal>
+          <Reveal>
           <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{PARTNERS.body}</p>
           <Link href={PARTNERS.cta.href} className="mt-8 inline-flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground">{PARTNERS.cta.label}<ArrowUpRight className="h-4 w-4" /></Link>
-        </Reveal>
+          </Reveal>
+        </div>
         <Reveal stagger className="grid gap-3 sm:grid-cols-2">
           {PARTNERS.benefits.map((benefit, index) => (
             <article key={benefit.title} className={`surface rounded-xl p-7 ${index === 2 ? "sm:col-span-2" : ""}`}>
