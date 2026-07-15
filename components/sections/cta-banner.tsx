@@ -1,6 +1,7 @@
 import { COURSE_FINDER } from "@/lib/content";
 import { COURSE_FINDER_URL } from "@/lib/config";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 /** Course Finder CTA shown only when its external URL is configured. */
 export function CtaBanner() {
@@ -9,9 +10,9 @@ export function CtaBanner() {
     <section className="bg-primary/[0.06] section-pad">
       <div className="mx-auto max-w-5xl px-8">
         <Reveal className="surface flex flex-col items-center rounded-xl bg-background/80 px-8 py-16 text-center md:px-16">
-          <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">
+          <TextReveal className="font-display text-4xl leading-tight text-foreground md:text-5xl">
             {COURSE_FINDER.title}
-          </h2>
+          </TextReveal>
           <p className="mt-6 max-w-2xl leading-relaxed text-muted-foreground">
             {COURSE_FINDER.body}
           </p>

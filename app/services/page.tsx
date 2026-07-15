@@ -6,6 +6,7 @@ import { SiteShell } from "@/components/site/page-shell";
 import { PageHero } from "@/components/site/page-hero";
 import { PageCta } from "@/components/site/page-cta";
 import { Reveal } from "@/components/reveal";
+import { Faq } from "@/components/sections/faq";
 
 export const metadata: Metadata = {
   title: SERVICES_PAGE.meta.title,
@@ -42,6 +43,7 @@ export default function ServicesPage() {
           </Reveal>
         </div>
       </section>
+      <Faq />
       <PageCta content={SERVICES_PAGE.cta} />
     </SiteShell>
   );

@@ -7,6 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { OFFERS } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 export function Offers() {
   const autoplay = useRef(
@@ -103,10 +104,10 @@ export function Offers() {
   return (
     <section id="offers" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
+        <TextReveal className="section-title font-display text-4xl leading-tight text-foreground md:text-5xl">
+          {OFFERS.title}
+        </TextReveal>
         <Reveal>
-          <h2 className="section-title font-display text-4xl leading-tight text-foreground md:text-5xl">
-            {OFFERS.title}
-          </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             {OFFERS.body}
           </p>

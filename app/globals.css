@@ -125,30 +125,6 @@
 .animate-fade-rise-delay { animation: fade-rise 0.8s ease-out 0.2s both; }
 .animate-fade-rise-delay-2 { animation: fade-rise 0.8s ease-out 0.4s both; }
 
-.reveal,
-.reveal-stagger > * {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .reveal.motion-ready,
-  .reveal-stagger.motion-ready > * {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.motion-ready.is-visible,
-  .reveal-stagger.motion-ready.is-visible > * {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.08s; }
-  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.16s; }
-  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.24s; }
-  .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.32s; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -156,6 +132,4 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal,
-  .reveal-stagger > * { opacity: 1; transform: none; }
 }

@@ -2,25 +2,24 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SERVICES } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { TextReveal } from "@/components/animate/text-reveal";
 
 export function Services() {
   return (
     <section id="services" className="section-pad">
       <div className="mx-auto max-w-7xl px-8">
-        <Reveal>
-          <h2 className="section-title max-w-2xl font-display text-4xl leading-tight text-foreground md:text-5xl">
-            {SERVICES.title}
-          </h2>
-        </Reveal>
+        <TextReveal className="section-title max-w-2xl font-display text-4xl leading-tight text-foreground md:text-5xl">
+          {SERVICES.title}
+        </TextReveal>
 
         <Reveal
           stagger
-          className="mt-14 grid grid-cols-1 border-t border-border md:grid-cols-2"
+          className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2"
         >
           {SERVICES.items.map((service) => (
             <div
               key={service.title}
-              className="group relative flex min-h-64 flex-col gap-4 border-b border-border p-8 md:border-r md:[&:nth-child(2n)]:border-r-0"
+              className="group relative flex min-h-64 flex-col gap-4 rounded-xl bg-secondary/40 p-8 transition-colors hover:bg-secondary/60"
             >
               <service.icon
                 aria-hidden
@@ -35,7 +34,7 @@ export function Services() {
               </p>
               <span
                 aria-hidden
-                className="absolute bottom-6 right-6 flex h-8 w-8 items-center justify-center border border-border text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                className="absolute bottom-6 right-6 flex h-8 w-8 items-center justify-center rounded-full bg-foreground/10 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
               >
                 <ArrowUpRight className="h-4 w-4" />
               </span>
