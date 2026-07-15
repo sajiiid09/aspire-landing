@@ -15,8 +15,7 @@ export function Faq() {
       <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div>
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-foreground/[0.08] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
+            <span className="inline-flex rounded-full bg-foreground/[0.08] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-foreground">
               {FAQ.badge}
             </span>
           </Reveal>

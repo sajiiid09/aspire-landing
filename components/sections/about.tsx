@@ -14,7 +14,7 @@ export function About() {
             <Image src={ABOUT.image} alt={ABOUT.imageAlt} fill sizes="(min-width: 768px) 42vw, 90vw" className="object-cover" />
           </div>
           <div className="surface absolute -bottom-6 right-4 rounded-xl p-5 sm:right-8">
-            <p className="font-display text-3xl text-foreground">{ABOUT.statBadge.value.toLocaleString()}{ABOUT.statBadge.suffix}</p>
+            <p className="metric-value text-3xl text-foreground">{ABOUT.statBadge.value.toLocaleString()}<span className="metric-suffix">{ABOUT.statBadge.suffix}</span></p>
             <p className="mt-1 text-xs text-muted-foreground">{ABOUT.statBadge.label}</p>
           </div>
         </Reveal>

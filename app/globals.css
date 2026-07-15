@@ -82,6 +82,25 @@
     color: hsl(var(--foreground));
     transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
   }
+
+  .metric-value {
+    display: inline-flex;
+    align-items: flex-start;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .metric-suffix {
+    margin-left: 0.08em;
+    padding-top: 0.1em;
+    font-size: 0.55em;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
 }
 
 @media (min-width: 768px) {

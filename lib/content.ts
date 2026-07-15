@@ -106,8 +106,8 @@ export const ABOUT = {
     "Aspire Global Education connects ambitious students with international study options across major English-speaking and European destinations.",
     "Human guidance and digital infrastructure work together, giving each student a clear route through course selection, documentation, admissions, and visa preparation.",
   ],
-  image: "/images/hero-campus.jpg",
-  imageAlt: "Students walking through a modern international university campus",
+  image: "/images/about-home.webp",
+  imageAlt: "Students walking across a university campus after class",
   statBadge: { value: 75000, suffix: "+", label: "Courses to explore" } satisfies Stat,
   cta: { label: "About Aspire", href: "/about" },
 } as const;
@@ -229,16 +229,16 @@ export interface FaqItem {
   answer: string;
 }
 
-// PLACEHOLDER — replace with client-approved copy
+// PLACEHOLDER: replace with client-approved copy
 export const FAQ = {
   badge: "FAQ",
   title: [{ text: "Frequently asked " }, { text: "questions.", em: true }] satisfies readonly HeadlinePart[],
-  image: "/images/faq-campus.jpg",
-  imageAlt: "University campus building behind a green lawn",
+  image: "/images/faq-library.webp",
+  imageAlt: "Students working quietly at a long table in a university library",
   items: [
     {
       question: "Which destinations and programs can Aspire help with?",
-      answer: "We guide applications to universities across 13 destinations, including the UK, USA, Canada, Australia, and Europe — covering undergraduate, postgraduate, and pathway programs in most major disciplines.",
+      answer: "We guide applications to universities across 13 destinations, including the UK, USA, Canada, Australia, and Europe. This covers undergraduate, postgraduate, and pathway programs in most major disciplines.",
     },
     {
       question: "How does the application process work?",
@@ -254,7 +254,7 @@ export const FAQ = {
     },
     {
       question: "How early should I start planning?",
-      answer: "Ideally 6–12 months before your target intake. That leaves comfortable time for admissions tests, scholarship deadlines, and visa processing — though we also handle tighter timelines when intakes allow.",
+      answer: "Ideally 6-12 months before your target intake. That leaves comfortable time for admissions tests, scholarship deadlines, and visa processing. We also handle tighter timelines when intakes allow.",
     },
     {
       question: "What support do I get after I arrive?",
@@ -266,7 +266,7 @@ export const FAQ = {
 export const CONTACT = {
   title: "Talk to a Counselor.",
   body: "Tell us what you are planning. The Aspire team will respond using the contact details you provide.",
-  backgroundImage: "/images/contact-bg.jpg",
+  backgroundImage: "/images/contact-library.webp",
   inquiryTypes: ["Student inquiry", "Partner inquiry"] as const,
   form: {
     inquiryType: "Inquiry type",
@@ -323,10 +323,10 @@ export const SERVICES_PAGE = {
     intro: "Four connected services take you from early comparison to a prepared application.",
   } satisfies PageHeroContent,
   items: [
-    { ...SERVICES.items[0], deliverables: ["Profile evaluation", "Career and subject mapping", "Destination comparison", "Budget-aware shortlisting"], image: "/images/student-1.jpg", imageAlt: "Student discussing international study options with a counselor" },
+    { ...SERVICES.items[0], deliverables: ["Profile evaluation", "Career and subject mapping", "Destination comparison", "Budget-aware shortlisting"], image: "/images/service-counseling.webp", imageAlt: "University students discussing their work together in a lecture hall" },
     { ...SERVICES.items[1], deliverables: ["Application coordination", "Statement review", "Recommendation guidance", "Institution communication"], image: "/images/dest-uk.jpg", imageAlt: "Historic international university buildings" },
-    { ...SERVICES.items[2], deliverables: ["Requirement review", "Document preparation", "Mock interview practice", "Submission guidance"], image: "/images/student-2.jpg", imageAlt: "Student preparing documentation for an international application" },
-    { ...SERVICES.items[3], deliverables: ["Aid and grant search", "Merit award review", "Bursary matching", "Cost comparison"], image: "/images/student-3.jpg", imageAlt: "Student reviewing international study funding options" },
+    { ...SERVICES.items[2], deliverables: ["Requirement review", "Document preparation", "Mock interview practice", "Submission guidance"], image: "/images/service-applications.webp", imageAlt: "Two people reviewing application information together on a laptop" },
+    { ...SERVICES.items[3], deliverables: ["Aid and grant search", "Merit award review", "Bursary matching", "Cost comparison"], image: "/images/service-funding.webp", imageAlt: "Open books and handwritten study notes arranged on a library table" },
   ],
   cta: { title: "Start with a clear assessment.", body: "Tell us your academic background, destination interests, and study goals.", label: "Talk to a Counselor", href: "/contact" } satisfies PageCtaContent,
 } as const;

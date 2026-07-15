@@ -1,7 +1,14 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { gsap, useGSAP, SplitText } from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+}
 
 interface TextRevealProps {
   as?: "h1" | "h2" | "h3";

@@ -11,11 +11,13 @@ Premium study-abroad marketing for students, parents, and education partners. Th
 ## Foundation
 
 - One dark navy theme across every route.
-- Instrument Serif for display text and Inter for body text.
+- Marcellus for editorial display text and Manrope for body text.
+- Metrics use Manrope 600 with tabular numerals, tight spacing, and compact suffixes.
 - White is the primary interactive color; cool blue-gray is the secondary text color.
 - Cards and interactive controls use a consistent 12px radius.
 - Liquid glass is reserved for navigation, key panels, and selected CTAs.
-- Images use natural-light international campus, city, and counseling scenes.
+- Images use licensed, natural-light documentary campus, study, and counseling scenes. Avoid isolated stock portraits, synthetic imagery, and staged graduation clichés.
+- The brand mark is a flat SVG globe, graduation cap, and upward orbit in Aspire Navy and Cool Sky. It is paired with live wordmark text for legibility.
 
 ## Layout
 

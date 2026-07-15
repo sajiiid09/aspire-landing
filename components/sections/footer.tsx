@@ -10,7 +10,7 @@ export function Footer({ plain = false }: { plain?: boolean }) {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3 font-display text-2xl text-foreground">
-            <span className="logo-chip h-10 w-10"><Image src="/asp-logo.png" alt="" width={40} height={40} className="h-full w-full object-contain" /></span>
+            <span className="logo-chip h-10 w-10"><Image src="/aspire-mark.svg" alt="" width={40} height={40} className="h-full w-full object-contain" /></span>
             Aspire Global
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{FOOTER.tagline}</p>

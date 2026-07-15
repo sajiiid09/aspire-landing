@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Aspire Global Education</title>
+  <circle cx="31" cy="31" r="21" fill="none" stroke="#00293f" stroke-width="3.5"/>
+  <path d="M19 31h24M31 10c6 6 9 13 9 21s-3 15-9 21M31 10c-6 6-9 13-9 21s3 15 9 21" fill="none" stroke="#78afc0" stroke-width="2" stroke-linecap="round"/>
+  <path d="m31 20 14 7-14 7-14-7 14-7Z" fill="#00293f"/>
+  <path d="M23 31v7c5 3 11 3 16 0v-7" fill="#00293f"/>
+  <path d="M9 43c12 8 32 6 44-7" fill="none" stroke="#78afc0" stroke-width="4" stroke-linecap="round"/>
+  <path d="m50 34 7-2-2 7-5-5Z" fill="#78afc0"/>
+</svg>

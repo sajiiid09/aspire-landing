@@ -26,13 +26,13 @@ export default function AboutPage() {
             {ABOUT_PAGE.paragraphs.map((paragraph) => <p key={paragraph} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground first:mt-0">{paragraph}</p>)}
           </Reveal>
           <Reveal className="relative aspect-[4/3] overflow-hidden rounded-xl">
-            <Image src="/images/about-intro.jpg" alt="Graduates celebrating and throwing caps on a university lawn" fill sizes="(min-width: 1024px) 42vw, 90vw" className="object-cover" />
+            <Image src="/images/about-story.webp" alt="University students collaborating around a table in a campus library" fill sizes="(min-width: 1024px) 42vw, 90vw" className="object-cover" />
           </Reveal>
         </div>
       </section>
       <section className="band-cream py-14 md:py-20">
         <Reveal stagger className="mx-auto grid max-w-7xl gap-5 px-6 sm:grid-cols-3 sm:px-8">
-          {STATS.items.map((stat) => <div key={stat.label} className="rounded-xl bg-secondary/80 p-7"><p className="font-display text-4xl text-foreground">{stat.value.toLocaleString()}{stat.suffix}</p><p className="mt-2 text-sm text-muted-foreground">{stat.label}</p></div>)}
+          {STATS.items.map((stat) => <div key={stat.label} className="rounded-xl bg-secondary/80 p-7"><p className="metric-value text-4xl text-foreground">{stat.value.toLocaleString()}<span className="metric-suffix">{stat.suffix}</span></p><p className="mt-2 text-sm text-muted-foreground">{stat.label}</p></div>)}
         </Reveal>
       </section>
       <section className="section-pad">

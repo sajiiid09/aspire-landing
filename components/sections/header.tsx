@@ -64,7 +64,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
           className={`inline-flex shrink-0 items-center gap-3 font-display text-xl tracking-tight text-foreground transition-[background-color,box-shadow,padding] duration-300 lg:text-2xl ${condensed ? `${chip} py-1.5 pl-1.5 pr-5` : ""}`}
         >
           <span className="logo-chip h-9 w-9">
-            <Image src="/asp-logo.png" alt="" width={36} height={36} className="h-full w-full object-contain" />
+            <Image src="/aspire-mark.svg" alt="" width={36} height={36} className="h-full w-full object-contain" />
           </span>
           <span>Aspire Global</span>
         </Link>

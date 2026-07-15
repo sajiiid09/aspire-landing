@@ -8,7 +8,7 @@ import { useCountUp, useInView } from "@/lib/hooks";
 function StatValue({ value, suffix }: { value: number; suffix: string }) {
   const { ref, inView } = useInView<HTMLParagraphElement>();
   const current = useCountUp(value, inView);
-  return <p ref={ref} className="min-w-0 font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-tight tabular-nums text-foreground">{current.toLocaleString()}{suffix}</p>;
+  return <p ref={ref} className="metric-value min-w-0 text-[clamp(2.5rem,5vw,3.75rem)] text-foreground">{current.toLocaleString()}<span className="metric-suffix">{suffix}</span></p>;
 }
 
 export function Stats() {

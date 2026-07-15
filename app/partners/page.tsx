@@ -15,7 +15,7 @@ export default function PartnersPage() {
       <PageHero content={PARTNERS_PAGE.hero} />
       <section className="section-pad">
         <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-8 lg:grid-cols-2 lg:items-center">
-          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-xl"><Image src="/images/contact-bg.jpg" alt="International education counseling team at work" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" /></Reveal>
+          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-xl"><Image src="/images/partners-team.webp" alt="Education colleagues reviewing information together around a laptop" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" /></Reveal>
           <Reveal>
             <h2 className="font-display text-4xl text-foreground md:text-5xl">{PARTNERS.title}</h2>
             <p className="mt-5 leading-relaxed text-muted-foreground">{PARTNERS.body}</p>
