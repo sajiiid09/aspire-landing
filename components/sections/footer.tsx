@@ -3,10 +3,11 @@ import Link from "next/link";
 import { FOOTER } from "@/lib/content";
 import { PORTAL_URL, SITE } from "@/lib/config";
 
-export function Footer() {
+/** `plain` = no overlapping CTA card above, use normal top padding. */
+export function Footer({ plain = false }: { plain?: boolean }) {
   return (
-    <footer className="bg-secondary/70">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className={`bg-secondary/70 ${plain ? "pt-16" : "pt-32 sm:pt-36"}`}>
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3 font-display text-2xl text-foreground">
             <span className="logo-chip h-10 w-10"><Image src="/asp-logo.png" alt="" width={40} height={40} className="h-full w-full object-contain" /></span>

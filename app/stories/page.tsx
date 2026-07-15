@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: STORIES_PAGE.meta.title, description:
 
 export default function StoriesPage() {
   return (
-    <SiteShell>
+    <SiteShell plainFooter>
       <PageHero content={STORIES_PAGE.hero} />
       <section className="section-pad">
         <Reveal className="mx-auto max-w-3xl px-6 text-center sm:px-8">

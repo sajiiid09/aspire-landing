@@ -7,5 +7,5 @@ import { Contact } from "@/components/sections/contact";
 export const metadata: Metadata = { title: CONTACT_PAGE.meta.title, description: CONTACT_PAGE.meta.description, alternates: { canonical: "/contact" } };
 
 export default function ContactPage() {
-  return <SiteShell><PageHero content={CONTACT_PAGE.hero} /><Contact /></SiteShell>;
+  return <SiteShell plainFooter><PageHero content={CONTACT_PAGE.hero} /><Contact /></SiteShell>;
 }
