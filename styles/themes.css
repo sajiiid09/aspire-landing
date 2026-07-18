@@ -1,81 +1,44 @@
-:root {
-  --background: 201 100% 13%;
-  --foreground: 0 0% 100%;
-  --muted: 202 45% 17%;
-  --muted-foreground: 204 20% 79%;
-  --primary: 0 0% 100%;
-  --primary-foreground: 201 100% 10%;
-  --secondary: 202 48% 11%;
-  --accent: 194 38% 67%;
-  --border: 200 26% 30%;
-  --input: 200 24% 42%;
-  --ring: 0 0% 100%;
-  --footer-skyline-bg: 204 42% 12%;
-  --font-display: var(--font-marcellus), Georgia, serif;
-  --font-body: var(--font-manrope), Arial, sans-serif;
-  --radius: 0.75rem;
-  --card-radius: 0.75rem;
-  --section-py: 5rem;
-  --section-py-md: 7rem;
-  --grid-gap: 3rem;
-  --hero-overlay: linear-gradient(180deg, hsl(201 100% 8% / 0.18), hsl(201 100% 8% / 0.55));
-  --cream: 40 30% 96%;
-  --cream-foreground: 201 100% 13%;
-}
-
-/* Creamy-white band: re-scopes the semantic palette so every token-based
-   utility inside flips to dark-on-cream without component changes. */
 .band-cream {
-  --background: 40 30% 96%;
-  --foreground: 201 100% 13%;
-  --muted: 40 24% 90%;
-  --muted-foreground: 202 30% 30%;
-  --primary: 201 100% 13%;
-  --primary-foreground: 40 30% 96%;
-  --secondary: 40 26% 91%;
-  --accent: 197 64% 28%;
-  --border: 40 14% 82%;
-  --input: 40 12% 62%;
-  --ring: 201 100% 13%;
-  background: hsl(var(--background));
-  color: hsl(var(--foreground));
+  --background: 0.97 0.015 86;
+  --foreground: 0.24 0.055 228;
+  --muted: 0.93 0.02 86;
+  --muted-foreground: 0.4 0.04 228;
+  --primary: 0.24 0.055 228;
+  --primary-foreground: 0.97 0.015 86;
+  --secondary: 0.93 0.02 86;
+  --accent: 0.58 0.11 72;
+  --border: 0.82 0.022 84;
+  --input: 0.58 0.035 225;
+  --ring: 0.24 0.055 228;
+  background: var(--color-cream);
+  color: var(--color-cream-ink);
 }
 
 .hero-em,
 .title-em {
+  position: relative;
+  display: inline;
   font-family: var(--font-display);
-  color: hsl(var(--accent));
   font-style: normal;
-}
-
-.surface {
-  background: hsl(var(--secondary) / 0.86);
-  box-shadow: inset 0 1px 0 hsl(var(--foreground) / 0.06), 0 18px 50px hsl(201 100% 6% / 0.16);
-  overflow: hidden;
-}
-
-.surface::before {
-  content: none;
+  color: var(--color-accent-channel);
+  letter-spacing: -0.01em;
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-accent-decoration);
+  text-decoration-thickness: var(--rule-fine);
+  text-underline-offset: 0.11em;
 }
 
 header.surface {
-  background: hsl(var(--background) / 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border-radius: 0;
-  box-shadow: 0 12px 40px hsl(201 100% 6% / 0.28);
-}
-
-.form-input:focus {
-  border-color: hsl(var(--ring));
-  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.12);
+  background: var(--color-header-surface);
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .surface,
-  .liquid-glass {
-    background: hsl(var(--secondary) / 0.98);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+  .surface {
+    background: var(--color-surface-hover);
+  }
+
+  body::after {
+    display: none;
   }
 }

@@ -8,6 +8,10 @@ export const COURSE_FINDER_URL =
 export const CONTACT_FORM_ENDPOINT =
   process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
 
+export const HERO_VIDEO_URL =
+  process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4";
+
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/+$/, "");
 
 export const SITE = {

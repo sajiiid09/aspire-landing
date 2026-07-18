@@ -9,25 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "oklch(var(--background) / <alpha-value>)",
+        foreground: "oklch(var(--foreground) / <alpha-value>)",
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "oklch(var(--muted) / <alpha-value>)",
+          foreground: "oklch(var(--muted-foreground) / <alpha-value>)",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "oklch(var(--primary) / <alpha-value>)",
+          foreground: "oklch(var(--primary-foreground) / <alpha-value>)",
         },
-        secondary: "hsl(var(--secondary))",
+        secondary: "oklch(var(--secondary) / <alpha-value>)",
         cream: {
-          DEFAULT: "hsl(var(--cream))",
-          foreground: "hsl(var(--cream-foreground))",
+          DEFAULT: "oklch(var(--cream) / <alpha-value>)",
+          foreground: "oklch(var(--cream-foreground) / <alpha-value>)",
         },
-        accent: "hsl(var(--accent))",
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
+        accent: "oklch(var(--accent) / <alpha-value>)",
+        destructive: {
+          DEFAULT: "oklch(var(--destructive) / <alpha-value>)",
+          foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
+        },
+        border: "oklch(var(--border) / <alpha-value>)",
+        input: "oklch(var(--input) / <alpha-value>)",
+        ring: "oklch(var(--ring) / <alpha-value>)",
       },
       fontFamily: {
         display: "var(--font-display)",
@@ -35,6 +39,19 @@ const config: Config = {
       },
       borderRadius: {
         DEFAULT: "var(--radius)",
+      },
+      boxShadow: {
+        card: "var(--shadow-card)",
+        float: "var(--shadow-float)",
+        overlap: "var(--shadow-overlap)",
+      },
+      transitionDuration: {
+        micro: "var(--dur-micro)",
+        short: "var(--dur-short)",
+        long: "var(--dur-long)",
+      },
+      transitionTimingFunction: {
+        "hallmark-out": "var(--ease-out)",
       },
     },
   },

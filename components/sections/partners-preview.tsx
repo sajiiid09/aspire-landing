@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PARTNERS } from "@/lib/content";
@@ -6,24 +7,40 @@ import { TextReveal } from "@/components/animate/text-reveal";
 
 export function PartnersPreview() {
   return (
-    <section className="section-pad">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
+    <section className="section-standard">
+      <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 sm:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+        <Reveal className="relative aspect-[4/5] overflow-hidden rounded-xl">
+          <Image
+            src="/images/partners-team.webp"
+            alt="Education colleagues reviewing information together around a laptop"
+            fill
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            className="object-cover"
+          />
+        </Reveal>
         <div>
           <TextReveal className="font-display text-4xl leading-tight text-foreground md:text-5xl">{PARTNERS.title}</TextReveal>
           <Reveal>
-          <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{PARTNERS.body}</p>
-          <Link href={PARTNERS.cta.href} className="mt-8 inline-flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground">{PARTNERS.cta.label}<ArrowUpRight className="h-4 w-4" /></Link>
+            <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{PARTNERS.body}</p>
+          </Reveal>
+          <Reveal stagger className="mt-10 divide-y divide-foreground/10 border-y border-foreground/10">
+            {PARTNERS.benefits.map((benefit) => (
+              <article key={benefit.title} className="py-7">
+                <div className="flex items-center gap-3">
+                  <benefit.icon className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+                  <h3 className="font-display text-2xl text-foreground">{benefit.title}</h3>
+                </div>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
+              </article>
+            ))}
+          </Reveal>
+          <Reveal>
+            <Link href={PARTNERS.cta.href} className="group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-foreground">
+              <span className="link-sweep">{PARTNERS.cta.label}</span>
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-micro ease-hallmark-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+            </Link>
           </Reveal>
         </div>
-        <Reveal stagger className="grid gap-3 sm:grid-cols-2">
-          {PARTNERS.benefits.map((benefit, index) => (
-            <article key={benefit.title} className={`surface rounded-xl p-7 ${index === 2 ? "sm:col-span-2" : ""}`}>
-              <benefit.icon className="h-6 w-6 text-muted-foreground" strokeWidth={1.5} aria-hidden />
-              <h3 className="mt-6 font-display text-2xl text-foreground">{benefit.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
-            </article>
-          ))}
-        </Reveal>
       </div>
     </section>
   );

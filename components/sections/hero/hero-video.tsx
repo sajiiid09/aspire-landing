@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { preload } from "react-dom";
 
 export function HeroVideo({ src, poster }: { src: string; poster: string }) {
+  preload(poster, { as: "image", fetchPriority: "high" });
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export function HeroVideo({ src, poster }: { src: string; poster: string }) {
   }, []);
 
   return (
-    <video ref={ref} className="hero-video absolute inset-0 h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" poster={poster} aria-hidden>
+    <video ref={ref} className="absolute inset-0 h-full w-full object-cover" autoPlay loop muted playsInline preload="metadata" poster={poster} aria-hidden>
       <source src={src} type="video/mp4" />
     </video>
   );

@@ -12,6 +12,7 @@ import {
   StampIcon,
   Users,
 } from "lucide-react";
+import { HERO_VIDEO_URL } from "@/lib/config";
 
 export interface HeadlinePart {
   text: string;
@@ -57,8 +58,8 @@ export const HERO = {
   subtext:
     "Explore global courses and get clear support from your first shortlist to your visa application.",
   cta: "Talk to a Counselor",
-  videoSrc:
-    "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4",
+  ctaSecondary: { label: "Explore destinations", href: "/destinations" },
+  videoSrc: HERO_VIDEO_URL,
   poster: "/images/hero-poster.jpg",
 } as const;
 
@@ -278,9 +279,16 @@ export const CONTACT = {
     message: "How can we help?",
     consent: "By submitting this form, you agree that Aspire may contact you about this inquiry.",
     submit: "Send Inquiry",
-    sending: "Sending...",
+    sending: "Sending…",
     success: "Your inquiry was sent successfully.",
+    successTitle: "Inquiry received.",
+    sendAnother: "Send another inquiry",
     error: "The form is unavailable. Please use the published contact details.",
+    required: "required",
+    errName: "Please enter your full name.",
+    errEmail: "Please enter a valid email address.",
+    errMessage: "Please share a little more detail (10 characters or more).",
+    errDestination: "Please select a destination.",
   },
   destinations: [
     ...DESTINATIONS.items.map((item) => item.country),
@@ -374,6 +382,7 @@ export const STORIES_PAGE = {
   emptyTitle: "Verified stories are being prepared.",
   emptyBody: "We do not publish invented testimonials. Speak with a counselor if you would like to understand the application process.",
   cta: { label: "Talk to a Counselor", href: "/contact" },
+  ctaSecondary: { label: "Explore destinations", href: "/destinations" },
 } as const;
 
 export const CONTACT_PAGE = {

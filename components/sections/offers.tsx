@@ -3,43 +3,37 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { OFFERS } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
 import { TextReveal } from "@/components/animate/text-reveal";
 
-export function Offers() {
-  const autoplay = useRef(
-    Autoplay({ delay: 3500, stopOnMouseEnter: true, stopOnInteraction: false }),
-  );
-  // Stable across renders. An inline array/options object here would make
-  // embla reinit (and reset the autoplay timer) on every re-render.
-  const plugins = useMemo(() => {
-    const reduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    return reduced ? [] : [autoplay.current];
-  }, []);
+export function Offers({ priority = false }: { priority?: boolean }) {
   const options = useMemo(
     () => ({ loop: true, align: "start" as const, containScroll: "trimSnaps" as const }),
     [],
   );
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, plugins);
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [visibleSlides, setVisibleSlides] = useState<number[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!emblaApi) return;
-    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
+    const syncCarouselState = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+      setVisibleSlides(emblaApi.slidesInView());
+    };
+    syncCarouselState();
+    emblaApi.on("select", syncCarouselState);
+    emblaApi.on("reInit", syncCarouselState);
+    emblaApi.on("slidesInView", syncCarouselState);
     return () => {
-      emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onSelect);
+      emblaApi.off("select", syncCarouselState);
+      emblaApi.off("reInit", syncCarouselState);
+      emblaApi.off("slidesInView", syncCarouselState);
     };
   }, [emblaApi]);
 
@@ -53,46 +47,35 @@ export function Offers() {
 
   const scrollPrev = useCallback(() => {
     emblaApi?.scrollPrev();
-    emblaApi?.plugins().autoplay?.reset();
   }, [emblaApi]);
   const scrollNext = useCallback(() => {
     emblaApi?.scrollNext();
-    emblaApi?.plugins().autoplay?.reset();
   }, [emblaApi]);
   const scrollTo = useCallback(
     (i: number) => {
       emblaApi?.scrollTo(i);
-      emblaApi?.plugins().autoplay?.reset();
     },
     [emblaApi],
   );
 
-  const openLightbox = useCallback(
-    (i: number) => {
-      setLightboxIndex(i);
-      emblaApi?.plugins().autoplay?.stop();
-      dialogRef.current?.showModal();
-    },
-    [emblaApi],
-  );
+  const openLightbox = useCallback((i: number) => {
+    setLightboxIndex(i);
+    dialogRef.current?.showModal();
+  }, []);
   const closeLightbox = useCallback(() => {
     dialogRef.current?.close();
     setLightboxIndex(null);
-    emblaApi?.plugins().autoplay?.play();
-  }, [emblaApi]);
+  }, []);
 
   // Escape closes the native dialog without going through closeLightbox, so
   // reset state on the close event as well.
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    const onClose = () => {
-      setLightboxIndex(null);
-      emblaApi?.plugins().autoplay?.play();
-    };
+    const onClose = () => setLightboxIndex(null);
     dialog.addEventListener("close", onClose);
     return () => dialog.removeEventListener("close", onClose);
-  }, [emblaApi]);
+  }, []);
   const stepLightbox = useCallback((delta: number) => {
     setLightboxIndex((i) =>
       i === null ? i : (i + delta + OFFERS.items.length) % OFFERS.items.length,
@@ -102,9 +85,9 @@ export function Offers() {
   const current = lightboxIndex === null ? null : OFFERS.items[lightboxIndex];
 
   return (
-    <section id="offers" className="section-pad">
+    <section id="offers" className="section-generous">
       <div className="mx-auto max-w-7xl px-8">
-        <TextReveal className="section-title font-display text-4xl leading-tight text-foreground md:text-5xl">
+        <TextReveal className="font-display text-4xl leading-tight text-foreground md:text-5xl">
           {OFFERS.title}
         </TextReveal>
         <Reveal>
@@ -114,7 +97,17 @@ export function Offers() {
         </Reveal>
 
         <Reveal className="mt-16">
-          <div className="relative">
+          <div
+            className="relative"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Current university offers"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") scrollPrev();
+              if (event.key === "ArrowRight") scrollNext();
+            }}
+          >
             <div ref={emblaRef} className="overflow-hidden">
               <div className="flex h-[420px] gap-4 md:h-[500px]">
                 {OFFERS.items.map((poster, i) => (
@@ -124,7 +117,11 @@ export function Offers() {
                     onClick={() => openLightbox(i)}
                     aria-label={`View offer: ${poster.label}`}
                     aria-haspopup="dialog"
-                    className="surface group relative min-w-0 flex-[0_0_auto] overflow-hidden"
+                    aria-hidden={!visibleSlides.includes(i)}
+                    inert={!visibleSlides.includes(i)}
+                    tabIndex={visibleSlides.includes(i) ? 0 : -1}
+                    className="surface group relative h-full min-w-0 flex-none overflow-hidden"
+                    style={{ aspectRatio: `${poster.width} / ${poster.height}` }}
                   >
                     <Image
                       src={poster.src}
@@ -132,20 +129,14 @@ export function Offers() {
                       width={poster.width}
                       height={poster.height}
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 40vw, 70vw"
-                      loading="lazy"
-                      className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                      priority={priority && i === 0}
+                      className="h-full w-full object-contain"
                     />
-                    <span
-                      className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 px-4 py-3 text-left text-xs text-foreground"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, transparent, hsl(var(--background) / 0.92))",
-                      }}
-                    >
+                    <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-[image:var(--photo-overlay)] px-4 py-3 text-left text-xs text-foreground">
                       <span className="truncate">{poster.label}</span>
                       <ZoomIn
                         aria-hidden
-                        className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:scale-110"
+                        className="h-4 w-4 shrink-0 text-muted-foreground"
                         strokeWidth={1.5}
                       />
                     </span>
@@ -157,30 +148,35 @@ export function Offers() {
             <button
               aria-label="Previous offer"
               onClick={scrollPrev}
-              className="surface absolute left-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
+              className="surface absolute left-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-[background-color,color] duration-short ease-hallmark-out hover:bg-foreground/10"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next offer"
               onClick={scrollNext}
-              className="surface absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-transform hover:scale-[1.06]"
+              className="surface absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-3 text-foreground transition-[background-color,color] duration-short ease-hallmark-out hover:bg-foreground/10"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="mt-6 flex justify-center gap-2">
+          <div className="mt-6 flex flex-wrap justify-center gap-1">
             {OFFERS.items.map((poster, i) => (
               <button
                 key={poster.src}
                 aria-label={`Go to ${poster.label}`}
-                aria-current={i === selectedIndex}
+                aria-current={i === selectedIndex ? "true" : undefined}
                 onClick={() => scrollTo(i)}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  i === selectedIndex ? "bg-foreground" : "bg-muted-foreground/40"
-                }`}
-              />
+                className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
+              >
+                <span
+                  aria-hidden
+                  className={`h-2 w-2 rounded-full transition-colors duration-short ease-hallmark-out ${
+                    i === selectedIndex ? "bg-accent" : "bg-muted-foreground/40 group-hover:bg-muted-foreground/70"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </Reveal>
@@ -197,7 +193,7 @@ export function Offers() {
           if (e.key === "Escape") closeLightbox();
         }}
         aria-label={current ? `${current.label} offer poster` : undefined}
-        className="m-auto max-h-[92vh] max-w-[92vw] bg-transparent p-0 backdrop:bg-[hsl(var(--background)/0.85)] backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[92vh] max-w-[92vw] bg-transparent p-0 backdrop:bg-background/85"
       >
         {current && (
           <div className="relative">
@@ -214,7 +210,7 @@ export function Offers() {
               type="button"
               aria-label="Close offer poster"
               onClick={closeLightbox}
-              className="surface absolute right-3 top-3 rounded-full p-2 text-foreground"
+              className="surface absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full text-foreground"
             >
               <X className="h-5 w-5" />
             </button>
@@ -222,7 +218,7 @@ export function Offers() {
               type="button"
               aria-label="Previous poster"
               onClick={() => stepLightbox(-1)}
-              className="surface absolute left-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-foreground"
+              className="surface absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-foreground"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -230,7 +226,7 @@ export function Offers() {
               type="button"
               aria-label="Next poster"
               onClick={() => stepLightbox(1)}
-              className="surface absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-foreground"
+              className="surface absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-foreground"
             >
               <ChevronRight className="h-5 w-5" />
             </button>

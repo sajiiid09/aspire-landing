@@ -24,12 +24,15 @@ export default function DestinationsPage() {
 
 function DestinationGroup({ title, body, items, featured = false }: { title: string; body: string; items: readonly (typeof DESTINATIONS.items)[number][]; featured?: boolean }) {
   return (
-    <section className={`section-pad ${featured ? "" : "bg-secondary/25"}`}>
+    <section className={`section-standard ${featured ? "" : "bg-secondary/25"}`}>
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <TextReveal className="font-display text-4xl text-foreground md:text-5xl">{title}</TextReveal>
         <Reveal><p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">{body}</p></Reveal>
-        <Reveal stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item, index) => <article key={item.country} className={`group relative min-h-72 overflow-hidden rounded-xl ${featured && index === 0 ? "sm:col-span-2 lg:row-span-2 lg:min-h-[36rem]" : ""}`}><Image src={item.image} alt={item.imageAlt} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" /><div className="absolute inset-0 bg-gradient-to-t from-background/95 via-transparent to-transparent" /><h3 className="absolute bottom-0 p-6 font-display text-3xl text-foreground">{item.country}</h3></article>)}
+        <Reveal stagger className="mt-12 grid auto-rows-[18rem] gap-4 sm:grid-cols-2 lg:grid-cols-12">
+          {items.map((item, index) => {
+            const span = featured && index === 0 ? "sm:col-span-2 lg:col-span-7 lg:row-span-2" : index % 3 === 0 ? "lg:col-span-7" : index % 3 === 1 ? "lg:col-span-5" : "lg:col-span-12";
+            return <article key={item.country} className={`group relative min-h-72 overflow-hidden rounded-xl ${span}`}><Image src={item.image} alt={item.imageAlt} fill priority={featured && index === 0} sizes="(min-width: 1024px) 58vw, (min-width: 640px) 50vw, 100vw" className="object-cover" /><div className="absolute inset-0 bg-[image:var(--photo-overlay)] transition-opacity duration-short ease-hallmark-out group-hover:opacity-90" /><h3 className="absolute bottom-0 p-6 font-display text-3xl text-foreground">{item.country}</h3></article>;
+          })}
         </Reveal>
       </div>
     </section>

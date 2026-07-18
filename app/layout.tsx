@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, Marcellus } from "next/font/google";
+import { Fraunces, Manrope } from "next/font/google";
 import { SITE } from "@/lib/config";
 import "./globals.css";
 import "../styles/themes.css";
 
-const display = Marcellus({
-  weight: "400",
+const display = Fraunces({
   subsets: ["latin"],
-  variable: "--font-marcellus",
+  style: ["normal"],
+  axes: ["opsz"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -59,10 +60,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased" suppressHydrationWarning>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[var(--z-tooltip)] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
         >
           Skip to content
         </a>
