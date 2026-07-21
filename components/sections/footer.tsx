@@ -24,12 +24,13 @@ export function Footer({ plain = false }: { plain?: boolean }) {
             {FOOTER.explore.map((link) => <li key={link.href}><Link href={link.href} className="text-sm text-muted-foreground transition-colors duration-short ease-hallmark-out hover:text-accent">{link.label}</Link></li>)}
           </ul>
         </nav>
-        {(SITE.address || SITE.phone || SITE.email || PORTAL_URL) && <div>
+        {(SITE.address || SITE.phone || SITE.email || SITE.whatsappUrl || PORTAL_URL) && <div>
           <h2 className="font-display text-lg text-foreground">Contact</h2>
-          <address className="mt-5 grid gap-1 text-sm not-italic text-muted-foreground">
-            {SITE.address && <span>{SITE.address}</span>}
-            {SITE.phone && <a href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`}>{SITE.phone}</a>}
-            {SITE.email && <a href={`mailto:${SITE.email}`}>{SITE.email}</a>}
+          <address className="mt-5 grid gap-2 text-sm not-italic text-muted-foreground">
+            {SITE.address && <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="leading-relaxed transition-colors duration-short ease-hallmark-out hover:text-accent">{SITE.address}</a>}
+            {SITE.phone && <a href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`} className="transition-colors duration-short ease-hallmark-out hover:text-accent">{SITE.phone}</a>}
+            {SITE.whatsappUrl && <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="transition-colors duration-short ease-hallmark-out hover:text-accent">WhatsApp: {SITE.phone}</a>}
+            {SITE.email && <a href={`mailto:${SITE.email}`} className="whitespace-nowrap text-xs transition-colors duration-short ease-hallmark-out hover:text-accent">{SITE.email}</a>}
           </address>
           {PORTAL_URL && <a href={PORTAL_URL} target="_blank" rel="noopener noreferrer" className="surface mt-6 inline-block rounded-lg px-6 py-3 text-sm text-foreground">Student Portal</a>}
         </div>}

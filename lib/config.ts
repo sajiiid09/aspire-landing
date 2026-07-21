@@ -21,10 +21,13 @@ export const SITE = {
     "Explore international courses and get clear support with admissions, scholarships, documents, and visa applications.",
   url: siteUrl,
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "aspireeducationglobal@gmail.com",
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "01626824721",
+  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+880 1626-824721",
   address:
     process.env.NEXT_PUBLIC_CONTACT_ADDRESS ??
     "Panthonibash, 5th floor, 69/J, Panthopath, Dhaka (opposite Bashundhara City Shopping Mall), Bangladesh",
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL ?? "https://wa.me/8801626824721",
+  mapsUrl:
+    process.env.NEXT_PUBLIC_MAPS_URL ??
+    "https://www.google.com/maps/search/?api=1&query=Panthonibash%2C%2069%2FJ%20Panthopath%2C%20Dhaka%2C%20Bangladesh",
 } as const;

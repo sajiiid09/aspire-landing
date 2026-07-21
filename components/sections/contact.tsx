@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
-import { CheckCircle2, ChevronDown, Mail, MapPin, Phone } from "lucide-react";
+import { CheckCircle2, ChevronDown, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/content";
 import { CONTACT_FORM_ENDPOINT, SITE } from "@/lib/config";
 import { Reveal } from "@/components/reveal";
@@ -111,9 +111,10 @@ export function Contact() {
         <Reveal>
           <h2 className="font-display text-4xl text-foreground md:text-5xl">{CONTACT.title}</h2>
           <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">{CONTACT.body}</p>
-          {(SITE.address || SITE.phone || SITE.email) && <address className="mt-10 grid gap-4 text-sm not-italic text-muted-foreground">
-            {SITE.address && <span className="flex items-start gap-3"><MapPin className="mt-1 h-4 w-4 shrink-0" aria-hidden />{SITE.address}</span>}
+          {(SITE.address || SITE.phone || SITE.email || SITE.whatsappUrl) && <address className="mt-10 grid gap-4 text-sm not-italic text-muted-foreground">
+            {SITE.address && <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:text-foreground"><MapPin className="mt-1 h-4 w-4 shrink-0" aria-hidden />{SITE.address}</a>}
             {SITE.phone && <a href={`tel:${SITE.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-3 hover:text-foreground"><Phone className="h-4 w-4" aria-hidden />{SITE.phone}</a>}
+            {SITE.whatsappUrl && <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-foreground"><MessageCircle className="h-4 w-4" aria-hidden />WhatsApp: {SITE.phone}</a>}
             {SITE.email && <a href={`mailto:${SITE.email}`} className="flex items-center gap-3 hover:text-foreground"><Mail className="h-4 w-4" aria-hidden />{SITE.email}</a>}
           </address>}
         </Reveal>
