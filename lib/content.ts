@@ -51,14 +51,14 @@ export const NAV_LINKS = [
 
 export const HERO = {
   headline: [
-    { text: "Where " },
-    { text: "ambition", em: true },
-    { text: " finds its horizon." },
+    { text: "Turn Your Dream of " },
+    { text: "Studying Abroad", em: true },
+    { text: " into Reality." },
   ] satisfies readonly HeadlinePart[],
   subtext:
-    "Explore global courses and get clear support from your first shortlist to your visa application.",
-  cta: "Talk to a Counselor",
-  ctaSecondary: { label: "Explore destinations", href: "/destinations" },
+    "From choosing the right university to getting your visa approved we guide you every step of the way with 100% transparency.",
+  cta: "Book Free Counseling",
+  ctaSecondary: { label: "Explore Universities", href: "/destinations" },
   videoSrc: HERO_VIDEO_URL,
   poster: "/images/hero-poster.jpg",
 } as const;
@@ -74,24 +74,24 @@ export const STATS = {
 } as const;
 
 export const HOW_IT_WORKS = {
-  title: "How Aspire works.",
-  body: "One connected service from course discovery to application processing.",
+  title: "Your 3-Step Journey to Success.",
+  body: "A simple, hassle-free process to get you into your dream university.",
   items: [
     {
       icon: Search,
-      title: "Explore and enquire",
+      title: "Free Profile Evaluation & University Shortlisting",
       description:
         "Compare courses and destinations, then share your goals with an Aspire counselor.",
     },
     {
       icon: FileCheck2,
-      title: "Prepare and submit",
+      title: "Application & Scholarship Assistance",
       description:
         "Your counselor coordinates shortlisting, documents, applications, and compliance checks.",
     },
     {
       icon: ShieldCheck,
-      title: "Track and progress",
+      title: "Visa Guidance & Pre-Departure Prep",
       description:
         "Use the Aspire portal while admissions, compliance, and visa teams move your case forward.",
     },
@@ -120,30 +120,30 @@ export interface ServiceSummary {
 }
 
 export const SERVICES = {
-  title: "Every important step, supported.",
+  title: "Complete Support for Your Overseas Education.",
   cta: { label: "View Services", href: "/services" },
   items: [
     {
       icon: Compass,
-      title: "Global Counseling",
+      title: "1-on-1 Personalized Counseling",
       description:
         "Profile evaluation and destination comparisons based on your academic history, goals, and budget.",
     },
     {
       icon: GraduationCap,
-      title: "Admissions and Documents",
+      title: "Seamless Application & SOP Review",
       description:
         "Application coordination, statement review, recommendation guidance, and university communication.",
     },
     {
       icon: StampIcon,
-      title: "Visa Guidance",
+      title: "High-Success Visa Support",
       description:
         "Document checks and interview preparation aligned with the requirements of your destination.",
     },
     {
       icon: Award,
-      title: "Scholarship Mapping",
+      title: "Scholarship & Financial Mapping",
       description:
         "A practical review of institutional aid, grants, bursaries, and merit-based funding options.",
     },
@@ -179,8 +179,8 @@ export const DESTINATIONS = {
 } as const;
 
 export const PARTNERS = {
-  title: "Built for education partners too.",
-  body: "Sub-agents can introduce student profiles, coordinate applications, and work with Aspire's admissions and compliance teams.",
+  title: "Grow Your Business with Aspire Global.",
+  body: "Join our partner network and offer your students access to 750+ top universities with full processing support.",
   cta: { label: "Partner With Us", href: "/partners" },
   benefits: [
     { icon: Users, title: "Shared student support", description: "Coordinate cases with specialist counselors and processing teams." },
@@ -196,9 +196,9 @@ export const COURSE_FINDER = {
 } as const;
 
 export const HOME_CONTACT_CTA = {
-  title: "Ready to plan your route?",
-  body: "Share your goals and get a practical next step from an Aspire counselor.",
-  label: "Talk to a Counselor",
+  title: "Ready to Start Your Overseas Education Journey?",
+  body: "Don't let confusion slow down your career. Speak to an expert education advisor today for free.",
+  label: "Schedule Your Free Session.",
   href: "/contact",
 } satisfies PageCtaContent;
 
