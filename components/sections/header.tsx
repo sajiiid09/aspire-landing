@@ -58,13 +58,13 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
 
   return (
     <header className={`${headerClass} inset-x-0 top-0 z-[var(--z-sticky)] transition-[background-color,box-shadow] duration-short ease-hallmark-out`}>
-      <nav aria-label="Primary navigation" className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
+      <nav aria-label="Primary navigation" className="mx-auto flex h-[88px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
         <Link
           href="/"
-          className={`inline-flex shrink-0 items-center gap-3 font-display text-xl tracking-tight text-foreground lg:text-2xl ${condensed ? `${chip} py-2 pl-2 pr-5` : ""}`}
+          className={`inline-flex shrink-0 items-center gap-3 font-display text-xl tracking-tight text-foreground lg:text-2xl ${condensed ? `${chip} py-1.5 pl-1.5 pr-5` : ""}`}
         >
-          <span className="logo-chip h-9 w-9">
-            <Image src="/logos/aspire-logo.svg" alt="" width={36} height={36} priority className="h-full w-full object-contain" />
+          <span className="logo-chip h-14 w-14 sm:h-16 sm:w-16">
+            <Image src="/logos/aspire-logo.svg" alt="" width={64} height={64} priority className="h-full w-full object-contain" />
           </span>
           <span>Aspire Global</span>
         </Link>
