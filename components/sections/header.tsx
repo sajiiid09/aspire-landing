@@ -64,7 +64,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
           className={`inline-flex shrink-0 items-center gap-3 font-display text-xl tracking-tight text-foreground lg:text-2xl ${condensed ? `${chip} py-1.5 pl-1.5 pr-5` : ""}`}
         >
           <span className="logo-chip h-14 w-14 sm:h-16 sm:w-16">
-            <Image src="/logos/aspire-logo.svg" alt="" width={64} height={64} priority className="h-full w-full object-contain" />
+            <Image src="/logos/aspire-mark.svg" alt="" width={64} height={64} priority className="h-full w-full object-contain" />
           </span>
           <span>Aspire Global</span>
         </Link>
