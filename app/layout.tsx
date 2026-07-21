@@ -47,6 +47,7 @@ const jsonLd = {
   url: SITE.url,
   ...(SITE.email && { email: SITE.email }),
   ...(SITE.phone && { telephone: SITE.phone }),
+  ...(SITE.address && { address: SITE.address }),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
