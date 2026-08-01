@@ -1,12 +1,9 @@
-/** External services remain outside this static marketing site. */
+/** Public site configuration. Secrets must not be added to this module. */
 export const PORTAL_URL =
   process.env.NEXT_PUBLIC_PORTAL_URL ?? "";
 
 export const COURSE_FINDER_URL =
   process.env.NEXT_PUBLIC_COURSE_FINDER_URL ?? "";
-
-export const CONTACT_FORM_ENDPOINT =
-  process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
 
 export const HERO_VIDEO_URL =
   process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??

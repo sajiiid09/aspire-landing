@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { CheckCircle2, ChevronDown, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CONTACT } from "@/lib/content";
-import { CONTACT_FORM_ENDPOINT, SITE } from "@/lib/config";
+import { SITE } from "@/lib/config";
 import { Reveal } from "@/components/reveal";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -66,27 +66,17 @@ export function Contact() {
       return;
     }
 
-    if (!CONTACT_FORM_ENDPOINT) {
-      if (!SITE.email) {
-        setStatus("error");
-        return;
-      }
-      const subject = encodeURIComponent(`${data.get("inquiryType")} for Aspire Global Education`);
-      const body = encodeURIComponent(
-        `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}\nDestination: ${data.get("destination")}\n\n${data.get("message")}`,
-      );
-      window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setStatus("sending");
     try {
-      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(Object.fromEntries(data.entries())),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       });
-      if (!response.ok) throw new Error(`Contact endpoint returned ${response.status}`);
+      if (!response.ok) throw new Error(`Contact API returned ${response.status}`);
       form.reset();
       setInquiryType("Student inquiry");
       setErrors({});
@@ -129,6 +119,10 @@ export function Contact() {
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate className="surface grid gap-6 rounded-xl p-6 sm:grid-cols-2 sm:p-8">
+              <div className="sr-only" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
               <Field label={CONTACT.form.inquiryType} htmlFor="inquiry-type" required>
                 <div className="relative">
                   <select id="inquiry-type" name="inquiryType" value={inquiryType} onChange={(event) => setInquiryType(event.target.value as typeof inquiryType)} className="form-input appearance-none pr-10" required>

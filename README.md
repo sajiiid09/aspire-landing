@@ -1,6 +1,6 @@
 # Aspire Global Education
 
-Static multi-page marketing site for a study-abroad consultancy. The approved visual direction is a single Cinematic Navy system with editorial serif typography, restrained motion, and liquid-glass surfaces.
+Multi-page marketing site for a study-abroad consultancy. The approved visual direction is a single Cinematic Navy system with editorial serif typography, restrained motion, and liquid-glass surfaces.
 
 ## Routes
 
@@ -30,10 +30,16 @@ Copy the required values into `.env.local` or the hosting environment:
 - `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_PORTAL_URL`
 - `NEXT_PUBLIC_COURSE_FINDER_URL`
-- `NEXT_PUBLIC_CONTACT_FORM_ENDPOINT`
 - `NEXT_PUBLIC_CONTACT_EMAIL`
 - `NEXT_PUBLIC_CONTACT_PHONE`
 - `NEXT_PUBLIC_CONTACT_ADDRESS`
 - `NEXT_PUBLIC_WHATSAPP_URL`
+- `SMTP_HOST` (defaults to `smtp.gmail.com`)
+- `SMTP_PORT` (defaults to `465`)
+- `SMTP_USER`
+- `SMTP_PASS`
+- `CONTACT_EMAIL` (defaults to `SMTP_USER`)
 
-Unconfigured portal, course-search, and contact details stay hidden. The contact form uses the configured third-party endpoint and falls back to the configured email address when the endpoint is unset.
+The contact form posts to the server-only `/api/contact` route and sends through SMTP. For Gmail, enable 2-Step Verification and use a Google App Password as `SMTP_PASS`. Never expose SMTP credentials through a `NEXT_PUBLIC_` variable.
+
+Because the form requires a server route, deploy this project to a host that supports the Next.js Node.js runtime (for example, Vercel) rather than as a static export.
