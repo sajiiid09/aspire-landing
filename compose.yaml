@@ -1,0 +1,39 @@
+name: aspire-education
+
+services:
+  aspire-education:
+    image: aspire-landing:${ASPIRE_IMAGE_TAG:-local}
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://aspireglobaleducation.tech}
+        NEXT_PUBLIC_CONTACT_EMAIL: ${NEXT_PUBLIC_CONTACT_EMAIL:-aspireeducationglobal@gmail.com}
+    env_file:
+      - ${ASPIRE_ENV_FILE:-/etc/aspire-landing.env}
+    environment:
+      HOSTNAME: 0.0.0.0
+      NODE_ENV: production
+      PORT: "3000"
+    ports:
+      - "127.0.0.1:${ASPIRE_HOST_PORT:-3101}:3000"
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cpus: 1.0
+    mem_limit: 768m
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch("http://127.0.0.1:3000/").then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"

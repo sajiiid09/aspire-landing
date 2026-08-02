@@ -1,0 +1,14 @@
+.git
+.gitignore
+.agents
+.codex
+.next
+node_modules
+out
+coverage
+.env*
+*.log
+*.pem
+.DS_Store
+Thumbs.db
+docs
