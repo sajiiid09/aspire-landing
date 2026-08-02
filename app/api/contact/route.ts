@@ -8,6 +8,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_REQUEST_BYTES = 20_000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+const MAX_RATE_LIMIT_ENTRIES = 10_000;
 
 type ContactSubmission = {
   inquiryType: string;
@@ -22,6 +23,7 @@ type ContactSubmission = {
 type RateLimitEntry = { count: number; resetAt: number };
 
 const rateLimits = new Map<string, RateLimitEntry>();
+let nextRateLimitSweep = Date.now() + RATE_LIMIT_WINDOW_MS;
 
 function getText(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength + 1) : "";
@@ -77,9 +79,20 @@ function getClientIp(request: Request) {
 
 function isRateLimited(ip: string) {
   const now = Date.now();
+  if (now >= nextRateLimitSweep) {
+    for (const [key, entry] of rateLimits) {
+      if (entry.resetAt <= now) rateLimits.delete(key);
+    }
+    nextRateLimitSweep = now + RATE_LIMIT_WINDOW_MS;
+  }
+
   const current = rateLimits.get(ip);
 
   if (!current || current.resetAt <= now) {
+    if (!current && rateLimits.size >= MAX_RATE_LIMIT_ENTRIES) {
+      const oldestKey = rateLimits.keys().next().value;
+      if (oldestKey) rateLimits.delete(oldestKey);
+    }
     rateLimits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return false;
   }
@@ -88,23 +101,85 @@ function isRateLimited(ip: string) {
   return current.count > RATE_LIMIT_MAX;
 }
 
+function isAllowedBrowserRequest(request: Request) {
+  if (request.headers.get("sec-fetch-site") === "cross-site") return false;
+
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+
+  try {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || request.url;
+    return origin === new URL(siteUrl).origin;
+  } catch {
+    return false;
+  }
+}
+
+type JsonBodyResult =
+  | { ok: true; value: unknown }
+  | { ok: false; status: 400 | 413 };
+
+async function readJsonBody(request: Request): Promise<JsonBodyResult> {
+  const reader = request.body?.getReader();
+  if (!reader) return { ok: false, status: 400 };
+
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_REQUEST_BYTES) {
+        await reader.cancel().catch(() => undefined);
+        return { ok: false, status: 413 };
+      }
+      chunks.push(value);
+    }
+
+    const body = new Uint8Array(totalBytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      body.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+
+    return {
+      ok: true,
+      value: JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(body)),
+    };
+  } catch {
+    return { ok: false, status: 400 };
+  }
+}
+
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") || 0);
   if (contentLength > MAX_REQUEST_BYTES) {
     return Response.json({ error: "Request is too large." }, { status: 413 });
   }
 
+  if (request.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase() !== "application/json") {
+    return Response.json({ error: "Content-Type must be application/json." }, { status: 415 });
+  }
+
+  if (!isAllowedBrowserRequest(request)) {
+    return Response.json({ error: "Cross-site submissions are not allowed." }, { status: 403 });
+  }
+
   if (isRateLimited(getClientIp(request))) {
     return Response.json({ error: "Too many requests. Please try again later." }, { status: 429 });
   }
 
-  let submission: ContactSubmission | null;
-  try {
-    submission = parseSubmission(await request.json());
-  } catch {
-    return Response.json({ error: "Invalid request." }, { status: 400 });
+  const body = await readJsonBody(request);
+  if (!body.ok) {
+    const error = body.status === 413 ? "Request is too large." : "Invalid request.";
+    return Response.json({ error }, { status: body.status });
   }
 
+  const submission = parseSubmission(body.value);
   if (!submission) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
