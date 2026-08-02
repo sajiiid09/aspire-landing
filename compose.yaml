@@ -16,6 +16,9 @@ services:
       PORT: "3000"
     ports:
       - "127.0.0.1:${ASPIRE_HOST_PORT:-3101}:3000"
+    networks:
+      - default
+      - proxy
     restart: unless-stopped
     init: true
     security_opt:
@@ -37,3 +40,8 @@ services:
       options:
         max-size: 10m
         max-file: "3"
+
+networks:
+  proxy:
+    external: true
+    name: ${ASPIRE_PROXY_NETWORK:-bloodman_default}
